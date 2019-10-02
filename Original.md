@@ -31,8 +31,8 @@ auto-formatter to avoid arguing over formatting.
 Run `pylint` over your code.
 
 <a id="s2.1.1-definition"></a>
-#### 2.1.1 Definition
-
+#### 2.1.1 Definition  2.1.1 정의
+ 
 `pylint` is a tool for finding bugs and style problems in Python source
 code. It finds problems that are typically caught by a compiler for less dynamic
 languages like C and C++. Because of the dynamic nature of Python, some
