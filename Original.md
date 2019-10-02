@@ -599,28 +599,26 @@ module instead of lambda functions. For example, prefer `operator.mul` to
 <a id="conditional-expressions"></a>
 ### 2.11 Conditional Expressions
 
-Okay for one-liners.
+한줄로 표기하는 방법입니다.
 
 <a id="s2.11.1-definition"></a>
-#### 2.11.1 Definition
+#### 2.11.1 정의
 
-Conditional expressions (sometimes called a “ternary operator”) are mechanisms
-that provide a shorter syntax for if statements. For example:
+조건식("임시 연산자"라고도 함)은 if문에 대해 더 짧은 구문을 제공하는 방법입니다. 예) 
 `x = 1 if cond else 2`.
 
 <a id="s2.11.2-pros"></a>
-#### 2.11.2 Pros
+#### 2.11.2 장점
 
-Shorter and more convenient than an if statement.
+if문보다 짧고 편리합니다.
 
 <a id="s2.11.3-cons"></a>
-#### 2.11.3 Cons
+#### 2.11.3 단점
 
-May be harder to read than an if statement. The condition may be difficult to
-locate if the expression is long.
+if문보다 읽기가 어려울 수 있습니다. 표현이 길어지면 조건을 찾기가 어려울 수 있습니다.
 
 <a id="s2.11.4-decision"></a>
-#### 2.11.4 Decision
+#### 2.11.4 결과
 
 Okay to use for one-liners. In other cases prefer to use a complete if
 statement.
