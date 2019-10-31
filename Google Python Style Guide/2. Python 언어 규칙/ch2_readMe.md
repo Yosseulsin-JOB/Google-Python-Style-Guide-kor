@@ -96,7 +96,7 @@
 
 - import된것들과 관련있는 이름을 사용하지마세요. 
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요. 
-- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing module](#typing-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
+- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#typing-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
 
 ### 2.3 Packages
 
