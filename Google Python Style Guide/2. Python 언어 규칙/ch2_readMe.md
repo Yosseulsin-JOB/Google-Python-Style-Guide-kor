@@ -178,7 +178,7 @@
   - 올바른 예
 
     ```python
-        def connect_to_next_port(self, minimum):
+    def connect_to_next_port(self, minimum):
         """Connects to the next available port.
 
         Args:
@@ -455,8 +455,7 @@
 
 #### 2.11.1 정의
 
-- 조건식(삼항 연산자)은 if 문을 더 짧은 구문으로 사용하는 방법입니다.
-  - 예) `x = 1 if cond else 2`
+- 조건식(삼항 연산자)은 if 문을 더 짧은 구문으로 사용하는 방법입니다. (e.g, `x = 1 if cond else 2`)
 
 #### 2.11.2 장점
 
