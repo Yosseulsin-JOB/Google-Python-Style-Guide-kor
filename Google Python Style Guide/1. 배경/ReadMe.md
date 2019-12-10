@@ -1,0 +1,15 @@
+# Google Python Style Guide
+
+## 번역
+
+- Contributors : [`0113bernoyoun`](https://github.com/0113bernoyoun)
+- Log
+  - 초안 : 2019.12.10
+
+## 1 배경
+
+- Python은 구글에서 메인으로 사용하는 동적 언어입니다.
+- 이 스타일 가이드는 Python 프로그램에서 *해야할 것들과 하지 말아야할 것* 들을 적어놓았습니다.
+- 코드 형식을 정확하게 하는 것들 돕기 위해, 우리는 [settings file for Vim](google_python_style.vim)을 만들었습니다.
+- Emacs 편집기에서는 기본 설정값으로 사용하면 됩니다.
+- 많은 팀에서 형식에 대한 논쟁을 피하기 위해 [yapf](https://github.com/google/yapf/) auto-formatter 을 사용합니다.
