@@ -7,6 +7,8 @@
   - 초안 : 2019.12.10
   - 수정 : 2020.07.27([f87ee84](https://github.com/google/styleguide/blob/f87ee8407a2447c8fd9ccf2b1d83c56b572585f4/pyguide.md) 반영)
 
+<a id="s1-background"></a>
+
 ## 1. 배경
 
 - Python은 구글에서 메인으로 사용하는 동적 언어입니다.
