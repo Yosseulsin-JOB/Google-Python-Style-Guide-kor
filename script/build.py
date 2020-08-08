@@ -2,6 +2,9 @@
 # python3
 
 import os
+import re
+
+find_link = re.compile('\[(\w+)\]\(([\w\\\/\_\.\:]+)\)')
 
 readme = []
 tree = []
@@ -64,6 +67,9 @@ def insert_part_in_readme(part_path, number, all):
     if syntax in ["##", "###", "####"]:
       link = lines[i-2].replace('<a id="', "").replace('"></a>', "").replace("\n","")
       title = lines[i].replace("# ", "").replace("#", "").replace("\n","")
+      link_in_title = find_link.search(title)
+      if link_in_title:
+        title = title.replace(link_in_title.group(), find_link.findall(title)[0][0])
       part_tree.append({"link":link, "title":title})
   if part_tree:
     tree.append(part_tree)
