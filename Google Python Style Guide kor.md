@@ -1100,7 +1100,7 @@
 
 - Decorator는 분명한 이점이 있더라도 현명하게 사용해야 합니다. Decorator는 import와 명명 지침을 따라야 합니다. Decorator pydoc는 decorator 함수 임을 분명히 명시해야합니다. dcorator를 위한 유닛 테스트(unit test)를 사용해야합니다.
 - Decorator(예. 파일, 소켓, 데이터베이스 연결 등) 를 실행할 때 (`pydoc` 혹은 기타 도구를 import 시간에 가져올 때) 사용 못할 수 있으므로 Decorator의 외부 의존성을 피하세요. 유효한 매개변수를 가진 Decorator은 모든 경우에 작동할 수 있도록 보장되어야 합니다.
-- Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#317-main) 항목에 자세한 내용이 있습니다.
+- Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
 - 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "@static method"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
 - 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "@classmethod"를 사용하세요.
 <a id="s2.18-threading"></a>
@@ -1365,7 +1365,7 @@
 - 코드를 작성할 때 _4 칸_ 들여쓰기를 하세요.
 
 - 탭을 사용하거나 탭과 스페이스를 섞어서 사용하지 마세요.
-- 묵시적 문장연장의 경우 [line length](#32-line-length) 섹션의 예시처럼 동일한 문장에 포함된 요소들을 수직정렬하거나 첫 열린괄호 이후로는 아무것도 없는 4 칸 hanging indent 를 적용하여야 합니다.
+- 묵시적 문장연장의 경우 [line length](#s3.2-line-length) 섹션의 예시처럼 동일한 문장에 포함된 요소들을 수직정렬하거나 첫 열린괄호 이후로는 아무것도 없는 4 칸 hanging indent 를 적용하여야 합니다.
 
 - 올바른 예
 
@@ -2325,7 +2325,7 @@ if __name__ == '__main__':
   ...
   ```
 
-- 단일 이름과 Type이 너무 길면 Type에 대한 [alias(별칭)](#3196-type-aliases)사용을 고려하세요.
+- 단일 이름과 Type이 너무 길면 Type에 대한 [alias(별칭)](#s3.19.6-aliases)사용을 고려하세요.
 - 최후의 수단은 다음에 4칸을 들여 쓰는 것입니다.
 
 - 올바른 예
@@ -2558,7 +2558,7 @@ c = (1, "2", 3.5)  # type: Tuple[int, Text, float]
   ...
   ```
 
-- 함수의 모든 string Type이 항상 동일한 경우(예, 반환 Type이 위의 코드에서 인자 Type과 동일한 경우) [AnyStr](#31910-typevar)를 사용하세요.
+- 함수의 모든 string Type이 항상 동일한 경우(예, 반환 Type이 위의 코드에서 인자 Type과 동일한 경우) [AnyStr](#s3.19.10-type-var)를 사용하세요.
 
 - 이렇게 사용하면 Python 3에 코드를 포팅하는 과정이 간단해집니다.
 
@@ -2620,7 +2620,7 @@ def f(x: "sketch.Sketch"): ...
   - 하지만 기술적으로 Circular 종속성을 유지하는 것은 가능하지만, [빌드 시스템(build system)](#typing-build-deps)이 다른 모듈에 의존해야 하기 때문에 그렇게 하도록 허락하지 않을 것입니다.
 
 - Circular 종속을 생성하는 모듈을 `Any`로 교체합니다.
-  - 의미있는 이름으로 [alias](#3196-type-aliases)를 지정하고 모듈의 실제 Type 이름을 사용하세요 (어떤 것의 어떤 속성인 Any).
+  - 의미있는 이름으로 [alias](#s3.19.6-aliases)를 지정하고 모듈의 실제 Type 이름을 사용하세요 (어떤 것의 어떤 속성인 Any).
   - Alias의 정의는 마지막으로 import와 한 줄로 분리합니다.
 
 ```python
@@ -2653,7 +2653,7 @@ def get_names(employee_ids: List) -> Dict:
   ...
 ```
 
-- 파라미터의 적합한 Type이 `Any`일 때, 명시적으로 표현되며, 많은 경우에 [`TypeVar`](#31910-typevar)가 더 적합할 수 있음을 기억해야합니다.
+- 파라미터의 적합한 Type이 `Any`일 때, 명시적으로 표현되며, 많은 경우에 [`TypeVar`](#s3.19.10-type-var)가 더 적합할 수 있음을 기억해야합니다.
 
 ```python
 def get_names(employee_ids: List[Any]) -> Dict[Any, Text]:
