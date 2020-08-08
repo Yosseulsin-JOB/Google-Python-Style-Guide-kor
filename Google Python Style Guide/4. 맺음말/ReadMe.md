@@ -1,3 +1,11 @@
+# Google Python Style Guide
+
+## 번역
+
+- Contributors : [`0113bernoyoun`](https://github.com/0113bernoyoun)
+- Log
+  - 초안 : 2019.12.10
+
 ## 4 맺음말
 
 ### _일관성을 유지하세요_
