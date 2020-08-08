@@ -69,7 +69,7 @@ def insert_part_in_readme(part_path, number, all):
     tree.append(part_tree)
   write_readme(target_readme, lines, True if number == "1" else False)
 
-def treeToContents():
+def tree_to_contents():
   contents = []
   for item in tree:
     if type(item) == dict:
@@ -106,7 +106,7 @@ def build():
   chapter_foreach(chapter_list, chapter_build)
 
   title = "# Google Python Style Guide\n"
-  Contents = treeToContents()
+  Contents = tree_to_contents()
 
   write_readme(to_readme, title + Contents + "".join(readme) , True)
 
