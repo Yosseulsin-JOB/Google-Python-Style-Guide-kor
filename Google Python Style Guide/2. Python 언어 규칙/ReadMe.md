@@ -939,7 +939,7 @@
 
 ### 2.18 스레드
 
-- 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 큐 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 threading 모듈이나 locking primitives를 사용하세요. lower-level 대신해 Condition variables와 `threading.Condition`를 선호하세요.
+- 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 큐 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 threading 모듈이나 locking primitives를 사용하세요. lower-level lock 대신해 Condition variables와 `threading.Condition`를 선호하세요.
 <a id="s2.19-power-features"></a>
 
 ### 2.19 강한 기능
@@ -1035,13 +1035,13 @@
   def func(a: int) -> List[int]:
   ```
 
-- [PEP-526](https://www.python.org/dev/peps/pep-0526/)구문 처럼 변수의 type을 선언할 수 있습니다.
+- [PEP-526](https://www.python.org/dev/peps/pep-0526/)구문 처럼 변수의 type을 선언할 때 사용합니다.
 
   ```python
   a: SomeType = some_func()
   ```
 
-- 또는 legacy Python version을 지원해야한다면 코드에 type 설명을 사용합니다.
+- legacy Python version을 지원해야한다면 코드에 type 설명을 추가합니다.
 
   ```python
   a = some_func()  # type: SomeType
