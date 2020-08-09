@@ -1,7 +1,5 @@
 # Google Python Style Guide
 
-<br>
-
 <details>
   <summary>Table of Contents</summary>
 
@@ -285,7 +283,8 @@
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
 - 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#s3.19.12-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
-  <a id="s2.3-packages"></a>
+
+<a id="s2.3-packages"></a>
 
 ---
 
@@ -1283,7 +1282,6 @@
 - 프로젝트의 복잡성에 크게 좌우됩니다. 한번 해보세요.
 
 <br>
-
 <a id="s3"></a>
 
 ## 3. Python 스타일 규칙
@@ -1656,7 +1654,6 @@
 - 이 줄은 파이썬 파일을 import 할때는 무시되지만 실행 될때는 커널이 어떤 파이썬 인터프리터를 사용해야 하는지 알려줍니다.
 - 따라서 직접 실행될 파일에 기록하는것이 적합합니다.
   <a id="s3.8-comments"></a>
-
 ---
 
 ### 3.8 Comments and Docstrings
@@ -1913,6 +1910,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 ---
 
+
 ### 3.10 Strings
 
 - 매개변수가 모두 문자열인 경우에도 `format` 메소드나 `%` 연산자를 사용하여 포메팅하세요.
@@ -2011,6 +2009,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
                         "extraneous leading spaces.")
         ```
 
+
         ```python
         import textwrap
 
@@ -2022,6 +2021,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
     <a id="s3.11-files-and-sockets"></a>
 
 ---
+
 
 ### 3.11 Files and Sockets
 
@@ -2062,6 +2062,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 ---
 
+
 ### 3.12 TODO Comments
 
 - 임시적, 잠시 사용하려는 코드 또는 좋기는 하지만 완벽하지 않은 코드의 경우 `TODO` 주석을 사용하세요.
@@ -2082,6 +2083,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   <a id="s3.13-imports-formatting"></a>
 
 ---
+
 
 ### 3.13 import 형식
 
@@ -2199,6 +2201,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 ---
 
+
 ### 3.15 접근 제어
 
 - 만약 접근제어자 함수를 무시할 경우 파이썬에서는 함수에 대해 추가적인 비용을 피하기 위해 접근제어자 함수 대신에 public 변수로 사용해야 합니다.
@@ -2210,6 +2213,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   <a id="s3.16-naming"></a>
 
 ---
+
 
 ### 3.16 네이밍
 
@@ -2276,10 +2280,10 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 | 메서드 이름          | `lower_with_under()` | `_lower_with_under()` (protected) |
 | 함수/메서드 매개변수 | `lower_with_under`   |                                   |
 | 지역 변수            | `lower_with_under`   |                                   |
-
 <a id="s3.17-main"></a>
 
 ---
+
 
 ### 3.17 Main
 
@@ -2319,6 +2323,7 @@ if __name__ == '__main__':
 
 ---
 
+
 ### 3.18 함수 길이
 
 - 함수의 길이가 작고 필수기능으로만 작성된 함수를 선호하세요.
@@ -2336,6 +2341,7 @@ if __name__ == '__main__':
     <a id="s3.19-type-annotations"></a>
 
 ---
+
 
 ### 3.19 Type 주석 방법
 
