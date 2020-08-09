@@ -77,6 +77,8 @@ def insert_part_in_readme(part_path, number, all):
       part_tree.append({"link":link, "title":title})
   if part_tree:
     tree.append(part_tree)
+  # 파트가 시작하는 부분에 라인 추가 (d5e507c / #12)
+  lines.append("\n---\n")
   write_readme(target_readme, lines, True if number == "1" else False)
 
 def tree_to_contents():
@@ -105,7 +107,8 @@ def chapter_build(chapter_path, number, all):
   f = open(from_readme, 'r')
   data = f.readlines()
   f.close()
-  readme.append("".join(chapter_header)  + "".join(data))
+  # 챕터가 시작하는 부분에 <br> 추가 (d5e507c / #12)
+  readme.append("\n<br>\n" + "".join(chapter_header)  + "".join(data))
 
 def build():
   to_readme = "./Google Python Style Guide kor.md"
