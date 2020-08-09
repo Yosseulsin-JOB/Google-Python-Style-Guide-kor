@@ -3,6 +3,8 @@
 ### 3.1 Semicolons
 
 - 세미콜론을 이용해서 문장을 끝내거나 한 줄에 2개의 구문을 작성하지 마세요.
+
+---
 <a id="s3.2-line-length"></a>
 
 ### 3.2 Line length
@@ -82,6 +84,8 @@
     ```
 
 - 위의 예시에서 각 요소에 사용된 들여쓰기를 잘 기억하세요. 더 자세한 정보는 [들여쓰기](#s3.4-indentation) 챕터를 확인하세요.
+
+---
 <a id="s3.3-parentheses"></a>
 
 ### 3.3 Parentheses
@@ -119,6 +123,8 @@
       bar()
   return (foo)
   ```
+
+---
 <a id="s3.4-indentation"></a>
 
 ### 3.4 Indentation
@@ -211,6 +217,8 @@
           6
           ]
   ```
+
+---
 <a id="s3.5-blank-lines"></a>
 
 ### 3.5 Blank Lines
@@ -219,6 +227,8 @@
 - 각 메소드 선언 또는 `class` 줄과 젓 번째 메소드 선언 시 그 사이에는 한 개의 빈 줄이 있어야 합니다.
 - `def` 줄 이후에는 빈 줄이 없어야 합니다.
 - 함수와 메소드 사이에 개발자의 판단하에 적절하게 한 개의 빈 줄을 사용하세요.
+
+---
 <a id="s3.6-whitespace"></a>
 
 ### 3.6 Whitespace
@@ -341,6 +351,8 @@
         'long_name': 2,
     }
     ```
+
+---
 <a id="s3.7-shebang-line"></a>
 
 ### 3.7 Shebang Line
@@ -350,6 +362,8 @@
 
 - 이 줄은 파이썬 파일을 import 할때는 무시되지만 실행 될때는 커널이 어떤 파이썬 인터프리터를 사용해야 하는지 알려줍니다.
 - 따라서 직접 실행될 파일에 기록하는것이 적합합니다.
+
+---
 <a id="s3.8-comments"></a>
 
 ### 3.8 Comments and Docstrings
@@ -569,6 +583,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 - 코드 리뷰어가 세미콜론이 사용되어야 하는데 컴마를 사용했다고 지적하는 것은 불만스러울 수 있지만 소스코드가 높은 수준의 명료성과 가독성을 가지는것은 매우 중요합니다.
 - 올바른 구두점, 스펠링 그리고 문법은 이를 얻을 수 있도록 도와줍니다.
+
+---
 <a id="s3.9-classes"></a>
 
 ### 3.9 Classes
@@ -599,6 +615,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
       class InnerClass(object):
           pass
   ```
+
+---
 <a id="s3.10-strings"></a>
 
 ### 3.10 Strings
@@ -706,6 +724,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
         This is also fine, because textwrap.dedent()
         will collapse common leading spaces in each line.""")
     ```
+
+---
 <a id="s3.11-files-and-sockets"></a>
 
 ### 3.11 Files and Sockets
@@ -742,6 +762,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
       for line in front_page:
           print(line)
   ```
+
+---
 <a id="s3.12-todo-comments"></a>
 
 ### 3.12 TODO Comments
@@ -761,6 +783,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 ```
 
 - 만약 작성한 `TODO` 가 "추후 무엇을 진행할 것" 이라는 형식을 담고 있다면 반드시 ("2009년 11월까지") 와 같은 구체적인 기간이나 ("모든 클라이언트가 XML 요청을 해결 할수 있을때 이 코드 삭제") 처럼 목적을 포함하여야 합니다.
+
+---
 <a id="s3.13-imports-formatting"></a>
 
 ### 3.13 import 형식
@@ -844,6 +868,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   #from myproject.backend.hgwells import time_machine
   #from myproject.backend.state_machine import main_loop
   ```
+
+---
 <a id="s3.14-statements"></a>
 
 ### 3.14 Statements
@@ -871,6 +897,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
       bar(foo)
   except ValueError: baz(foo)
   ```
+
+---
 <a id="s3.15-access-control"></a>
 
 ### 3.15 접근 제어
@@ -881,6 +909,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 - 반면에 접근이 복잡하거나 변수의 접근에 대한 비용이 큰 경우, `get_foo()` 와 `set_foo()`와 같은 함수 호출([네이밍](#s3.16-naming) 가이드 라인을 참고하라)을 사용해야 합니다.
 - 만약 전에 했던 행동이 property를 통해 접근을 허락했다면 새로운 접근제어자 함수를 property와 묶지마세요.
 - 어떤 코드가 여전히 변수에 오래된 메서드를 통해 접근하려 시도한다면 반드시 눈에 보이게 부수어 복잡성의 변화를 인식하게 만들어야 합니다.
+
+---
 <a id="s3.16-naming"></a>
 
 ### 3.16 네이밍
@@ -904,7 +934,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 <a id="s3.16.1-names-to-avoid"></a>
 
-#### 3.16.1 피해야할 이름
+#### 3.16.1 피해야 할 이름
 
 1. 아래와 같은 특별한 경우를 제외한 단일 글자는 피합니다.
 
@@ -948,6 +978,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 | 메서드 이름          | `lower_with_under()` | `_lower_with_under()` (protected) |
 | 함수/메서드 매개변수 | `lower_with_under`   |                                   |
 | 지역 변수            | `lower_with_under`   |                                   |
+
+---
 <a id="s3.17-main"></a>
 
 ### 3.17 Main
@@ -984,6 +1016,8 @@ if __name__ == '__main__':
 
 - top level에 있는 모든 코드는 모듈이 import될 때 실행될 것입니다.
 - 파일을 `pydoc`으로 만들 때 실행하면 안되는 연산을 하거나 함수를 호출하는 것과 객체를 만드는 것을 조심하세요.
+
+---
 <a id="s3.18-function-length"></a>
 
 ### 3.18 함수 길이
@@ -1000,6 +1034,8 @@ if __name__ == '__main__':
 - 작업을 할때 몇몇 길고 복잡한 함수를 발견할 수 있습니다. 절대 기존의 코드를 수정한다는 협박을 하지 마세요
   - 만약 함수가 사용하기 어렵다고 판단되면, 에러를 디버깅 하기 힘들다는걸 알거나 몇몇 다른 문맥에서 이 에러들을 사용하기 원한다고 할때
   - 그 함수를 작고 더욱 관리가 가능한 조각들로 나누는 것을 생각해 보세요.
+
+---
 <a id="s3.19-type-annotations"></a>
 
 ### 3.19 Type 주석 방법
@@ -1427,3 +1463,5 @@ T = TypeVar('T')
 def get_names(employee_ids: List[T]) -> Dict[T, Text]:
   """직원의 아이디를 이름과 연결하여 반환합니다."""
 ```
+
+---

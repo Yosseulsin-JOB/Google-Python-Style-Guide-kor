@@ -8,7 +8,7 @@
 
 #### 2.1.1 정의
 
-- `pylint`는 파이썬 소스코드에서 버그와 스타일 문제를 찾기위한 툴입니다. (`pylint`는 빌나 컴파일시 에러외에 `추가`로 오류검사를 할 수 있는 도구라고 생각하면 될 것 같습니다.)
+- `pylint`는 파이썬 소스코드에서 버그와 스타일 문제를 찾기 위한 툴입니다. (`pylint`는 빌나 컴파일 시 에러 외에 `추가`로 오류검사를 할 수 있는 도구라고 생각하면 될 것 같습니다.)
 - 일반적으로 C나 C++와 같은 비동적 프로그래밍 언어에서의 컴파일러를 통해 잡히는 문제를 찾아냅니다.
 - 파이썬의 동적인 특성때문에 몇몇 경고들은 정확하지 않을 수 있지만 드물게 발생합니다.
 
@@ -68,6 +68,8 @@
   ```
 
 - 경고를 없애는 방법은 일반적인 형태로 사용되지 않은 인자의 이름으로 `_`를 사용하거나 이름에 `unused_`를 붙이거나 `_`으로 할당하는 것입니다. 이러한 형태는 허용되지만 권장하지 않습니다. break caller는 이름으로 인수를 전달하고 인수가 실제로 사용되지 않도록 강제하지 않습니다.
+
+---
 <a id="s2.2-imports"></a>
 
 ### 2.2 Imports
@@ -112,6 +114,8 @@
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
 - 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#s3.19.12-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
+
+---
 <a id="s2.3-packages"></a>
 
 ### 2.3 Packages
@@ -167,6 +171,8 @@
 
 - 메인 바이너리 디렉토리는 몇몇 환경에서 발생했음에도 불구하고`sys.path`에 있다고 예측하면 안됩니다.
 - 이러한 상황에서 코드는 `import jodie`는 파일로 된 `jodie.py`가 아닌 써드파티나 탑 레벨 패키지 이름이 `jodie`라고 참조한다고 가정해야합니다.
+
+---
 <a id="s2.4-exceptions"></a>
 
 ### 2.4 예외
@@ -252,7 +258,7 @@
 - 사용하는 동안, 기존에 존재하는 예외 클래스(exception class)로부터 상속을 받아야 합니다.
 - 예외 이름은 `Error`로 끝나야 하고 말더듬이(stutter)로 시작하면 안됩니다.(`foo.fooError`).
 - 예외를 다시 발생시키거나 쓰레드의 가장 바깥 쪽 블록에 있지않으면 절대 포괄적인 `except:`문을 사용하거나 `Exception`, `StandardError`을 사용하지마세요. (그리고 에러메시지를 출력하세요.) Python은 이와 관련해서 매우 관용적이며 `except:` 모든 오탈자를 비롯하여, sys.exit() 호출, Ctrl+C로 인한 인터럽트, 유닛테스트 실패와 마지막으로 당신이 포착을 원하지 않았던 다른 모든 종류의 예외들까지 모두 잡아낼 것입니다.
-- 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야할 에러를 가리게 됩니다.
+- 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야 할 에러를 가리게 됩니다.
 - 예외가 `try` 블록에서 발생하던 안하던 `finally`절은 코드를 실행시킨다. 이건 가끔 깔끔히 하는데 유용합니다. 예를들어, 파일을 닫을 때 가 그 예입니다.
 - 예외를 포착했을때, `,` 보다 `as` 를 사용하세요. 예시는 다음과 같습니다.
 
@@ -262,6 +268,8 @@
   except Error as error:
       pass
   ```
+
+---
 <a id="s2.5-global-variables"></a>
 
 ### 2.5 전역 변수
@@ -296,6 +304,8 @@
 - 예를들어 `MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다. [Naming](#s3.16-naming) 을 참고하세요.
 - 만약 전역변수가 필요하다면 module-level에서 선언되고 모듈 내부에서 이름에 `_`를 붙여서 만들어져야 합니다.
 - 외부 접근은 반드시 public단위의 module-level 함수를 통해서 동작되어야 합니다. [Naming](#s3.16-naming)을 참고하세요.
+
+---
 <a id="s2.6-nested"></a>
 
 ### 2.6 중첩/지역/내부 클래스와 함수
@@ -334,6 +344,8 @@
 - 몇가지 주의사항을 지키면 사용해도 괜찮습니다.
 - local value에 접근할 때를 제외하고 중첩함수나 중첩 클래스 사용을 피하세요.
 - 함수를 모듈 사용자들에게 숨기기 위해 중첩하지마세요. 대신, module level에서는 이름 앞에 `_`을 붙여 계속해서 test할 수 있게 하세요.
+
+---
 <a id="s2.7-comprehensions"></a>
 <a id="s2.7-list_comprehensions"></a>
 
@@ -418,6 +430,8 @@
           for z in range(5)
           if y != z)
   ```
+
+---
 <a id="s2.8-default-iterators-and-operators"></a>
 
 ### 2.8 기본 반복자와 연산자
@@ -471,6 +485,8 @@
   for line in afile.readlines(): ...
   for k, v in dict.iteritems(): ...
   ```
+
+---
 <a id="s2.9-generators"></a>
 
 ### 2.9 제너레이터
@@ -502,6 +518,8 @@
 #### 2.9.4 결론
 
 - 제너레이터 함수에서 docstring에 대해 "Returns:"보다 "Yields:"를 사용하세요.
+
+---
 <a id="s2.10-lambda-functions"></a>
 
 ### 2.10 람다 함수
@@ -536,6 +554,8 @@
 
 - 곱셈 같은 일반 연산자에서는 `operator`모듈 대신에 람다 함수를 사용하세요.
 - 예를 들어, `operator.mul`을 `lambda x,y : x * y` 처럼 사용하시면 됩니다.
+
+---
 <a id="s2.11-conditional-expressions"></a>
 
 ### 2.11 조건문 표현
@@ -565,6 +585,8 @@
 #### 2.11.4
 
 - 간단한 상황에 좋습니다. 그 외의 경우에는 if 문을 사용하는 것이 좋습니다.
+
+---
 <a id="s2.12-default-argument-values"></a>
 
 ### 2.12 기본 인자 값
@@ -636,6 +658,8 @@
   def foo(a, b: Mapping = {}):  # 확인되지 않은 코드로 전달 될 수 있습니다...
       ...
   ```
+
+---
 <a id="s2.13-properties"></a>
 
 ### 2.13 Properties
@@ -715,6 +739,8 @@
       def perimeter(self):
           return self.side * 4
   ```
+
+---
 <a id="s2.14-truefalse-evaluations"></a>
 
 ### 2.14 True/False 평가
@@ -749,7 +775,7 @@
 
   - 항상 `if foo is None:`(혹은 `is not None`)을 통해 `None` 값을 확인하세요.
   - 예를 들어, 기본값이 `None`인 변수나 인자를 어떤 값으로 설정했는지 확인할 때, 어떤 값이 boolean의 `False` 값일 수 있습니다.
-  - `==`를 사용해서 boolean 변수인 `False`와 비교하지 마세요. 대신 `if not x:`를 사용하세요. `False`와 `None`를 구별해야할 경우 `if not x and is not None:`와 같은 식으로 연결하세요.
+  - `==`를 사용해서 boolean 변수인 `False`와 비교하지 마세요. 대신 `if not x:`를 사용하세요. `False`와 `None`를 구별해야 할 경우 `if not x and is not None:`와 같은 식으로 연결하세요.
   - sequences(strings, lists, tuples)의 경우 빈 sequences는 `False`이므로 `if len(seq):` 혹은 `if not len(seq):` 보다 `if seq:` 혹은 `if not seq:`가 더 바람직합니다.
   - 정수(integer)를 처리할때, 암묵적(implicit) `False`는 이점보다 더 많은 위험을 가져올 수 있습니다(즉 `None`을 0으로 잘못 처리합니다.). (`len()`의 결과가 아닌)정수라고 알려진 값을 정수 0과 비교할 수 있습니다.
 
@@ -787,6 +813,8 @@
   ```
 
 - `'0'`(즉, `0` 문자열)은 참으로 평가한다는 점에 유의해야합니다.
+
+---
 <a id="s2.15-deprecated-language-features"></a>
 
 ### 2.15 사용하지 않는 언어의 기능
@@ -826,6 +854,8 @@
 
   apply(fn, args, kwargs)
   ```
+
+---
 <a id="s2.16-lexical-scoping"></a>
 
 ### 2.16 렉시컬 스코핑(Lexical Scoping)
@@ -883,6 +913,8 @@
 #### 2.16.4 결론
 
 - 사용해도 좋습니다.
+
+---
 <a id="s2.17-function-and-method-decorators"></a>
 
 ### 2.17 함수와 메서드 Decorators
@@ -935,11 +967,15 @@
 - Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
 - 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "@static method"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
 - 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "@classmethod"를 사용하세요.
+
+---
 <a id="s2.18-threading"></a>
 
 ### 2.18 스레드
 
 - 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 큐 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 threading 모듈이나 locking primitives를 사용하세요. lower-level lock 대신해 Condition variables와 `threading.Condition`를 선호하세요.
+
+---
 <a id="s2.19-power-features"></a>
 
 ### 2.19 강한 기능
@@ -971,6 +1007,8 @@
 
 - 코드에서 이러한 기능은 피하세요.
 - 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `collections.namedtuple`, `dataclasses`, `enum`)
+
+---
 <a id="s2.20-modern-python"></a>
 
 ### 2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports
@@ -1017,6 +1055,8 @@
 ##### six, future 그리고 past 라이브러리
 
 - 프로젝트가 Python 2, 3 모두 지원해야하는 경우에 라이브러리를 적합하게 사용하는 것을 권장합니다. 코드를 더 깨끗하고 삶을 더 쉽게 만들기 위해 존재합니다.
+
+---
 <a id="s2.21-type-annotated-code"></a>
 <a id="s2.21-typed-code"></a>
 
@@ -1064,3 +1104,5 @@
 #### 2.21.4 결론
 
 - 프로젝트의 복잡성에 크게 좌우됩니다. 한번 해보세요.
+
+---

@@ -3,154 +3,156 @@
 <details>
   <summary>Table of Contents</summary>
 
-- [1. 배경](#s1)
-- [2. Python 언어 규칙](#s2)
-  - [2.1 Lint](#s2.1-lint)
-    - [2.1.1 정의](#s2.1.1-definition)
-    - [2.1.2 장점](#s2.1.2-pros)
-    - [2.1.3 단점](#s2.1.3-cons)
-    - [2.1.4 결론](#s2.1.4-decision)
-  - [2.2 Imports](#s2.2-imports)
-    - [2.2.1 정의](#s2.2.1-definition)
-    - [2.2.2 장점](#s2.2.2-pros)
-    - [2.2.3 단점](#s2.2.3-cons)
-    - [2.2.4 결론](#s2.2.4-decision)
-  - [2.3 Packages](#s2.3-packages)
-    - [2.3.1 장점](#s2.3.1-pros)
-    - [2.3.2 단점](#S2.3.2-cons)
-    - [2.3.3 결론](#s2.3.3-decision)
-  - [2.4 예외](#s2.4-exceptions)
-    - [2.4.1 결정](#s2.4.1-definition)
-    - [2.4.2 장점](#s2.4.2-pros)
-    - [2.4.3 단점](#s2.4.3-cons)
-    - [2.4.4 결론](#s2.4.4-decision)
-  - [2.5 전역 변수](#s2.5-global-variables)
-    - [2.5.1 정의](#s2.5.1-definition)
-    - [2.5.2 장점](#s2.5.2-pros)
-    - [2.5.3 단점](#s2.5.3-cons)
-    - [2.5.4 결론](#s2.5.4-decision)
-  - [2.6 중첩/지역/내부 클래스와 함수](#s2.6-nested)
-    - [2.6.1 정의](#s2.6.1-definition)
-    - [2.6.2 장점](#s2.6.2-pros)
-    - [2.6.3 단점](#s2.6.3-cons)
-    - [2.6.4 결론](#s2.6.4-decision)
-  - [2.7 Comprehensions & 제너레이터 표현식](#s2.7-list_comprehensions)
-    - [2.7.1 정의](#s2.7.1-definition)
-    - [2.7.2 장점](#s2.7.2-pros)
-    - [2.7.3 단점](#s2.7.3-cons)
-    - [2.7.4 결론](#s2.7.4-decision)
-  - [2.8 기본 반복자와 연산자](#s2.8-default-iterators-and-operators)
-    - [2.8.1 정의](#s2.8.1-definition)
-    - [2.8.2 장점](#s2.8.2-pros)
-    - [2.8.3 단점](#s2.8.3-cons)
-    - [2.8.4 결론](#s2.8.4-decision)
-  - [2.9 제너레이터](#s2.9-generators)
-    - [2.9.1 정의](#s2.9.1-definition)
-    - [2.9.2 장점](#s2.9.2-pros)
-    - [2.9.3 단점](#s2.9.3-cons)
-    - [2.9.4 결론](#s2.9.4-decision)
-  - [2.10 람다 함수](#s2.10-lambda-functions)
-    - [2.10.1 정의](#s2.10.1-definition)
-    - [2.10.2 장점](#s2.10.2-pros)
-    - [2.10.3 단점](#s2.10.3-cons)
-    - [2.10.4 결론](#s2.10.4-decision)
-  - [2.11 조건문 표현](#s2.11-conditional-expressions)
-    - [2.11.1 정의](#s2.11.1-definition)
-    - [2.11.2 장점](#s2.11.2-pros)
-    - [2.11.3 단점](#s2.11.3-cons)
-    - [2.11.4](#s2.11.4-decision)
-  - [2.12 기본 인자 값](#s2.12-default-argument-values)
-    - [2.12.1 정의](#s2.12.1-definition)
-    - [2.12.2 장점](#s2.12.2-pros)
-    - [2.12.3 단점](#s2.12.3-cons)
-    - [2.12.4 결론](#s2.12.4-decision)
-  - [2.13 Properties](#s2.13-properties)
-    - [2.13.1 정의](#s2.13.1-definition)
-    - [2.13.2 장점](#s2.13.2-pros)
-    - [2.13.3 단점](#s2.13.3-cons)
-    - [2.13.4 결론](#s2.13.4-decision)
-  - [2.14 True/False 평가](#s2.14-truefalse-evaluations)
-    - [2.14.1 정의](#s2.14.1-definition)
-    - [2.14.2 장점](#s2.14.2-pros)
-    - [2.14.3 단점](#s2.14.3-cons)
-    - [2.14.4 결론](#s2.14.4-decision)
-  - [2.15 사용하지 않는 언어의 기능](#s2.15-deprecated-language-features)
-    - [2.15.1 정의](#s2.15.1-definition)
-    - [2.15.2 결론](#s2.15.2-decision)
-  - [2.16 렉시컬 스코핑(Lexical Scoping)](#s2.16-lexical-scoping)
-    - [2.16.1 정의](#s2.16.1-definition)
-    - [2.16.2 장점](#s2.16.2-pros)
-    - [2.16.3 단점](#s2.16.3-cons)
-    - [2.16.4 결론](#s2.16.4-decision)
-  - [2.17 함수와 메서드 Decorators](#s2.17-function-and-method-decorators)
-    - [2.17.1 정의](#s2.17.1-definition)
-    - [2.17.2 장점](#s2.17.2-pros)
-    - [2.17.3 단점](#s2.17.3-cons)
-    - [2.17.4 결론](#s2.17.4-decision)
-  - [2.18 스레드](#s2.18-threading)
-  - [2.19 강한 기능](#s2.19-power-features)
-    - [2.19.1 정의](#s2.19.1-definition)
-    - [2.19.2 장점](#s2.19.2-pros)
-    - [2.19.3 단점](#s2.19.3-cons)
-    - [2.19.4 결론](#s2.19.4-decision)
-  - [2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports](#s2.20-modern-python)
-    - [2.20.1 정의](#s2.20.1-definition)
-    - [2.20.2 장점](#s2.20.2-pros)
-    - [2.20.3 단점](#s2.20.3-cons)
-    - [2.20.4 결론](#s2.20.4-decision)
-  - [2.21 Type 주석](#s2.21-typed-code)
-    - [2.21.1 정의](#s2.21.1-definition)
-    - [2.21.2 장점](#s2.21.2-pros)
-    - [2.21.3 단점](#s2.21.3-cons)
-    - [2.21.4 결론](#s2.21.4-decision)
-- [3. Python 스타일 규칙](#s3)
-  - [3.1 Semicolons](#s3.1-semicolons)
-  - [3.2 Line length](#s3.2-line-length)
-  - [3.3 Parentheses](#s3.3-parentheses)
-  - [3.4 Indentation](#s3.4-indentation)
-    - [3.4.1 원소 나열 시 후행 쉼표](#s3.4.1-trailing-comma)
-  - [3.5 Blank Lines](#s3.5-blank-lines)
-  - [3.6 Whitespace](#s3.6-whitespace)
-  - [3.7 Shebang Line](#s3.7-shebang-line)
-  - [3.8 Comments and Docstrings](#s3.8-comments)
-    - [3.8.1 Docstrings](#s3.8.1-comments-in-doc-strings)
-    - [3.8.2 Modules](#s3.8.2-comments-in-modules)
-    - [3.8.3 Functions and Methods](#s3.8.3-functions-and-methods)
-    - [3.8.4 Classes](#s3.8.4-comments-in-classes)
-    - [3.8.5 Block and Inline Comments](#s3.8.5-comments-in-block-and-inline)
-    - [3.8.6 Punctuation, Spelling and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
-  - [3.9 Classes](#s3.9-classes)
-  - [3.10 Strings](#s3.10-strings)
-  - [3.11 Files and Sockets](#s3.11-files-and-sockets)
-  - [3.12 TODO Comments](#s3.12-todo-comments)
-  - [3.13 import 형식](#s3.13-imports-formatting)
-  - [3.14 Statements](#s3.14-statements)
-  - [3.15 접근 제어](#s3.15-access-control)
-  - [3.16 네이밍](#s3.16-naming)
-    - [3.16.1 피해야할 이름](#s3.16.1-names-to-avoid)
-    - [3.16.3 파일 네이밍](#s3.16.3-file-naming)
-    - [3.16.4 Guido의 권고에 따른 가이드라인](#s3.16.4-guidelines-derived-from-guidos-recommendations)
-  - [3.17 Main](#s3.17-main)
-  - [3.18 함수 길이](#s3.18-function-length)
-  - [3.19 Type 주석 방법](#s3.19-type-annotations)
-    - [3.19.1 일반적인 규칙](#s3.19.1-general)
-    - [3.19.2 줄 바꿈](#s3.19.2-line-breaking)
-    - [3.19.3 전방선언](#s3.19.3-forward-declarations)
-    - [3.19.4 기본 값](#s3.19.4-default-values)
-    - [3.19.5 NoneType](#s3.19.5-none-type)
-    - [3.19.6 Type Aliases](#s3.19.6-aliases)
-    - [3.19.7 Ignoring Types](#s3.19.7-ignore)
-    - [3.19.8 내부 변수 작성](#s3.19.8-comments)
-    - [3.19.9 튜플 vs 리스트](#s3.19.9-tuples)
-    - [3.19.10 TypeVar](#s3.19.10-type-var)
-    - [3.19.11 문자열 Type](#s3.19.11-strings)
-    - [3.19.12 Typing 추가](#s3.19.12-imports)
-    - [3.19.13 조건 Imports](#s3.19.13-conditional-imports)
-    - [3.19.14 Circular 종속](#s3.19.14-circular-deps)
-    - [3.19.15 일반](#s3.19.15-generics)
-- [4. 맺음말](#s4)
+-   [1. 배경](#s1)
+-   [2. Python 언어 규칙](#s2)
+    *   [2.1 Lint](#s2.1-lint)
+        +   [2.1.1 정의](#s2.1.1-definition)
+        +   [2.1.2 장점](#s2.1.2-pros)
+        +   [2.1.3 단점](#s2.1.3-cons)
+        +   [2.1.4 결론](#s2.1.4-decision)
+    *   [2.2 Imports](#s2.2-imports)
+        +   [2.2.1 정의](#s2.2.1-definition)
+        +   [2.2.2 장점](#s2.2.2-pros)
+        +   [2.2.3 단점](#s2.2.3-cons)
+        +   [2.2.4 결론](#s2.2.4-decision)
+    *   [2.3 Packages](#s2.3-packages)
+        +   [2.3.1 장점](#s2.3.1-pros)
+        +   [2.3.2 단점](#S2.3.2-cons)
+        +   [2.3.3 결론](#s2.3.3-decision)
+    *   [2.4 예외](#s2.4-exceptions)
+        +   [2.4.1 결정](#s2.4.1-definition)
+        +   [2.4.2 장점](#s2.4.2-pros)
+        +   [2.4.3 단점](#s2.4.3-cons)
+        +   [2.4.4 결론](#s2.4.4-decision)
+    *   [2.5 전역 변수](#s2.5-global-variables)
+        +   [2.5.1 정의](#s2.5.1-definition)
+        +   [2.5.2 장점](#s2.5.2-pros)
+        +   [2.5.3 단점](#s2.5.3-cons)
+        +   [2.5.4 결론](#s2.5.4-decision)
+    *   [2.6 중첩/지역/내부 클래스와 함수](#s2.6-nested)
+        +   [2.6.1 정의](#s2.6.1-definition)
+        +   [2.6.2 장점](#s2.6.2-pros)
+        +   [2.6.3 단점](#s2.6.3-cons)
+        +   [2.6.4 결론](#s2.6.4-decision)
+    *   [2.7 Comprehensions & 제너레이터 표현식](#s2.7-list_comprehensions)
+        +   [2.7.1 정의](#s2.7.1-definition)
+        +   [2.7.2 장점](#s2.7.2-pros)
+        +   [2.7.3 단점](#s2.7.3-cons)
+        +   [2.7.4 결론](#s2.7.4-decision)
+    *   [2.8 기본 반복자와 연산자](#s2.8-default-iterators-and-operators)
+        +   [2.8.1 정의](#s2.8.1-definition)
+        +   [2.8.2 장점](#s2.8.2-pros)
+        +   [2.8.3 단점](#s2.8.3-cons)
+        +   [2.8.4 결론](#s2.8.4-decision)
+    *   [2.9 제너레이터](#s2.9-generators)
+        +   [2.9.1 정의](#s2.9.1-definition)
+        +   [2.9.2 장점](#s2.9.2-pros)
+        +   [2.9.3 단점](#s2.9.3-cons)
+        +   [2.9.4 결론](#s2.9.4-decision)
+    *   [2.10 람다 함수](#s2.10-lambda-functions)
+        +   [2.10.1 정의](#s2.10.1-definition)
+        +   [2.10.2 장점](#s2.10.2-pros)
+        +   [2.10.3 단점](#s2.10.3-cons)
+        +   [2.10.4 결론](#s2.10.4-decision)
+    *   [2.11 조건문 표현](#s2.11-conditional-expressions)
+        +   [2.11.1 정의](#s2.11.1-definition)
+        +   [2.11.2 장점](#s2.11.2-pros)
+        +   [2.11.3 단점](#s2.11.3-cons)
+        +   [2.11.4](#s2.11.4-decision)
+    *   [2.12 기본 인자 값](#s2.12-default-argument-values)
+        +   [2.12.1 정의](#s2.12.1-definition)
+        +   [2.12.2 장점](#s2.12.2-pros)
+        +   [2.12.3 단점](#s2.12.3-cons)
+        +   [2.12.4 결론](#s2.12.4-decision)
+    *   [2.13 Properties](#s2.13-properties)
+        +   [2.13.1 정의](#s2.13.1-definition)
+        +   [2.13.2 장점](#s2.13.2-pros)
+        +   [2.13.3 단점](#s2.13.3-cons)
+        +   [2.13.4 결론](#s2.13.4-decision)
+    *   [2.14 True/False 평가](#s2.14-truefalse-evaluations)
+        +   [2.14.1 정의](#s2.14.1-definition)
+        +   [2.14.2 장점](#s2.14.2-pros)
+        +   [2.14.3 단점](#s2.14.3-cons)
+        +   [2.14.4 결론](#s2.14.4-decision)
+    *   [2.15 사용하지 않는 언어의 기능](#s2.15-deprecated-language-features)
+        +   [2.15.1 정의](#s2.15.1-definition)
+        +   [2.15.2 결론](#s2.15.2-decision)
+    *   [2.16 렉시컬 스코핑(Lexical Scoping)](#s2.16-lexical-scoping)
+        +   [2.16.1 정의](#s2.16.1-definition)
+        +   [2.16.2 장점](#s2.16.2-pros)
+        +   [2.16.3 단점](#s2.16.3-cons)
+        +   [2.16.4 결론](#s2.16.4-decision)
+    *   [2.17 함수와 메서드 Decorators](#s2.17-function-and-method-decorators)
+        +   [2.17.1 정의](#s2.17.1-definition)
+        +   [2.17.2 장점](#s2.17.2-pros)
+        +   [2.17.3 단점](#s2.17.3-cons)
+        +   [2.17.4 결론](#s2.17.4-decision)
+    *   [2.18 스레드](#s2.18-threading)
+    *   [2.19 강한 기능](#s2.19-power-features)
+        +   [2.19.1 정의](#s2.19.1-definition)
+        +   [2.19.2 장점](#s2.19.2-pros)
+        +   [2.19.3 단점](#s2.19.3-cons)
+        +   [2.19.4 결론](#s2.19.4-decision)
+    *   [2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports](#s2.20-modern-python)
+        +   [2.20.1 정의](#s2.20.1-definition)
+        +   [2.20.2 장점](#s2.20.2-pros)
+        +   [2.20.3 단점](#s2.20.3-cons)
+        +   [2.20.4 결론](#s2.20.4-decision)
+    *   [2.21 Type 주석](#s2.21-typed-code)
+        +   [2.21.1 정의](#s2.21.1-definition)
+        +   [2.21.2 장점](#s2.21.2-pros)
+        +   [2.21.3 단점](#s2.21.3-cons)
+        +   [2.21.4 결론](#s2.21.4-decision)
+-   [3. Python 스타일 규칙](#s3)
+    *   [3.1 Semicolons](#s3.1-semicolons)
+    *   [3.2 Line length](#s3.2-line-length)
+    *   [3.3 Parentheses](#s3.3-parentheses)
+    *   [3.4 Indentation](#s3.4-indentation)
+        +   [3.4.1 원소 나열 시 후행 쉼표](#s3.4.1-trailing-comma)
+    *   [3.5 Blank Lines](#s3.5-blank-lines)
+    *   [3.6 Whitespace](#s3.6-whitespace)
+    *   [3.7 Shebang Line](#s3.7-shebang-line)
+    *   [3.8 Comments and Docstrings](#s3.8-comments)
+        +   [3.8.1 Docstrings](#s3.8.1-comments-in-doc-strings)
+        +   [3.8.2 Modules](#s3.8.2-comments-in-modules)
+        +   [3.8.3 Functions and Methods](#s3.8.3-functions-and-methods)
+        +   [3.8.4 Classes](#s3.8.4-comments-in-classes)
+        +   [3.8.5 Block and Inline Comments](#s3.8.5-comments-in-block-and-inline)
+        +   [3.8.6 Punctuation, Spelling and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
+    *   [3.9 Classes](#s3.9-classes)
+    *   [3.10 Strings](#s3.10-strings)
+    *   [3.11 Files and Sockets](#s3.11-files-and-sockets)
+    *   [3.12 TODO Comments](#s3.12-todo-comments)
+    *   [3.13 import 형식](#s3.13-imports-formatting)
+    *   [3.14 Statements](#s3.14-statements)
+    *   [3.15 접근 제어](#s3.15-access-control)
+    *   [3.16 네이밍](#s3.16-naming)
+        +   [3.16.1 피해야 할 이름](#s3.16.1-names-to-avoid)
+        +   [3.16.3 파일 네이밍](#s3.16.3-file-naming)
+        +   [3.16.4 Guido의 권고에 따른 가이드라인](#s3.16.4-guidelines-derived-from-guidos-recommendations)
+    *   [3.17 Main](#s3.17-main)
+    *   [3.18 함수 길이](#s3.18-function-length)
+    *   [3.19 Type 주석 방법](#s3.19-type-annotations)
+        +   [3.19.1 일반적인 규칙](#s3.19.1-general)
+        +   [3.19.2 줄 바꿈](#s3.19.2-line-breaking)
+        +   [3.19.3 전방선언](#s3.19.3-forward-declarations)
+        +   [3.19.4 기본 값](#s3.19.4-default-values)
+        +   [3.19.5 NoneType](#s3.19.5-none-type)
+        +   [3.19.6 Type Aliases](#s3.19.6-aliases)
+        +   [3.19.7 Ignoring Types](#s3.19.7-ignore)
+        +   [3.19.8 내부 변수 작성](#s3.19.8-comments)
+        +   [3.19.9 튜플 vs 리스트](#s3.19.9-tuples)
+        +   [3.19.10 TypeVar](#s3.19.10-type-var)
+        +   [3.19.11 문자열 Type](#s3.19.11-strings)
+        +   [3.19.12 Typing 추가](#s3.19.12-imports)
+        +   [3.19.13 조건 Imports](#s3.19.13-conditional-imports)
+        +   [3.19.14 Circular 종속](#s3.19.14-circular-deps)
+        +   [3.19.15 일반](#s3.19.15-generics)
+-   [4. 맺음말](#s4)
 
 </details>
+
+<br>
 
 <a id="s1"></a>
 
@@ -162,7 +164,10 @@
 - Emacs 편집기에서는 기본 설정값으로 사용하면 됩니다.
 - 많은 팀에서 형식에 대한 논쟁을 피하기 위해 [yapf](https://github.com/google/yapf/) auto-formatter 을 사용합니다.
 
+---
+
 <br>
+
 <a id="s2"></a>
 
 ## 2. Python 언어 규칙
@@ -237,9 +242,9 @@
   ```
 
 - 경고를 없애는 방법은 일반적인 형태로 사용되지 않은 인자의 이름으로 `_`를 사용하거나 이름에 `unused_`를 붙이거나 `_`으로 할당하는 것입니다. 이러한 형태는 허용되지만 권장하지 않습니다. break caller는 이름으로 인수를 전달하고 인수가 실제로 사용되지 않도록 강제하지 않습니다.
-  <a id="s2.2-imports"></a>
 
 ---
+<a id="s2.2-imports"></a>
 
 ### 2.2 Imports
 
@@ -284,9 +289,8 @@
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
 - 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#s3.19.12-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
 
-<a id="s2.3-packages"></a>
-
 ---
+<a id="s2.3-packages"></a>
 
 ### 2.3 Packages
 
@@ -341,9 +345,9 @@
 
 - 메인 바이너리 디렉토리는 몇몇 환경에서 발생했음에도 불구하고`sys.path`에 있다고 예측하면 안됩니다.
 - 이러한 상황에서 코드는 `import jodie`는 파일로 된 `jodie.py`가 아닌 써드파티나 탑 레벨 패키지 이름이 `jodie`라고 참조한다고 가정해야합니다.
-  <a id="s2.4-exceptions"></a>
 
 ---
+<a id="s2.4-exceptions"></a>
 
 ### 2.4 예외
 
@@ -428,7 +432,7 @@
 - 사용하는 동안, 기존에 존재하는 예외 클래스(exception class)로부터 상속을 받아야 합니다.
 - 예외 이름은 `Error`로 끝나야 하고 말더듬이(stutter)로 시작하면 안됩니다.(`foo.fooError`).
 - 예외를 다시 발생시키거나 쓰레드의 가장 바깥 쪽 블록에 있지않으면 절대 포괄적인 `except:`문을 사용하거나 `Exception`, `StandardError`을 사용하지마세요. (그리고 에러메시지를 출력하세요.) Python은 이와 관련해서 매우 관용적이며 `except:` 모든 오탈자를 비롯하여, sys.exit() 호출, Ctrl+C로 인한 인터럽트, 유닛테스트 실패와 마지막으로 당신이 포착을 원하지 않았던 다른 모든 종류의 예외들까지 모두 잡아낼 것입니다.
-- 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야할 에러를 가리게 됩니다.
+- 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야 할 에러를 가리게 됩니다.
 - 예외가 `try` 블록에서 발생하던 안하던 `finally`절은 코드를 실행시킨다. 이건 가끔 깔끔히 하는데 유용합니다. 예를들어, 파일을 닫을 때 가 그 예입니다.
 - 예외를 포착했을때, `,` 보다 `as` 를 사용하세요. 예시는 다음과 같습니다.
 
@@ -439,9 +443,8 @@
       pass
   ```
 
-  <a id="s2.5-global-variables"></a>
-
 ---
+<a id="s2.5-global-variables"></a>
 
 ### 2.5 전역 변수
 
@@ -475,9 +478,9 @@
 - 예를들어 `MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다. [Naming](#s3.16-naming) 을 참고하세요.
 - 만약 전역변수가 필요하다면 module-level에서 선언되고 모듈 내부에서 이름에 `_`를 붙여서 만들어져야 합니다.
 - 외부 접근은 반드시 public단위의 module-level 함수를 통해서 동작되어야 합니다. [Naming](#s3.16-naming)을 참고하세요.
-  <a id="s2.6-nested"></a>
 
 ---
+<a id="s2.6-nested"></a>
 
 ### 2.6 중첩/지역/내부 클래스와 함수
 
@@ -515,10 +518,10 @@
 - 몇가지 주의사항을 지키면 사용해도 괜찮습니다.
 - local value에 접근할 때를 제외하고 중첩함수나 중첩 클래스 사용을 피하세요.
 - 함수를 모듈 사용자들에게 숨기기 위해 중첩하지마세요. 대신, module level에서는 이름 앞에 `_`을 붙여 계속해서 test할 수 있게 하세요.
-  <a id="s2.7-comprehensions"></a>
-  <a id="s2.7-list_comprehensions"></a>
 
 ---
+<a id="s2.7-comprehensions"></a>
+<a id="s2.7-list_comprehensions"></a>
 
 ### 2.7 Comprehensions & 제너레이터 표현식
 
@@ -602,9 +605,8 @@
           if y != z)
   ```
 
-  <a id="s2.8-default-iterators-and-operators"></a>
-
 ---
+<a id="s2.8-default-iterators-and-operators"></a>
 
 ### 2.8 기본 반복자와 연산자
 
@@ -658,9 +660,8 @@
   for k, v in dict.iteritems(): ...
   ```
 
-  <a id="s2.9-generators"></a>
-
 ---
+<a id="s2.9-generators"></a>
 
 ### 2.9 제너레이터
 
@@ -691,9 +692,9 @@
 #### 2.9.4 결론
 
 - 제너레이터 함수에서 docstring에 대해 "Returns:"보다 "Yields:"를 사용하세요.
-  <a id="s2.10-lambda-functions"></a>
 
 ---
+<a id="s2.10-lambda-functions"></a>
 
 ### 2.10 람다 함수
 
@@ -727,9 +728,9 @@
 
 - 곱셈 같은 일반 연산자에서는 `operator`모듈 대신에 람다 함수를 사용하세요.
 - 예를 들어, `operator.mul`을 `lambda x,y : x * y` 처럼 사용하시면 됩니다.
-  <a id="s2.11-conditional-expressions"></a>
 
 ---
+<a id="s2.11-conditional-expressions"></a>
 
 ### 2.11 조건문 표현
 
@@ -758,9 +759,9 @@
 #### 2.11.4
 
 - 간단한 상황에 좋습니다. 그 외의 경우에는 if 문을 사용하는 것이 좋습니다.
-  <a id="s2.12-default-argument-values"></a>
 
 ---
+<a id="s2.12-default-argument-values"></a>
 
 ### 2.12 기본 인자 값
 
@@ -832,9 +833,8 @@
       ...
   ```
 
-  <a id="s2.13-properties"></a>
-
 ---
+<a id="s2.13-properties"></a>
 
 ### 2.13 Properties
 
@@ -914,9 +914,8 @@
           return self.side * 4
   ```
 
-  <a id="s2.14-truefalse-evaluations"></a>
-
 ---
+<a id="s2.14-truefalse-evaluations"></a>
 
 ### 2.14 True/False 평가
 
@@ -950,7 +949,7 @@
 
   - 항상 `if foo is None:`(혹은 `is not None`)을 통해 `None` 값을 확인하세요.
   - 예를 들어, 기본값이 `None`인 변수나 인자를 어떤 값으로 설정했는지 확인할 때, 어떤 값이 boolean의 `False` 값일 수 있습니다.
-  - `==`를 사용해서 boolean 변수인 `False`와 비교하지 마세요. 대신 `if not x:`를 사용하세요. `False`와 `None`를 구별해야할 경우 `if not x and is not None:`와 같은 식으로 연결하세요.
+  - `==`를 사용해서 boolean 변수인 `False`와 비교하지 마세요. 대신 `if not x:`를 사용하세요. `False`와 `None`를 구별해야 할 경우 `if not x and is not None:`와 같은 식으로 연결하세요.
   - sequences(strings, lists, tuples)의 경우 빈 sequences는 `False`이므로 `if len(seq):` 혹은 `if not len(seq):` 보다 `if seq:` 혹은 `if not seq:`가 더 바람직합니다.
   - 정수(integer)를 처리할때, 암묵적(implicit) `False`는 이점보다 더 많은 위험을 가져올 수 있습니다(즉 `None`을 0으로 잘못 처리합니다.). (`len()`의 결과가 아닌)정수라고 알려진 값을 정수 0과 비교할 수 있습니다.
 
@@ -988,9 +987,9 @@
   ```
 
 - `'0'`(즉, `0` 문자열)은 참으로 평가한다는 점에 유의해야합니다.
-  <a id="s2.15-deprecated-language-features"></a>
 
 ---
+<a id="s2.15-deprecated-language-features"></a>
 
 ### 2.15 사용하지 않는 언어의 기능
 
@@ -1030,9 +1029,8 @@
   apply(fn, args, kwargs)
   ```
 
-  <a id="s2.16-lexical-scoping"></a>
-
 ---
+<a id="s2.16-lexical-scoping"></a>
 
 ### 2.16 렉시컬 스코핑(Lexical Scoping)
 
@@ -1089,9 +1087,9 @@
 #### 2.16.4 결론
 
 - 사용해도 좋습니다.
-  <a id="s2.17-function-and-method-decorators"></a>
 
 ---
+<a id="s2.17-function-and-method-decorators"></a>
 
 ### 2.17 함수와 메서드 Decorators
 
@@ -1143,16 +1141,16 @@
 - Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
 - 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "@static method"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
 - 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "@classmethod"를 사용하세요.
-  <a id="s2.18-threading"></a>
 
 ---
+<a id="s2.18-threading"></a>
 
 ### 2.18 스레드
 
 - 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 큐 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 threading 모듈이나 locking primitives를 사용하세요. lower-level lock 대신해 Condition variables와 `threading.Condition`를 선호하세요.
-  <a id="s2.19-power-features"></a>
 
 ---
+<a id="s2.19-power-features"></a>
 
 ### 2.19 강한 기능
 
@@ -1183,9 +1181,9 @@
 
 - 코드에서 이러한 기능은 피하세요.
 - 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `collections.namedtuple`, `dataclasses`, `enum`)
-  <a id="s2.20-modern-python"></a>
 
 ---
+<a id="s2.20-modern-python"></a>
 
 ### 2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports
 
@@ -1231,10 +1229,10 @@
 ##### six, future 그리고 past 라이브러리
 
 - 프로젝트가 Python 2, 3 모두 지원해야하는 경우에 라이브러리를 적합하게 사용하는 것을 권장합니다. 코드를 더 깨끗하고 삶을 더 쉽게 만들기 위해 존재합니다.
-  <a id="s2.21-type-annotated-code"></a>
-  <a id="s2.21-typed-code"></a>
 
 ---
+<a id="s2.21-type-annotated-code"></a>
+<a id="s2.21-typed-code"></a>
 
 ### 2.21 Type 주석
 
@@ -1281,7 +1279,10 @@
 
 - 프로젝트의 복잡성에 크게 좌우됩니다. 한번 해보세요.
 
+---
+
 <br>
+
 <a id="s3"></a>
 
 ## 3. Python 스타일 규칙
@@ -1291,9 +1292,9 @@
 ### 3.1 Semicolons
 
 - 세미콜론을 이용해서 문장을 끝내거나 한 줄에 2개의 구문을 작성하지 마세요.
-  <a id="s3.2-line-length"></a>
 
 ---
+<a id="s3.2-line-length"></a>
 
 ### 3.2 Line length
 
@@ -1372,9 +1373,9 @@
     ```
 
 - 위의 예시에서 각 요소에 사용된 들여쓰기를 잘 기억하세요. 더 자세한 정보는 [들여쓰기](#s3.4-indentation) 챕터를 확인하세요.
-  <a id="s3.3-parentheses"></a>
 
 ---
+<a id="s3.3-parentheses"></a>
 
 ### 3.3 Parentheses
 
@@ -1412,9 +1413,8 @@
   return (foo)
   ```
 
-  <a id="s3.4-indentation"></a>
-
 ---
+<a id="s3.4-indentation"></a>
 
 ### 3.4 Indentation
 
@@ -1507,9 +1507,8 @@
           ]
   ```
 
-  <a id="s3.5-blank-lines"></a>
-
 ---
+<a id="s3.5-blank-lines"></a>
 
 ### 3.5 Blank Lines
 
@@ -1517,9 +1516,9 @@
 - 각 메소드 선언 또는 `class` 줄과 젓 번째 메소드 선언 시 그 사이에는 한 개의 빈 줄이 있어야 합니다.
 - `def` 줄 이후에는 빈 줄이 없어야 합니다.
 - 함수와 메소드 사이에 개발자의 판단하에 적절하게 한 개의 빈 줄을 사용하세요.
-  <a id="s3.6-whitespace"></a>
 
 ---
+<a id="s3.6-whitespace"></a>
 
 ### 3.6 Whitespace
 
@@ -1632,19 +1631,18 @@
 
   - 부적절한 예
 
-        ```python
-        foo       = 1000  # comment
-        long_name = 2     # comment that should not be aligned
+    ```python
+    foo       = 1000  # comment
+    long_name = 2     # comment that should not be aligned
 
-        dictionary = {
-            'foo'      : 1,
-            'long_name': 2,
-        }
-        ```
-
-    <a id="s3.7-shebang-line"></a>
+    dictionary = {
+        'foo'      : 1,
+        'long_name': 2,
+    }
+    ```
 
 ---
+<a id="s3.7-shebang-line"></a>
 
 ### 3.7 Shebang Line
 
@@ -1653,8 +1651,9 @@
 
 - 이 줄은 파이썬 파일을 import 할때는 무시되지만 실행 될때는 커널이 어떤 파이썬 인터프리터를 사용해야 하는지 알려줍니다.
 - 따라서 직접 실행될 파일에 기록하는것이 적합합니다.
-  <a id="s3.8-comments"></a>
+
 ---
+<a id="s3.8-comments"></a>
 
 ### 3.8 Comments and Docstrings
 
@@ -1873,9 +1872,9 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 - 코드 리뷰어가 세미콜론이 사용되어야 하는데 컴마를 사용했다고 지적하는 것은 불만스러울 수 있지만 소스코드가 높은 수준의 명료성과 가독성을 가지는것은 매우 중요합니다.
 - 올바른 구두점, 스펠링 그리고 문법은 이를 얻을 수 있도록 도와줍니다.
-  <a id="s3.9-classes"></a>
 
 ---
+<a id="s3.9-classes"></a>
 
 ### 3.9 Classes
 
@@ -1906,10 +1905,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
           pass
   ```
 
-  <a id="s3.10-strings"></a>
-
 ---
-
+<a id="s3.10-strings"></a>
 
 ### 3.10 Strings
 
@@ -1994,34 +1991,31 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
   - 올바른 예
 
-        ```python
-        long_string = """This is fine if your use case can accept
-            extraneous leading spaces."""
-        ```
+    ```python
+    long_string = """This is fine if your use case can accept
+        extraneous leading spaces."""
+    ```
 
-        ```python
-        long_string = ("And this is fine if you cannot accept\n" +
-                        "extraneous leading spaces.")
-        ```
+    ```python
+    long_string = ("And this is fine if you cannot accept\n" +
+                    "extraneous leading spaces.")
+    ```
 
-        ```python
-        long_string = ("And this too is fine if you cannot accept\n"
-                        "extraneous leading spaces.")
-        ```
+    ```python
+    long_string = ("And this too is fine if you cannot accept\n"
+                    "extraneous leading spaces.")
+    ```
 
+    ```python
+    import textwrap
 
-        ```python
-        import textwrap
-
-        long_string = textwrap.dedent("""\
-            This is also fine, because textwrap.dedent()
-            will collapse common leading spaces in each line.""")
-        ```
-
-    <a id="s3.11-files-and-sockets"></a>
+    long_string = textwrap.dedent("""\
+        This is also fine, because textwrap.dedent()
+        will collapse common leading spaces in each line.""")
+    ```
 
 ---
-
+<a id="s3.11-files-and-sockets"></a>
 
 ### 3.11 Files and Sockets
 
@@ -2058,10 +2052,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
           print(line)
   ```
 
-  <a id="s3.12-todo-comments"></a>
-
 ---
-
+<a id="s3.12-todo-comments"></a>
 
 ### 3.12 TODO Comments
 
@@ -2080,10 +2072,9 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 ```
 
 - 만약 작성한 `TODO` 가 "추후 무엇을 진행할 것" 이라는 형식을 담고 있다면 반드시 ("2009년 11월까지") 와 같은 구체적인 기간이나 ("모든 클라이언트가 XML 요청을 해결 할수 있을때 이 코드 삭제") 처럼 목적을 포함하여야 합니다.
-  <a id="s3.13-imports-formatting"></a>
 
 ---
-
+<a id="s3.13-imports-formatting"></a>
 
 ### 3.13 import 형식
 
@@ -2167,9 +2158,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   #from myproject.backend.state_machine import main_loop
   ```
 
-  <a id="s3.14-statements"></a>
-
 ---
+<a id="s3.14-statements"></a>
 
 ### 3.14 Statements
 
@@ -2197,10 +2187,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   except ValueError: baz(foo)
   ```
 
-  <a id="s3.15-access-control"></a>
-
 ---
-
+<a id="s3.15-access-control"></a>
 
 ### 3.15 접근 제어
 
@@ -2210,10 +2198,9 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 - 반면에 접근이 복잡하거나 변수의 접근에 대한 비용이 큰 경우, `get_foo()` 와 `set_foo()`와 같은 함수 호출([네이밍](#s3.16-naming) 가이드 라인을 참고하라)을 사용해야 합니다.
 - 만약 전에 했던 행동이 property를 통해 접근을 허락했다면 새로운 접근제어자 함수를 property와 묶지마세요.
 - 어떤 코드가 여전히 변수에 오래된 메서드를 통해 접근하려 시도한다면 반드시 눈에 보이게 부수어 복잡성의 변화를 인식하게 만들어야 합니다.
-  <a id="s3.16-naming"></a>
 
 ---
-
+<a id="s3.16-naming"></a>
 
 ### 3.16 네이밍
 
@@ -2236,7 +2223,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 <a id="s3.16.1-names-to-avoid"></a>
 
-#### 3.16.1 피해야할 이름
+#### 3.16.1 피해야 할 이름
 
 1. 아래와 같은 특별한 경우를 제외한 단일 글자는 피합니다.
 
@@ -2280,10 +2267,9 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 | 메서드 이름          | `lower_with_under()` | `_lower_with_under()` (protected) |
 | 함수/메서드 매개변수 | `lower_with_under`   |                                   |
 | 지역 변수            | `lower_with_under`   |                                   |
-<a id="s3.17-main"></a>
 
 ---
-
+<a id="s3.17-main"></a>
 
 ### 3.17 Main
 
@@ -2319,10 +2305,9 @@ if __name__ == '__main__':
 
 - top level에 있는 모든 코드는 모듈이 import될 때 실행될 것입니다.
 - 파일을 `pydoc`으로 만들 때 실행하면 안되는 연산을 하거나 함수를 호출하는 것과 객체를 만드는 것을 조심하세요.
-  <a id="s3.18-function-length"></a>
 
 ---
-
+<a id="s3.18-function-length"></a>
 
 ### 3.18 함수 길이
 
@@ -2338,10 +2323,9 @@ if __name__ == '__main__':
 - 작업을 할때 몇몇 길고 복잡한 함수를 발견할 수 있습니다. 절대 기존의 코드를 수정한다는 협박을 하지 마세요
   - 만약 함수가 사용하기 어렵다고 판단되면, 에러를 디버깅 하기 힘들다는걸 알거나 몇몇 다른 문맥에서 이 에러들을 사용하기 원한다고 할때
   - 그 함수를 작고 더욱 관리가 가능한 조각들로 나누는 것을 생각해 보세요.
-    <a id="s3.19-type-annotations"></a>
 
 ---
-
+<a id="s3.19-type-annotations"></a>
 
 ### 3.19 Type 주석 방법
 
@@ -2769,6 +2753,8 @@ def get_names(employee_ids: List[T]) -> Dict[T, Text]:
   """직원의 아이디를 이름과 연결하여 반환합니다."""
 ```
 
+---
+
 <br>
 
 <a id="s4"></a>
@@ -2782,3 +2768,5 @@ def get_names(employee_ids: List[T]) -> Dict[T, Text]:
 - 스타일 가이드라인의 요점은 코딩에서 공통된 어투를 갖는 것입니다. 그렇게 된다면 사람들은 당신의 코딩 형식보다는 당신의 코드에 집중할 수 있습니다
 - 우리는 여기서 사람들이 어휘를 알 수 있는 세계적인 코딩 스타일 규칙을 제공하지만 고유의 스타일도 중요합니다.
 - 파일에 코드를 추가했을 때 이 코드가 다른 코드와 비교하여 크게 달라 보이면 코드를 읽는 사람의 입장에서는 리듬이 깨집니다. 이 부분을 주의하세요.
+
+---
