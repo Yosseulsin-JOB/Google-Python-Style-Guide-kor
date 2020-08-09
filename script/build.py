@@ -1,5 +1,9 @@
 #-*- coding:utf-8 -*-
-# python3
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring
+# pylint: disable=missing-function-docstring
+
+
 
 import os
 import re
@@ -47,15 +51,15 @@ def part_foreach(part_list, number, f=print):
   start = 1
   end = start + len(part_list)
   for i in range(start, end):
-    idx =str(number)+"."+str(i)
-    f(part_list[idx], str(i), part_list)  
+    idx = str(number) + "." + str(i)
+    f(part_list[idx], str(i), part_list)
 
 def write_readme(readme_path, data, override=False):
   write_type = 'w' if override is True else 'a'
   f = open(readme_path, write_type)
   f.write("".join(data))
   f.close()
-  
+
 def insert_part_in_readme(part_path, number, all):
   part_tree = []
   target_readme = part_path.split(part_path.split('/')[-1])[0] + "ReadMe.md"
@@ -65,8 +69,8 @@ def insert_part_in_readme(part_path, number, all):
   for i in range(0, len(lines)):
     syntax = lines[i].split(" ")[0]
     if syntax in ["##", "###", "####"]:
-      link = lines[i-2].replace('<a id="', "").replace('"></a>', "").replace("\n","")
-      title = lines[i].replace("# ", "").replace("#", "").replace("\n","")
+      link = lines[i-2].replace('<a id="', "").replace('"></a>', "").replace("\n", "")
+      title = lines[i].replace("# ", "").replace("#", "").replace("\n", "")
       link_in_title = find_link.search(title)
       if link_in_title:
         title = title.replace(link_in_title.group(), find_link.findall(title)[0][0])
@@ -85,16 +89,16 @@ def tree_to_contents():
     for part in item[1:]:
       contents.append("        +   ["+part["title"]+"](#"+part["link"]+")")
 
-  return "\n".join(["\n<details>","  <summary>Table of Contents</summary>\n\n"]) + "\n".join(contents)+ "\n\n</details>\n"
+  return "\n".join(["\n<details>", "  <summary>Table of Contents</summary>\n\n"]) + "\n".join(contents)+ "\n\n</details>\n"
 
 def chapter_build(chapter_path, number, all):
   chapter_title = chapter_path.split("/")[-1]
   chapter_link = "s"+chapter_path.split("/")[-1].split(". ")[0]
   tree.append({"title":chapter_title, "link": chapter_link})
   chapter_header = [
-    '\n<a id="'+chapter_link+'"></a>\n',
-    "\n",
-    "## "+chapter_title +"\n\n",
+      '\n<a id="'+chapter_link+'"></a>\n',
+      "\n",
+      "## "+chapter_title +"\n\n",
   ]
   part_foreach(get_part_list(chapter_path), number, insert_part_in_readme)
   from_readme = chapter_path + "/ReadMe.md"
@@ -104,9 +108,7 @@ def chapter_build(chapter_path, number, all):
   readme.append("".join(chapter_header)  + "".join(data))
 
 def build():
-  
   to_readme = "./Google Python Style Guide kor.md"
-  
 
   chapter_list = get_chapter_list()
   chapter_foreach(chapter_list, chapter_build)
@@ -114,6 +116,6 @@ def build():
   title = "# Google Python Style Guide\n"
   Contents = tree_to_contents()
 
-  write_readme(to_readme, title + Contents + "".join(readme) , True)
+  write_readme(to_readme, title + Contents + "".join(readme), True)
 
 build()
