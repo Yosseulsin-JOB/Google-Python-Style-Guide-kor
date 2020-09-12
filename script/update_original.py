@@ -103,17 +103,3 @@ if __name__ == "__main__":
     create_pull_request(repo, commit)
 
     print("요청 완료했습니다.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
