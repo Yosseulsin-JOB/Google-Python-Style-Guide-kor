@@ -25,4 +25,5 @@ jobs:
         run: |
           python ./script/update_original.py
         env:
+          # Settings > sercets > ACCESS_TOKEN
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
