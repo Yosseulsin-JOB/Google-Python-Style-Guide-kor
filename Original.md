@@ -6,118 +6,39 @@ See README.md for details.
 
 # Google Python Style Guide
 
+<!-- markdown="1" is required for GitHub Pages to render the TOC properly. -->
 
-<!-- https://github.com/google/styleguide/issues/566: Can this render properly on Github Pages? -->
-
-<details>
+<details markdown="1">
   <summary>Table of Contents</summary>
 
 -   [1 Background](#s1-background)
 -   [2 Python Language Rules](#s2-python-language-rules)
     *   [2.1 Lint](#s2.1-lint)
-        +   [2.1.1 Definition](#s2.1.1-definition)
-        +   [2.1.2 Pros](#s2.1.2-pros)
-        +   [2.1.3 Cons](#s2.1.3-cons)
-        +   [2.1.4 Decision](#s2.1.4-decision)
     *   [2.2 Imports](#s2.2-imports)
-        +   [2.2.1 Definition](#s2.2.1-definition)
-        +   [2.2.2 Pros](#s2.2.2-pros)
-        +   [2.2.3 Cons](#s2.2.3-cons)
-        +   [2.2.4 Decision](#s2.2.4-decision)
     *   [2.3 Packages](#s2.3-packages)
-        +   [2.3.1 Pros](#s2.3.1-pros)
-        +   [2.3.2 Cons](#s2.3.2-cons)
-        +   [2.3.3 Decision](#s2.3.3-decision)
     *   [2.4 Exceptions](#s2.4-exceptions)
-        +   [2.4.1 Definition](#s2.4.1-definition)
-        +   [2.4.2 Pros](#s2.4.2-pros)
-        +   [2.4.3 Cons](#s2.4.3-cons)
-        +   [2.4.4 Decision](#s2.4.4-decision)
     *   [2.5 Global variables](#s2.5-global-variables)
-        +   [2.5.1 Definition](#s2.5.1-definition)
-        +   [2.5.2 Pros](#s2.5.2-pros)
-        +   [2.5.3 Cons](#s2.5.3-cons)
-        +   [2.5.4 Decision](#s2.5.4-decision)
     *   [2.6 Nested/Local/Inner Classes and Functions](#s2.6-nested)
-        +   [2.6.1 Definition](#s2.6.1-definition)
-        +   [2.6.2 Pros](#s2.6.2-pros)
-        +   [2.6.3 Cons](#s2.6.3-cons)
-        +   [2.6.4 Decision](#s2.6.4-decision)
     *   [2.7 Comprehensions & Generator Expressions](#s2.7-comprehensions)
-        +   [2.7.1 Definition](#s2.7.1-definition)
-        +   [2.7.2 Pros](#s2.7.2-pros)
-        +   [2.7.3 Cons](#s2.7.3-cons)
-        +   [2.7.4 Decision](#s2.7.4-decision)
     *   [2.8 Default Iterators and Operators](#s2.8-default-iterators-and-operators)
-        +   [2.8.1 Definition](#s2.8.1-definition)
-        +   [2.8.2 Pros](#s2.8.2-pros)
-        +   [2.8.3 Cons](#s2.8.3-cons)
-        +   [2.8.4 Decision](#s2.8.4-decision)
     *   [2.9 Generators](#s2.9-generators)
-        +   [2.9.1 Definition](#s2.9.1-definition)
-        +   [2.9.2 Pros](#s2.9.2-pros)
-        +   [2.9.3 Cons](#s2.9.3-cons)
-        +   [2.9.4 Decision](#s2.9.4-decision)
     *   [2.10 Lambda Functions](#s2.10-lambda-functions)
-        +   [2.10.1 Definition](#s2.10.1-definition)
-        +   [2.10.2 Pros](#s2.10.2-pros)
-        +   [2.10.3 Cons](#s2.10.3-cons)
-        +   [2.10.4 Decision](#s2.10.4-decision)
     *   [2.11 Conditional Expressions](#s2.11-conditional-expressions)
-        +   [2.11.1 Definition](#s2.11.1-definition)
-        +   [2.11.2 Pros](#s2.11.2-pros)
-        +   [2.11.3 Cons](#s2.11.3-cons)
-        +   [2.11.4 Decision](#s2.11.4-decision)
     *   [2.12 Default Argument Values](#s2.12-default-argument-values)
-        +   [2.12.1 Definition](#s2.12.1-definition)
-        +   [2.12.2 Pros](#s2.12.2-pros)
-        +   [2.12.3 Cons](#s2.12.3-cons)
-        +   [2.12.4 Decision](#s2.12.4-decision)
     *   [2.13 Properties](#s2.13-properties)
-        +   [2.13.1 Definition](#s2.13.1-definition)
-        +   [2.13.2 Pros](#s2.13.2-pros)
-        +   [2.13.3 Cons](#s2.13.3-cons)
-        +   [2.13.4 Decision](#s2.13.4-decision)
     *   [2.14 True/False Evaluations](#s2.14-truefalse-evaluations)
-        +   [2.14.1 Definition](#s2.14.1-definition)
-        +   [2.14.2 Pros](#s2.14.2-pros)
-        +   [2.14.3 Cons](#s2.14.3-cons)
-        +   [2.14.4 Decision](#s2.14.4-decision)
-    *   [2.15 Deprecated Language Features](#s2.15-deprecated-language-features)
-        +   [2.15.1 Definition](#s2.15.1-definition)
-        +   [2.15.2 Decision](#s2.15.2-decision)
     *   [2.16 Lexical Scoping](#s2.16-lexical-scoping)
-        +   [2.16.1 Definition](#s2.16.1-definition)
-        +   [2.16.2 Pros](#s2.16.2-pros)
-        +   [2.16.3 Cons](#s2.16.3-cons)
-        +   [2.16.4 Decision](#s2.16.4-decision)
     *   [2.17 Function and Method Decorators](#s2.17-function-and-method-decorators)
-        +   [2.17.1 Definition](#s2.17.1-definition)
-        +   [2.17.2 Pros](#s2.17.2-pros)
-        +   [2.17.3 Cons](#s2.17.3-cons)
-        +   [2.17.4 Decision](#s2.17.4-decision)
     *   [2.18 Threading](#s2.18-threading)
     *   [2.19 Power Features](#s2.19-power-features)
-        +   [2.19.1 Definition](#s2.19.1-definition)
-        +   [2.19.2 Pros](#s2.19.2-pros)
-        +   [2.19.3 Cons](#s2.19.3-cons)
-        +   [2.19.4 Decision](#s2.19.4-decision)
-    *   [2.20 Modern Python: Python 3 and from \_\_future\_\_ imports](#s2.20-modern-python)
-        +   [2.20.1 Definition](#s2.20.1-definition)
-        +   [2.20.2 Pros](#s2.20.2-pros)
-        +   [2.20.3 Cons](#s2.20.3-cons)
-        +   [2.20.4 Decision](#s2.20.4-decision)
+    *   [2.20 Modern Python: from \_\_future\_\_ imports](#s2.20-modern-python)
     *   [2.21 Type Annotated Code](#s2.21-type-annotated-code)
-        +   [2.21.1 Definition](#s2.21.1-definition)
-        +   [2.21.2 Pros](#s2.21.2-pros)
-        +   [2.21.3 Cons](#s2.21.3-cons)
-        +   [2.21.4 Decision](#s2.21.4-decision)
 -   [3 Python Style Rules](#s3-python-style-rules)
     *   [3.1 Semicolons](#s3.1-semicolons)
     *   [3.2 Line length](#s3.2-line-length)
     *   [3.3 Parentheses](#s3.3-parentheses)
     *   [3.4 Indentation](#s3.4-indentation)
-    *   [3.4.1 Trailing commas in sequences of items?](#s3.4.1-trailing-commas)
+        +   [3.4.1 Trailing commas in sequences of items?](#s3.4.1-trailing-commas)
     *   [3.5 Blank Lines](#s3.5-blank-lines)
     *   [3.6 Whitespace](#s3.6-whitespace)
     *   [3.7 Shebang Line](#s3.7-shebang-line)
@@ -128,9 +49,10 @@ See README.md for details.
         +   [3.8.4 Classes](#s3.8.4-comments-in-classes)
         +   [3.8.5 Block and Inline Comments](#s3.8.5-block-and-inline-comments)
         +   [3.8.6 Punctuation, Spelling, and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
-    *   [3.9 Classes](#s3.9-classes)
     *   [3.10 Strings](#s3.10-strings)
-    *   [3.11 Files and Sockets](#s3.11-files-and-sockets)
+        +   [3.10.1 Logging](#s3.10.1-logging)
+        +   [3.10.2 Error Messages](#s3.10.2-error-messages)
+    *   [3.11 Files, Sockets, and similar Stateful Resources](#s3.11-files-sockets-closeables)
     *   [3.12 TODO Comments](#s3.12-todo-comments)
     *   [3.13 Imports formatting](#s3.13-imports-formatting)
     *   [3.14 Statements](#s3.14-statements)
@@ -190,7 +112,7 @@ auto-formatter to avoid arguing over formatting.
 <a id="lint"></a>
 ### 2.1 Lint 
 
-Run `pylint` over your code.
+Run `pylint` over your code using this [pylintrc](https://google.github.io/styleguide/pylintrc).
 
 <a id="s2.1.1-definition"></a>
 <a id="211-definition"></a>
@@ -198,9 +120,10 @@ Run `pylint` over your code.
 <a id="lint-definition"></a>
 #### 2.1.1 Definition 
 
-`pylint` is a tool for finding bugs and style problems in Python source
-code. It finds problems that are typically caught by a compiler for less dynamic
-languages like C and C++. Because of the dynamic nature of Python, some
+`pylint`
+is a tool for finding bugs and style problems in Python source code. It finds
+problems that are typically caught by a compiler for less dynamic languages like
+C and C++. Because of the dynamic nature of Python, some
 warnings may be incorrect; however, spurious warnings should be fairly
 infrequent.
 
@@ -218,8 +141,9 @@ Catches easy-to-miss errors like typos, using-vars-before-assignment, etc.
 <a id="lint-cons"></a>
 #### 2.1.3 Cons 
 
-`pylint` isn't perfect. To take advantage of it, we'll need to sometimes: a)
-Write around it b) Suppress its warnings or c) Improve it.
+`pylint`
+isn't perfect. To take advantage of it, sometimes we'll need to write around it,
+suppress its warnings or fix it.
 
 <a id="s2.1.4-decision"></a>
 <a id="214-decision"></a>
@@ -227,7 +151,9 @@ Write around it b) Suppress its warnings or c) Improve it.
 <a id="lint-decision"></a>
 #### 2.1.4 Decision 
 
-Make sure you run `pylint` on your code.
+Make sure you run
+`pylint`
+on your code.
 
 
 Suppress warnings if they are inappropriate so that other issues are not hidden.
@@ -237,7 +163,8 @@ To suppress warnings, you can set a line-level comment:
 dict = 'something awful'  # Bad Idea... pylint: disable=redefined-builtin
 ```
 
-`pylint` warnings are each identified by symbolic name (`empty-docstring`)
+`pylint`
+warnings are each identified by symbolic name (`empty-docstring`)
 Google-specific warnings start with `g-`.
 
 If the reason for the suppression is not clear from the symbolic name, add an
@@ -246,7 +173,9 @@ explanation.
 Suppressing in this way has the advantage that we can easily search for
 suppressions and revisit them.
 
-You can get a list of `pylint` warnings by doing:
+You can get a list of
+`pylint`
+warnings by doing:
 
 ```shell
 pylint --list-msgs
@@ -265,7 +194,7 @@ beginning of the function. Always include a comment explaining why you are
 deleting it. "Unused." is sufficient. For example:
 
 ```python
-def viking_cafe_order(spam, beans, eggs=None):
+def viking_cafe_order(spam: str, beans: str, eggs: Optional[str] = None) -> str:
     del beans, eggs  # Unused by vikings.
     return spam + spam + spam
 ```
@@ -283,8 +212,11 @@ that the arguments are actually unused.
 ### 2.2 Imports 
 
 Use `import` statements for packages and modules only, not for individual
-classes or functions. Note that there is an explicit exemption for imports from
-the [typing module](#typing-imports).
+classes or functions. Imports from the [typing module](#typing-imports),
+[typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions),
+and the
+[six.moves module](https://six.readthedocs.io/#module-six.moves)
+are exempt from this rule.
 
 <a id="s2.2.1-definition"></a>
 <a id="221-definition"></a>
@@ -318,13 +250,13 @@ Module names can still collide. Some module names are inconveniently long.
 <a id="imports-decision"></a>
 #### 2.2.4 Decision 
 
-* Use `import x` for importing packages and modules.
-* Use `from x import y` where `x` is the package prefix and `y` is the module
-name with no prefix.
-* Use `from x import y as z` if two modules named `y` are to be imported or if
-`y` is an inconveniently long name.
-* Use `import y as z` only when `z` is a standard abbreviation (e.g., `np` for
-`numpy`).
+*   Use `import x` for importing packages and modules.
+*   Use `from x import y` where `x` is the package prefix and `y` is the module
+    name with no prefix.
+*   Use `from x import y as z` if two modules named `y` are to be imported or if
+    `y` is an inconveniently long name.
+*   Use `import y as z` only when `z` is a standard abbreviation (e.g., `np` for
+    `numpy`).
 
 For example the module `sound.effects.echo` may be imported as follows:
 
@@ -337,10 +269,6 @@ echo.EchoFilter(input, output, delay=0.7, atten=4)
 Do not use relative names in imports. Even if the module is in the same package,
 use the full package name. This helps prevent unintentionally importing a
 package twice.
-
-Imports from the [typing module](#typing-imports) and the
-[six.moves module](https://six.readthedocs.io/#module-six.moves)
-are exempt from this rule.
 
 <a id="s2.3-packages"></a>
 <a id="23-packages"></a>
@@ -357,7 +285,7 @@ Import each module using the full pathname location of the module.
 #### 2.3.1 Pros 
 
 Avoids conflicts in module names or incorrect imports due to the module search
-path not being what the author expected.  Makes it easier to find modules.
+path not being what the author expected. Makes it easier to find modules.
 
 <a id="s2.3.2-cons"></a>
 <a id="232-cons"></a>
@@ -366,7 +294,7 @@ path not being what the author expected.  Makes it easier to find modules.
 #### 2.3.2 Cons 
 
 Makes it harder to deploy code because you have to replicate the package
-hierarchy.  Not really a problem with modern deployment mechanisms.
+hierarchy. Not really a problem with modern deployment mechanisms.
 
 <a id="s2.3.3-decision"></a>
 <a id="233-decision"></a>
@@ -406,7 +334,7 @@ import jodie
 ```
 
 The directory the main binary is located in should not be assumed to be in
-`sys.path` despite that happening in some environments.  This being the case,
+`sys.path` despite that happening in some environments. This being the case,
 code should assume that `import jodie` refers to a third party or top level
 package named `jodie`, not a local `jodie.py`.
 
@@ -425,8 +353,8 @@ Exceptions are allowed but must be used carefully.
 <a id="exceptions-definition"></a>
 #### 2.4.1 Definition 
 
-Exceptions are a means of breaking out of the normal flow of control of a code
-block to handle errors or other exceptional conditions.
+Exceptions are a means of breaking out of normal control flow to handle errors
+or other exceptional conditions.
 
 <a id="s2.4.2-pros"></a>
 <a id="242-pros"></a>
@@ -437,7 +365,7 @@ block to handle errors or other exceptional conditions.
 The control flow of normal operation code is not cluttered by error-handling
 code. It also allows the control flow to skip multiple frames when a certain
 condition occurs, e.g., returning from N nested functions in one step instead of
-having to carry-through error codes.
+having to plumb error codes through.
 
 <a id="s2.4.3-cons"></a>
 <a id="243-cons"></a>
@@ -456,10 +384,6 @@ library calls.
 
 Exceptions must follow certain conditions:
 
--   Raise exceptions like this: `raise MyError('Error message')` or `raise
-    MyError()`. Do not use the two-argument form (`raise MyError, 'Error
-    message'`).
-
 -   Make use of built-in exception classes when it makes sense. For example,
     raise a `ValueError` to indicate a programming mistake like a violated
     precondition (such as if you were passed a negative number but required a
@@ -472,7 +396,7 @@ Exceptions must follow certain conditions:
     
     ```python
     Yes:
-      def connect_to_next_port(self, minimum):
+      def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -500,7 +424,7 @@ Exceptions must follow certain conditions:
 
     ```python
     No:
-      def connect_to_next_port(self, minimum):
+      def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -540,16 +464,6 @@ Exceptions must follow certain conditions:
 -   Use the `finally` clause to execute code whether or not an exception is
     raised in the `try` block. This is often useful for cleanup, i.e., closing a
     file.
-
--   When capturing an exception, use `as` rather than a comma. For example:
-
-    
-    ```python
-    try:
-      raise Error()
-    except Error as error:
-      pass
-    ```
 
 <a id="s2.5-global-variables"></a>
 <a id="25-global-variables"></a>
@@ -593,7 +507,7 @@ assignments to global variables are done when the module is first imported.
 Avoid global variables.
 
 While they are technically variables, module-level constants are permitted and
-encouraged. For example: `MAX_HOLY_HANDGRENADE_COUNT = 3`. Constants must be
+encouraged. For example: `_MAX_HOLY_HANDGRENADE_COUNT = 3`. Constants must be
 named using all caps with underscores. See [Naming](#s3.16-naming) below.
 
 If needed, globals should be declared at the module level and made internal to
@@ -636,9 +550,8 @@ Commonly used for implementing decorators.
 <a id="nested-classes-functions-cons"></a>
 #### 2.6.3 Cons 
 
-Instances of nested or local classes cannot be pickled. Nested functions and
-classes cannot be directly tested. Nesting can make your outer function longer
-and less readable.
+Nested functions and classes cannot be directly tested. Nesting can make the
+outer function longer and less readable.
 
 <a id="s2.6.4-decision"></a>
 <a id="264-decision"></a>
@@ -647,9 +560,9 @@ and less readable.
 #### 2.6.4 Decision 
 
 They are fine with some caveats. Avoid nested functions or classes except when
-closing over a local value. Do not nest a function just to hide it from users
-of a module. Instead, prefix its name with an \_ at the module level so that it
-can still be accessed by tests.
+closing over a local value other than `self` or `cls`. Do not nest a function
+just to hide it from users of a module. Instead, prefix its name with an \_ at
+the module level so that it can still be accessed by tests.
 
 <a id="s2.7-comprehensions"></a>
 <a id="s2.7-list_comprehensions"></a>
@@ -796,8 +709,7 @@ means a dictionary). This is also an advantage.
 Use default iterators and operators for types that support them, like lists,
 dictionaries, and files. The built-in types define iterator methods, too. Prefer
 these methods to methods that return lists, except that you should not mutate a
-container while iterating over it. Never use Python 2 specific iteration
-methods such as `dict.iter*()` unless necessary.
+container while iterating over it.
 
 ```python
 Yes:  for key in adict: ...
@@ -866,7 +778,8 @@ functions.
 <a id="lambdas"></a>
 ### 2.10 Lambda Functions 
 
-Okay for one-liners.
+Okay for one-liners. Prefer generator expressions over `map()` or `filter()`
+with a `lambda`.
 
 <a id="s2.10.1-definition"></a>
 <a id="2101-definition"></a>
@@ -875,8 +788,6 @@ Okay for one-liners.
 #### 2.10.1 Definition 
 
 Lambdas define anonymous functions in an expression, as opposed to a statement.
-They are often used to define callbacks or operators for higher-order functions
-like `map()` and `filter()`.
 
 <a id="s2.10.2-pros"></a>
 <a id="2102-pros"></a>
@@ -903,8 +814,8 @@ function may only contain an expression.
 #### 2.10.4 Decision 
 
 Okay to use them for one-liners. If the code inside the lambda function is
-longer than 60-80 chars, it's probably better to define it as a regular [nested
-function](#lexical-scoping).
+longer than 60-80 chars, it's probably better to define it as a regular
+[nested function](#lexical-scoping).
 
 For common operations like multiplication, use the functions from the `operator`
 module instead of lambda functions. For example, prefer `operator.mul` to
@@ -925,8 +836,8 @@ Okay for simple cases.
 #### 2.11.1 Definition 
 
 Conditional expressions (sometimes called a “ternary operator”) are mechanisms
-that provide a shorter syntax for if statements. For example:
-`x = 1 if cond else 2`.
+that provide a shorter syntax for if statements. For example: `x = 1 if cond
+else 2`.
 
 <a id="s2.11.2-pros"></a>
 <a id="2112-pros"></a>
@@ -956,22 +867,24 @@ true-expression, if-expression, else-expression. Use a complete if statement
 when things get more complicated.
 
 ```python
-one_line = 'yes' if predicate(value) else 'no'
-slightly_split = ('yes' if predicate(value)
-                  else 'no, nein, nyet')
-the_longest_ternary_style_that_can_be_done = (
-    'yes, true, affirmative, confirmed, correct'
-    if predicate(value)
-    else 'no, false, negative, nay')
+Yes:
+    one_line = 'yes' if predicate(value) else 'no'
+    slightly_split = ('yes' if predicate(value)
+                      else 'no, nein, nyet')
+    the_longest_ternary_style_that_can_be_done = (
+        'yes, true, affirmative, confirmed, correct'
+        if predicate(value)
+        else 'no, false, negative, nay')
 ```
 
 ```python
-bad_line_breaking = ('yes' if predicate(value) else
-                     'no')
-portion_too_long = ('yes'
-                    if some_long_module.some_long_predicate_function(
-                        really_long_variable_name)
-                    else 'no, false, negative, nay')
+No:
+    bad_line_breaking = ('yes' if predicate(value) else
+                         'no')
+    portion_too_long = ('yes'
+                        if some_long_module.some_long_predicate_function(
+                            really_long_variable_name)
+                        else 'no, false, negative, nay')
 ```
 
 <a id="s2.12-default-argument-values"></a>
@@ -989,9 +902,9 @@ Okay in most cases.
 #### 2.12.1 Definition 
 
 You can specify values for variables at the end of a function's parameter list,
-e.g., `def foo(a, b=0):`.  If `foo` is called with only one argument,
-`b` is set to 0. If it is called with two arguments, `b` has the value of the
-second argument.
+e.g., `def foo(a, b=0):`. If `foo` is called with only one argument, `b` is set
+to 0. If it is called with two arguments, `b` has the value of the second
+argument.
 
 <a id="s2.12.2-pros"></a>
 <a id="2122-pros"></a>
@@ -1086,8 +999,8 @@ future without breaking the interface.
 <a id="properties-cons"></a>
 #### 2.13.3 Cons 
 
-Must inherit from `object` in Python 2. Can hide side-effects much like operator
-overloading. Can be confusing for subclasses.
+Can hide side-effects much like operator overloading. Can be confusing for
+subclasses.
 
 <a id="s2.13.4-decision"></a>
 <a id="2134-decision"></a>
@@ -1096,8 +1009,8 @@ overloading. Can be confusing for subclasses.
 #### 2.13.4 Decision 
 
 Use properties in new code to access or set data where you would normally have
-used simple, lightweight accessor or setter methods. Properties should be
-created with the `@property` [decorator](#s2.17-function-and-method-decorators).
+used lightweight accessor or setter methods. Properties should be created with
+the `@property` [decorator](#s2.17-function-and-method-decorators).
 
 Inheritance with properties can be non-obvious if the property itself is not
 overridden. Thus one must make sure that accessor methods are called indirectly
@@ -1123,28 +1036,28 @@ Yes: import math
          16
          """
 
-         def __init__(self, side):
+         def __init__(self, side: float):
              self.side = side
 
          @property
-         def area(self):
+         def area(self) -> float:
              """Area of the square."""
              return self._get_area()
 
          @area.setter
-         def area(self, area):
-             return self._set_area(area)
+         def area(self, area: float):
+             self._set_area(area)
 
-         def _get_area(self):
+         def _get_area(self) -> float:
              """Indirect accessor to calculate the 'area' property."""
              return self.side ** 2
 
-         def _set_area(self, area):
+         def _set_area(self, area: float):
              """Indirect setter to set the 'area' property."""
              self.side = math.sqrt(area)
 
          @property
-         def perimeter(self):
+         def perimeter(self) -> float:
              return self.side * 4
 ```
 
@@ -1163,8 +1076,8 @@ Use the "implicit" false if at all possible.
 #### 2.14.1 Definition 
 
 Python evaluates certain values as `False` when in a boolean context. A quick
-"rule of thumb" is that all "empty" values are considered false, so
-`0, None, [], {}, ''` all evaluate as false in a boolean context.
+"rule of thumb" is that all "empty" values are considered false, so `0, None,
+[], {}, ''` all evaluate as false in a boolean context.
 
 <a id="s2.14.2-pros"></a>
 <a id="2142-pros"></a>
@@ -1241,53 +1154,6 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
 
 -   Note that `'0'` (i.e., `0` as string) evaluates to true.
 
-<a id="s2.15-deprecated-language-features"></a>
-<a id="215-deprecated-language-features"></a>
-
-<a id="deprecated-features"></a>
-### 2.15 Deprecated Language Features 
-
-Use string methods instead of the `string` module where possible. Use function
-call syntax instead of `apply`. Use list comprehensions and `for` loops instead
-of `filter` and `map` when the function argument would have been an inlined
-lambda anyway. Use `for` loops instead of `reduce`.
-
-<a id="s2.15.1-definition"></a>
-<a id="2151-definition"></a>
-
-<a id="deprecated-features-definition"></a>
-#### 2.15.1 Definition 
-
-Current versions of Python provide alternative constructs that people find
-generally preferable.
-
-<a id="s2.15.2-decision"></a>
-<a id="2152-decision"></a>
-
-<a id="deprecated-features-decision"></a>
-#### 2.15.2 Decision 
-
-We do not use any Python version which does not support these features, so there
-is no reason not to use the new styles.
-
-```python
-Yes: words = foo.split(':')
-
-     [x[1] for x in my_list if x[2] == 5]
-
-     map(math.sqrt, data)    # Ok. No inlined lambda expression.
-
-     fn(*args, **kwargs)
-```
-
-```python
-No:  words = string.split(foo, ':')
-
-     map(lambda x: x[1], filter(lambda x: x[2] == 5, my_list))
-
-     apply(fn, args, kwargs)
-```
-
 <a id="s2.16-lexical-scoping"></a>
 <a id="216-lexical-scoping"></a>
 
@@ -1312,9 +1178,9 @@ treated as a global variable.
 An example of the use of this feature is:
 
 ```python
-def get_adder(summand1):
+def get_adder(summand1: float) -> Callable[[float], float]:
     """Returns a function that adds numbers to a given number."""
-    def adder(summand2):
+    def adder(summand2: float) -> float:
         return summand1 + summand2
 
     return adder
@@ -1340,7 +1206,7 @@ Can lead to confusing bugs. Such as this example based on
 
 ```python
 i = 4
-def foo(x):
+def foo(x: Iterable[int]):
     def bar():
         print(i, end='')
     # ...
@@ -1351,8 +1217,8 @@ def foo(x):
     bar()
 ```
 
-So `foo([1, 2, 3])` will print `1 2 3 3`, not `1 2 3
-4`.
+So `foo([1, 2, 3])` will print `1 2 3 3`,
+not `1 2 3 4`.
 
 <a id="s2.16.4-decision"></a>
 <a id="2164-decision"></a>
@@ -1369,8 +1235,8 @@ Okay to use.
 <a id="decorators"></a>
 ### 2.17 Function and Method Decorators 
 
-Use decorators judiciously when there is a clear advantage. Avoid
-`@staticmethod` and limit use of `@classmethod`.
+Use decorators judiciously when there is a clear advantage. Avoid `staticmethod`
+and limit use of `classmethod`.
 
 <a id="s2.17.1-definition"></a>
 <a id="2171-definition"></a>
@@ -1378,8 +1244,7 @@ Use decorators judiciously when there is a clear advantage. Avoid
 <a id="decorators-definition"></a>
 #### 2.17.1 Definition 
 
-[Decorators for Functions and
-Methods](https://docs.python.org/3/glossary.html#term-decorator)
+[Decorators for Functions and Methods](https://docs.python.org/3/glossary.html#term-decorator)
 (a.k.a "the `@` notation"). One common decorator is `@property`, used for
 converting ordinary methods into dynamically computed attributes. However, the
 decorator syntax allows for user-defined decorators as well. Specifically, for
@@ -1441,10 +1306,10 @@ guaranteed to succeed in all cases.
 Decorators are a special case of "top level code" - see [main](#s3.17-main) for
 more discussion.
 
-Never use `@staticmethod` unless forced to in order to integrate with an API
+Never use `staticmethod` unless forced to in order to integrate with an API
 defined in an existing library. Write a module level function instead.
 
-Use `@classmethod` only when writing a named constructor or a class-specific
+Use `classmethod` only when writing a named constructor or a class-specific
 routine that modifies necessary global state such as a process-wide cache.
 
 <a id="s2.18-threading"></a>
@@ -1483,7 +1348,8 @@ Avoid these features.
 Python is an extremely flexible language and gives you many fancy features such
 as custom metaclasses, access to bytecode, on-the-fly compilation, dynamic
 inheritance, object reparenting, import hacks, reflection (e.g. some uses of
-`getattr()`), modification of system internals, etc.
+`getattr()`), modification of system internals, `__del__` methods implementing
+customized cleanup, etc.
 
 <a id="s2.19.2-pros"></a>
 <a id="2192-pros"></a>
@@ -1514,18 +1380,16 @@ longer but is straightforward.
 Avoid these features in your code.
 
 Standard library modules and classes that internally use these features are okay
-to use (for example, `abc.ABCMeta`, `collections.namedtuple`, `dataclasses`,
-and `enum`).
+to use (for example, `abc.ABCMeta`, `dataclasses`, and `enum`).
 
 <a id="s2.20-modern-python"></a>
 <a id="220-modern-python"></a>
 
 <a id="modern-python"></a>
-### 2.20 Modern Python: Python 3 and from \_\_future\_\_ imports 
+### 2.20 Modern Python: from \_\_future\_\_ imports 
 
-Python 3 is here! While not every project is ready to
-use it yet, all code should be written to be 3 compatible (and tested under
-3 when possible).
+New language version semantic changes may be gated behind a special future
+import to enable them on a per-file basis within earlier runtimes.
 
 <a id="s2.20.1-definition"></a>
 <a id="2201-definition"></a>
@@ -1533,10 +1397,9 @@ use it yet, all code should be written to be 3 compatible (and tested under
 <a id="modern-python-definition"></a>
 #### 2.20.1 Definition 
 
-Python 3 is a significant change in the Python language. While existing code is
-often written with 2.7 in mind, there are some simple things to do to make code
-more explicit about its intentions and thus better prepared for use under Python
-3 without modification.
+Being able to turn on some of the more modern features via `from __future__
+import` statements allows early use of features from expected future Python
+versions.
 
 <a id="s2.20.2-pros"></a>
 <a id="2202-pros"></a>
@@ -1544,8 +1407,11 @@ more explicit about its intentions and thus better prepared for use under Python
 <a id="modern-python-pros"></a>
 #### 2.20.2 Pros 
 
-Code written with Python 3 in mind is more explicit and easier to get running
-under Python 3 once all of the dependencies of your project are ready.
+This has proven to make runtime version upgrades smoother as changes can be made
+on a per-file basis while declaring compatibility and preventing regressions
+within those files. Modern code is more maintainable as it is less likely to
+accumulate technical debt that will be problematic during future runtime
+upgrades.
 
 <a id="s2.20.3-cons"></a>
 <a id="2203-cons"></a>
@@ -1553,9 +1419,9 @@ under Python 3 once all of the dependencies of your project are ready.
 <a id="modern-python-cons"></a>
 #### 2.20.3 Cons 
 
-Some people find the additional boilerplate to be ugly. It's unusual to add
-imports to a module that doesn't actually require the features added by the
-import.
+Such code may not work on very old interpreter versions prior to the
+introduction of the needed future statement. The need for this is more common in
+projects supporting an extremely wide variety of environments.
 
 <a id="s2.20.4-decision"></a>
 <a id="2204-decision"></a>
@@ -1565,9 +1431,18 @@ import.
 
 ##### from \_\_future\_\_ imports
 
-Use of `from __future__ import` statements is encouraged. All new code should
-contain the following and existing code should be updated to be compatible when
-possible:
+Use of `from __future__ import` statements is encouraged. It allows a given
+source file to start using more modern Python syntax features today. Once you no
+longer need to run on a version where the features are hidden behind a
+`__future__` import, feel free to remove those lines.
+
+In code that may execute on versions as old as 3.5 rather than >= 3.7, import:
+
+```python
+from __future__ import generator_stop
+```
+
+For legacy code with the burden of continuing to support 2.7, import:
 
 ```python
 from __future__ import absolute_import
@@ -1575,27 +1450,26 @@ from __future__ import division
 from __future__ import print_function
 ```
 
-For more information on these imports, see
-[absolute imports](https://www.python.org/dev/peps/pep-0328/),
-[`/` division behavior](https://www.python.org/dev/peps/pep-0238/), and
-[the `print` function](https://www.python.org/dev/peps/pep-3105/).
+For more information read the
+[Python future statement definitions](https://docs.python.org/3/library/__future__.html)
+documentation.
 
+Please don't remove these imports until you are confident the code is only ever
+used in a sufficiently modern environment. Even if you do not currently use the
+feature a specific future import enables in your code today, keeping it in place
+in the file prevents later modifications of the code from inadvertently
+depending on the older behavior.
 
-Please don't omit or remove these imports, even if they're not currently used in
-the module, unless the code is Python 3 only. It is better to always have the
-future imports in all files so that they are not forgotten during later edits
-when someone starts using such a feature.
-
-There are other `from __future__` import statements. Use them as you see fit. We
-do not include `unicode_literals` in our recommendations as it is not a clear
-win due to implicit default codec conversion consequences it introduces in many
-places within Python 2.7. Most code is better off with explicit use of `b''` and
-`u''` bytes and unicode string literals as necessary.
+Use other `from __future__` import statements as you see fit. We did not include
+`unicode_literals` in our recommendations for 2.7 as it was not a clear win due
+to implicit default codec conversion consequences it introduced in many places
+within 2.7. Most dual-version 2-and-3 code was better off with explicit use of
+`b''` and `u''` bytes and unicode string literals where necessary.
 
 ##### The six, future, and past libraries
 
-When your project needs to actively support use under both Python 2 and 3, use
-the [six](https://pypi.org/project/six/),
+When your project still needs to support use under both Python 2 and 3, use the
+[six](https://pypi.org/project/six/),
 [future](https://pypi.org/project/future/), and
 [past](https://pypi.org/project/past/) libraries as you see fit. They exist to
 make your code cleaner and life easier.
@@ -1610,14 +1484,13 @@ make your code cleaner and life easier.
 
 You can annotate Python 3 code with type hints according to
 [PEP-484](https://www.python.org/dev/peps/pep-0484/), and type-check the code at
-build time with a type checking tool like
-[pytype](https://github.com/google/pytype).
+build time with a type checking tool like [pytype](https://github.com/google/pytype).
 
 
-Type annotations can be in the source or in a [stub pyi
-file](https://www.python.org/dev/peps/pep-0484/#stub-files). Whenever possible,
-annotations should be in the source. Use pyi files for third-party or extension
-modules.
+Type annotations can be in the source or in a
+[stub pyi file](https://www.python.org/dev/peps/pep-0484/#stub-files). Whenever
+possible, annotations should be in the source. Use pyi files for third-party or
+extension modules.
 
 
 <a id="s2.21.1-definition"></a>
@@ -1662,7 +1535,10 @@ your ability to use [Power Features](#power-features).
 <a id="typed-code-cons"></a>
 #### 2.21.3 Cons 
 
-You will have to keep the type declarations up to date. You might see type errors that you think are valid code. Use of a [type checker](https://github.com/google/pytype)
+You will have to keep the type declarations up to date.
+You might see type errors that you think are
+valid code. Use of a
+[type checker](https://github.com/google/pytype)
 may reduce your ability to use [Power Features](#power-features).
 
 <a id="s2.21.4-decision"></a>
@@ -1710,13 +1586,13 @@ Explicit exceptions to the 80 character limit:
 -   URLs, pathnames, or long flags in comments.
 -   Long string module level constants not containing whitespace that would be
     inconvenient to split across lines such as URLs or pathnames.
--   Pylint disable comments. (e.g.: `# pylint: disable=invalid-name`)
+    -   Pylint disable comments. (e.g.: `# pylint: disable=invalid-name`)
 
 Do not use backslash line continuation except for `with` statements requiring
 three or more context managers.
 
-Make use of Python's [implicit line joining inside parentheses, brackets and
-braces](http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining).
+Make use of Python's
+[implicit line joining inside parentheses, brackets and braces](http://docs.python.org/reference/lexical_analysis.html#implicit-line-joining).
 If necessary, you can add an extra pair of parentheses around an expression.
 
 ```python
@@ -1762,7 +1638,7 @@ Yes:  with very_long_first_expression_function() as spam, \
 ```python
 No:  with VeryLongFirstExpressionFunction() as spam, \
           VeryLongSecondExpressionFunction() as beans:
-       PlaceOrder(eggs, beans, spam, beans)
+       PlaceOrder(beans, spam)
 ```
 
 ```python
@@ -1777,7 +1653,8 @@ above; see the [indentation](#s3.4-indentation) section for explanation.
 In all other cases where a line exceeds 80 characters, and the
 [yapf](https://github.com/google/yapf/)
 auto-formatter does not help bring the line below the limit, the line is allowed
-to exceed this maximum.
+to exceed this maximum. Authors are encouraged to manually break the line up per
+the notes above when it is sensible.
 
 <a id="s3.3-parentheses"></a>
 <a id="33-parentheses"></a>
@@ -1839,8 +1716,8 @@ Yes:   # Aligned with opening delimiter
 
        # Aligned with opening delimiter in a dictionary
        foo = {
-           long_dictionary_key: value1 +
-                                value2,
+           'long_dictionary_key': value1 +
+                                  value2,
            ...
        }
 
@@ -1854,7 +1731,7 @@ Yes:   # Aligned with opening delimiter
 
        # 4-space hanging indent in a dictionary
        foo = {
-           long_dictionary_key:
+           'long_dictionary_key':
                long_dictionary_value,
            ...
        }
@@ -1874,7 +1751,7 @@ No:    # Stuff on first line forbidden
 
        # No hanging indent in a dictionary
        foo = {
-           long_dictionary_key:
+           'long_dictionary_key':
            long_dictionary_value,
            ...
        }
@@ -1890,7 +1767,7 @@ No:    # Stuff on first line forbidden
 <a id="trailing_commas"></a>
 
 <a id="trailing-comma"></a>
-### 3.4.1 Trailing commas in sequences of items? 
+#### 3.4.1 Trailing commas in sequences of items? 
 
 Trailing commas in sequences of items are recommended only when the closing
 container token `]`, `)`, or `}` does not appear on the same line as the final
@@ -1939,11 +1816,11 @@ Follow standard typographic rules for the use of spaces around punctuation.
 No whitespace inside parentheses, brackets or braces.
 
 ```python
-Yes: spam(ham[1], {eggs: 2}, [])
+Yes: spam(ham[1], {'eggs': 2}, [])
 ```
 
 ```python
-No:  spam( ham[ 1 ], { eggs: 2 }, [ ] )
+No:  spam( ham[ 1 ], { 'eggs': 2 }, [ ] )
 ```
 
 No whitespace before a comma, semicolon, or colon. Do use whitespace after a
@@ -1972,7 +1849,6 @@ Yes: spam(1)
 No:  spam (1)
 ```
 
-
 ```python
 Yes: dict['key'] = list[index]
 ```
@@ -1997,9 +1873,9 @@ No:  x<1
 ```
 
 Never use spaces around `=` when passing keyword arguments or defining a default
-parameter value, with one exception: [when a type annotation is
-present](#typing-default-values), _do_ use spaces around the `=` for the default
-parameter value.
+parameter value, with one exception:
+[when a type annotation is present](#typing-default-values), _do_ use spaces
+around the `=` for the default parameter value.
 
 ```python
 Yes: def complex(real, imag=0.0): return Magic(r=real, i=imag)
@@ -2046,12 +1922,10 @@ No:
 
 Most `.py` files do not need to start with a `#!` line. Start the main file of a
 program with
-`#!/usr/bin/python` with an optional single digit `2` or `3` suffix per
-[PEP-394](https://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0394/).
+`#!/usr/bin/env python3` (to support virtualenvs) or `#!/usr/bin/python3` per
+[PEP-394](https://www.python.org/dev/peps/pep-0394/).
 
-This line is used by the kernel to find the Python interpreter, but is ignored
-by Python when importing modules. It is only necessary on a file that will be
-executed directly.
+This line is used by the kernel to find the Python interpreter, but is ignored by Python when importing modules. It is only necessary on a file intended to be executed directly.
 
 <a id="s3.8-comments-and-docstrings"></a>
 <a id="s3.8-comments"></a>
@@ -2075,10 +1949,11 @@ first statement in a package, module, class or function. These strings can be
 extracted automatically through the `__doc__` member of the object and are used
 by `pydoc`.
 (Try running `pydoc` on your module to see how it looks.) Always use the three
-double-quote `"""` format for docstrings (per [PEP
-257](https://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0257/)).
-A docstring should be organized as a summary line (one physical line) terminated
-by a period, question mark, or exclamation point, followed by a blank line,
+double-quote `"""` format for docstrings (per
+[PEP 257](https://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0257/)).
+A docstring should be organized as a summary line (one physical line not
+exceeding 80 characters) terminated by a period, question mark, or exclamation
+point. When writing more (encouraged), this must be followed by a blank line,
 followed by the rest of the docstring starting at the same cursor position as
 the first quote of the first line. There are more formatting guidelines for
 docstrings below.
@@ -2090,9 +1965,7 @@ docstrings below.
 <a id="module-docs"></a>
 #### 3.8.2 Modules 
 
-Every file should contain license boilerplate.
-Choose the appropriate boilerplate for the license used by the project (for
-example, Apache 2.0, BSD, LGPL, GPL)
+Every file should contain license boilerplate. Choose the appropriate boilerplate for the license used by the project (for example, Apache 2.0, BSD, LGPL, GPL)
 
 Files should start with a docstring describing the contents and usage of the
 module.
@@ -2128,13 +2001,21 @@ A function must have a docstring, unless it meets all of the following criteria:
 -   obvious
 
 A docstring should give enough information to write a call to the function
-without reading the function's code. The docstring should be descriptive-style
-(`"""Fetches rows from a Bigtable."""`) rather than imperative-style (`"""Fetch
-rows from a Bigtable."""`), except for `@property` data descriptors, which
-should use the <a href="#384-classes">same style as attributes</a>. A docstring
-should describe the function's calling syntax and its semantics, not its
-implementation. For tricky code, comments alongside the code are more
-appropriate than using docstrings.
+without reading the function's code. The docstring should describe the
+function's calling syntax and its semantics, but generally not its
+implementation details, unless those details are relevant to how the function is
+to be used. For example, a function that mutates one of its arguments as a side
+effect should note that in its docstring. Otherwise, subtle but important
+details of a function's implementation that are not relevant to the caller are
+better expressed as comments alongside the code than within the function's
+docstring.
+
+The docstring should be descriptive-style (`"""Fetches rows from a
+Bigtable."""`) rather than imperative-style (`"""Fetch rows from a
+Bigtable."""`). The docstring for a `@property` data descriptor should use the
+same style as the docstring for an attribute or a
+<a href="#doc-function-args">function argument</a> (`"""The Bigtable path."""`,
+rather than `"""Returns the Bigtable path."""`).
 
 A method that overrides a method from a base class may have a simple docstring
 sending the reader to its overridden method's docstring, such as `"""See base
@@ -2158,11 +2039,10 @@ aptly described using a one-line docstring.
     separated by a colon followed by either a space or newline. If the
     description is too long to fit on a single 80-character line, use a hanging
     indent of 2 or 4 spaces more than the parameter name (be consistent with the
-    rest of the docstrings in the file).
-    The description should include required type(s) if the code does not contain
-    a corresponding type annotation. If a function accepts `*foo` (variable
-    length argument lists) and/or `**bar` (arbitrary keyword arguments), they
-    should be listed as `*foo` and `**bar`.
+    rest of the docstrings in the file). The description should include required
+    type(s) if the code does not contain a corresponding type annotation. If a
+    function accepts `*foo` (variable length argument lists) and/or `**bar`
+    (arbitrary keyword arguments), they should be listed as `*foo` and `**bar`.
 
 <a id="doc-function-returns"></a>
 [*Returns:* (or *Yields:* for generators)](#doc-function-returns)
@@ -2185,7 +2065,7 @@ aptly described using a one-line docstring.
 def fetch_smalltable_rows(table_handle: smalltable.Table,
                           keys: Sequence[Union[bytes, str]],
                           require_all_keys: bool = False,
-                         ) -> Mapping[bytes, Tuple[str]]:
+) -> Mapping[bytes, Tuple[str]]:
     """Fetches rows from a Smalltable.
 
     Retrieves rows pertaining to the given keys from the Table instance
@@ -2222,7 +2102,7 @@ Similarly, this variation on `Args:` with a line break is also allowed:
 def fetch_smalltable_rows(table_handle: smalltable.Table,
                           keys: Sequence[Union[bytes, str]],
                           require_all_keys: bool = False,
-                         ) -> Mapping[bytes, Tuple[str]]:
+) -> Mapping[bytes, Tuple[str]]:
     """Fetches rows from a Smalltable.
 
     Retrieves rows pertaining to the given keys from the Table instance
@@ -2280,7 +2160,7 @@ class SampleClass:
         eggs: An integer count of the eggs we have laid.
     """
 
-    def __init__(self, likes_spam=False):
+    def __init__(self, likes_spam: bool = False):
         """Inits SampleClass with blah."""
         self.likes_spam = likes_spam
         self.eggs = 0
@@ -2298,10 +2178,10 @@ class SampleClass:
 #### 3.8.5 Block and Inline Comments 
 
 The final place to have comments is in tricky parts of the code. If you're going
-to have to explain it at the next [code
-review](http://en.wikipedia.org/wiki/Code_review), you should comment it
-now. Complicated operations get a few lines of comments before the operations
-commence. Non-obvious ones get comments at the end of the line.
+to have to explain it at the next [code review](http://en.wikipedia.org/wiki/Code_review),
+you should comment it now. Complicated operations get a few lines of comments
+before the operations commence. Non-obvious ones get comments at the end of the
+line.
 
 ```python
 # We use a weighted dictionary search to find out where i is in
@@ -2348,48 +2228,18 @@ using a comma when you should be using a semicolon, it is very important that
 source code maintain a high level of clarity and readability. Proper
 punctuation, spelling, and grammar help with that goal.
 
-<a id="s3.9-classes"></a>
-<a id="39-classes"></a>
-
-<a id="classes"></a>
-### 3.9 Classes 
-
-Classes need not explicitly inherit from `object` (unless for compatibility with
-Python 2).
-
-```python
-Modern:
-     class SampleClass:
-         pass
-
-
-     class OuterClass:
-
-         class InnerClass:
-             pass
-```
-
-```python
-Ancient:
-    class SampleClass(object):
-        pass
-
-
-    class OuterClass(object):
-
-        class InnerClass(object):
-            pass
-```
-
 <a id="s3.10-strings"></a>
 <a id="310-strings"></a>
 
 <a id="strings"></a>
 ### 3.10 Strings 
 
-Use the `format` method or the `%` operator for formatting strings, even when
-the parameters are all strings. Use your best judgment to decide between `+` and
-`%` (or `format`) though.
+Use an
+[f-string](https://docs.python.org/3/reference/lexical_analysis.html#f-strings),
+the `%` operator, or the `format` method for formatting strings, even when the
+parameters are all strings. Use your best judgment to decide between `+` and `%`
+(or `format`) though. Do not use `%` or the `format` method for pure
+concatenation.
 
 ```python
 Yes: x = a + b
@@ -2397,7 +2247,7 @@ Yes: x = a + b
      x = '{}, {}'.format(first, second)
      x = 'name: %s; score: %d' % (name, n)
      x = 'name: {}; score: {}'.format(name, n)
-     x = f'name: {name}; score: {n}'  # Python 3.6+
+     x = f'name: {name}; score: {n}'
 ```
 
 ```python
@@ -2407,11 +2257,14 @@ No: x = '%s%s' % (a, b)  # use + in this case
     x = 'name: ' + name + '; score: ' + str(n)
 ```
 
-Avoid using the `+` and `+=` operators to accumulate a string within a loop.
-Since strings are immutable, this creates unnecessary temporary objects and
-results in quadratic rather than linear running time. Instead, add each
-substring to a list and `''.join` the list after the loop terminates (or, write
-each substring to an `io.BytesIO` buffer).
+Avoid using the `+` and `+=` operators to accumulate a string within a loop. In
+some conditions, accumulating a string with addition can lead to quadratic
+rather than linear running time. Although common accumulations of this sort may
+be optimized on CPython, that is an implementation detail. The conditions under
+which an optimization applies are not easy to predict and may change. Instead,
+add each substring to a list and `''.join` the list after the loop terminates,
+or write each substring to an `io.StringIO` buffer. These techniques
+consistently have amortized-linear run time complexity.
 
 ```python
 Yes: items = ['<table>']
@@ -2490,40 +2343,151 @@ Don't do this.
       will collapse common leading spaces in each line.""")
 ```
 
+<a id="s3.10.1-logging"></a>
+<a id="3101-logging"></a>
+<a id="logging"></a>
+
+<a id="logging"></a>
+#### 3.10.1 Logging 
+
+For logging functions that expect a pattern-string (with %-placeholders) as
+their first argument: Always call them with a string literal (not an f-string!)
+as their first argument with pattern-parameters as subsequent arguments. Some
+logging implementations collect the unexpanded pattern-string as a queryable
+field. It also prevents spending time rendering a message that no logger is
+configured to output.
+
+```python
+  Yes:
+  import tensorflow as tf
+  logger = tf.get_logger()
+  logger.info('TensorFlow Version is: %s', tf.__version__)
+```
+
+```python
+  Yes:
+  import os
+  from absl import logging
+
+  logging.info('Current $PAGER is: %s', os.getenv('PAGER', default=''))
+
+  homedir = os.getenv('HOME')
+  if homedir is None or not os.access(homedir, os.W_OK):
+    logging.error('Cannot write to home directory, $HOME=%r', homedir)
+```
+
+```python
+  No:
+  import os
+  from absl import logging
+
+  logging.info('Current $PAGER is:')
+  logging.info(os.getenv('PAGER', default=''))
+
+  homedir = os.getenv('HOME')
+  if homedir is None or not os.access(homedir, os.W_OK):
+    logging.error(f'Cannot write to home directory, $HOME={homedir!r}')
+```
+
+<a id="s3.10.2-error-messages"></a>
+<a id="3102-error-messages"></a>
+<a id="error-messages"></a>
+
+<a id="error-messages"></a>
+#### 3.10.2 Error Messages 
+
+Error messages (such as: message strings on exceptions like `ValueError`, or
+messages shown to the user) should follow three guidelines:
+
+1.  The message needs to precisely match the actual error condition.
+
+2.  Interpolated pieces need to always be clearly identifiable as such.
+
+3.  They should allow simple automated processing (e.g. grepping).
+
+```python
+  Yes:
+  if not 0 <= p <= 1:
+    raise ValueError(f'Not a probability: {p!r}')
+
+  try:
+    os.rmdir(workdir)
+  except OSError as error:
+    logging.warning('Could not remove directory (reason: %r): %r',
+                    error, workdir)
+```
+
+```python
+  No:
+  if p < 0 or p > 1:  # PROBLEM: also false for float('nan')!
+    raise ValueError(f'Not a probability: {p!r}')
+
+  try:
+    os.rmdir(workdir)
+  except OSError:
+    # PROBLEM: Message makes an assumption that might not be true:
+    # Deletion might have failed for some other reason, misleading
+    # whoever has to debug this.
+    logging.warning('Directory already was deleted: %s', workdir)
+
+  try:
+    os.rmdir(workdir)
+  except OSError:
+    # PROBLEM: The message is harder to grep for than necessary, and
+    # not universally non-confusing for all possible values of `workdir`.
+    # Imagine someone calling a library function with such code
+    # using a name such as workdir = 'deleted'. The warning would read:
+    # "The deleted directory could not be deleted."
+    logging.warning('The %s directory could not be deleted.', workdir)
+```
+
+<a id="s3.11-files-sockets-closeables"></a>
 <a id="s3.11-files-and-sockets"></a>
 <a id="311-files-and-sockets"></a>
 <a id="files-and-sockets"></a>
 
 <a id="files"></a>
-### 3.11 Files and Sockets 
+### 3.11 Files, Sockets, and similar Stateful Resources 
 
-Explicitly close files and sockets when done with them.
+Explicitly close files and sockets when done with them. This rule naturally
+extends to closeable resources that internally use sockets, such as database
+connections, and also other resources that need to be closed down in a similar
+fashion. To name only a few examples, this also includes
+[mmap](https://docs.python.org/3/library/mmap.html) mappings,
+[h5py File objects](https://docs.h5py.org/en/stable/high/file.html), and
+[matplotlib.pyplot figure windows](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.close.html).
 
-Leaving files, sockets or other file-like objects open unnecessarily has many
-downsides:
+Leaving files, sockets or other such stateful objects open unnecessarily has
+many downsides:
 
 -   They may consume limited system resources, such as file descriptors. Code
     that deals with many such objects may exhaust those resources unnecessarily
     if they're not returned to the system promptly after use.
 -   Holding files open may prevent other actions such as moving or deleting
-    them.
+    them, or unmounting a filesystem.
 -   Files and sockets that are shared throughout a program may inadvertently be
     read from or written to after logically being closed. If they are actually
-    closed, attempts to read or write from them will throw exceptions, making
+    closed, attempts to read or write from them will raise exceptions, making
     the problem known sooner.
 
-Furthermore, while files and sockets are automatically closed when the file
-object is destructed, tying the lifetime of the file object to the state of the
-file is poor practice:
+Furthermore, while files and sockets (and some similarly behaving resources) are
+automatically closed when the object is destructed, coupling the lifetime of the
+object to the state of the resource is poor practice:
 
--   There are no guarantees as to when the runtime will actually run the file's
-    destructor. Different Python implementations use different memory management
-    techniques, such as delayed garbage collection, which may increase the
-    object's lifetime arbitrarily and indefinitely.
+-   There are no guarantees as to when the runtime will actually invoke the
+    `__del__` method. Different Python implementations use different memory
+    management techniques, such as delayed garbage collection, which may
+    increase the object's lifetime arbitrarily and indefinitely.
 -   Unexpected references to the file, e.g. in globals or exception tracebacks,
     may keep it around longer than intended.
 
-The preferred way to manage files is using the
+Relying on finalizers to do automatic cleanup that has observable side effects
+has been rediscovered over and over again to lead to major problems, across many
+decades and multiple languages (see e.g.
+[this article](https://wiki.sei.cmu.edu/confluence/display/java/MET12-J.+Do+not+use+finalizers)
+for Java).
+
+The preferred way to manage files and similar resources is using the
 [`with` statement](http://docs.python.org/reference/compound_stmts.html#the-with-statement):
 
 ```python
@@ -2542,6 +2506,9 @@ with contextlib.closing(urllib.urlopen("http://www.python.org/")) as front_page:
     for line in front_page:
         print(line)
 ```
+
+In rare cases where context-based resource management is infeasible, code
+documentation must explain clearly how resource lifetime is managed.
 
 <a id="s3.12-todo-comments"></a>
 <a id="312-todo-comments"></a>
@@ -2646,8 +2613,8 @@ grouped from most generic to least generic:
 
     
 Within each grouping, imports should be sorted lexicographically, ignoring case,
-according to each module's full package path. Code may optionally place a blank
-line between import sections.
+according to each module's full package path (the `path` in `from path import
+...`). Code may optionally place a blank line between import sections.
 
 ```python
 import collections
@@ -2661,6 +2628,7 @@ import cryptography
 import tensorflow as tf
 
 from book.genres import scifi
+from myproject.backend import huxley
 from myproject.backend.hgwells import time_machine
 from myproject.backend.state_machine import main_loop
 from otherproject.ai import body
@@ -2753,7 +2721,7 @@ Always use a `.py` filename extension. Never use dashes.
 
 -   single character names, except for specifically allowed cases:
 
-    -   counters or iterators (e.g. `i`, `j`, `k`, `v`, et al)
+    -   counters or iterators (e.g. `i`, `j`, `k`, `v`, et al.)
     -   `e` as an exception identifier in `try/except` statements.
     -   `f` as a file handle in `with` statements
 
@@ -2766,7 +2734,30 @@ Always use a `.py` filename extension. Never use dashes.
 
 -   `__double_leading_and_trailing_underscore__` names (reserved by Python)
 
--   module.
+-   offensive terms
+
+-   names that needlessly include the type of the variable (for example:
+    `id_to_name_dict`)
+
+<a id="s3.16.2-naming-conventions"></a>
+<a id="3162-naming-convention"></a>
+
+<a id="naming-conventions"></a>
+#### 3.16.2 Naming Conventions 
+
+-   "Internal" means internal to a module, or protected or private within a
+    class.
+
+-   Prepending a single underscore (`_`) has some support for protecting module
+    variables and functions (linters will flag protected member access).
+
+-   Prepending a double underscore (`__` aka "dunder") to an instance variable
+    or method effectively makes the variable or method private to its class
+    (using name mangling); we discourage its use as it impacts readability and
+    testability, and isn't *really* private. Prefer a single underscore.
+
+-   Place related classes and top-level functions together in a
+    module.
     Unlike Java, there is no need to limit yourself to one class per module.
 
 -   Use CapWords for class names, but lower\_with\_under.py for module names.
@@ -2879,16 +2870,25 @@ containing `exec "$0.py" "$@"`.
 <a id="s3.17-main"></a>
 <a id="317-main"></a>
 
+<a id="math-notation"></a>
+#### 3.16.5 Mathematical Notation 
+
+For mathematically heavy code, short variable names that would otherwise violate
+the style guide are preferred when they match established notation in a
+reference paper or algorithm. When doing so, reference the source of all naming
+conventions in a comment or docstring or, if the source is not accessible,
+clearly document the naming conventions. Prefer PEP8-compliant
+`descriptive_names` for public APIs, which are much more likely to be
+encountered out of context.
+
 <a id="main"></a>
 ### 3.17 Main 
 
-Even a file meant to be used as an executable should be importable and a mere
-import should not have the side effect of executing the program's main
-functionality. The main functionality should be in a `main()` function.
-
-In Python, `pydoc` as well as unit tests require modules to be importable. Your
-code should always check `if __name__ == '__main__'` before executing your main
-program so that the main program is not executed when the module is imported.
+In Python, `pydoc` as well as unit tests require modules to be importable. If a
+file is meant to be used as an executable, its main functionality should be in a
+`main()` function, and your code should always check `if __name__ == '__main__'`
+before executing your main program, so that it is not executed when the module
+is imported.
 
 When using [absl](https://github.com/abseil/abseil-py), use `app.run`:
 
@@ -2896,7 +2896,7 @@ When using [absl](https://github.com/abseil/abseil-py), use `app.run`:
 from absl import app
 ...
 
-def main(argv):
+def main(argv: Sequence[str]):
     # process non-flag arguments
     ...
 
@@ -2936,10 +2936,11 @@ Keeping your functions short and simple makes it easier for other people to read
 and modify your code.
 
 You could find long and complicated functions when working with
-some code. Do not be intimidated by modifying existing code: if working with such
-a function proves to be difficult, you find that errors are hard to debug, or
-you want to use a piece of it in several different contexts, consider breaking
-up the function into smaller and more manageable pieces.
+some
+code. Do not be intimidated by modifying existing code: if working with such a
+function proves to be difficult, you find that errors are hard to debug, or you
+want to use a piece of it in several different contexts, consider breaking up
+the function into smaller and more manageable pieces.
 
 <a id="s3.19-type-annotations"></a>
 <a id="319-type-annotations"></a>
@@ -2954,20 +2955,22 @@ up the function into smaller and more manageable pieces.
 <a id="typing-general"></a>
 #### 3.19.1 General Rules 
 
-* Familiarize yourself with [PEP-484](https://www.python.org/dev/peps/pep-0484/).
-* In methods, only annotate `self`, or `cls` if it is necessary for proper type
-  information. e.g., `@classmethod def create(cls: Type[T]) -> T: return cls()`
-* If any other variable or a returned type should not be expressed, use `Any`.
-* You are not required to annotate all the functions in a module.
-  -   At least annotate your public APIs.
-  -   Use judgment to get to a good balance between safety and clarity on the
-      one hand, and flexibility on the other.
-  -   Annotate code that is prone to type-related errors (previous bugs or
-      complexity).
-  -   Annotate code that is hard to understand.
-  -   Annotate code as it becomes stable from a types perspective. In many
-      cases, you can annotate all the functions in mature code without losing
-      too much flexibility.
+*   Familiarize yourself with
+    [PEP-484](https://www.python.org/dev/peps/pep-0484/).
+*   In methods, only annotate `self`, or `cls` if it is necessary for proper
+    type information. e.g., `@classmethod def create(cls: Type[T]) -> T: return
+    cls()`
+*   If any other variable or a returned type should not be expressed, use `Any`.
+*   You are not required to annotate all the functions in a module.
+    -   At least annotate your public APIs.
+    -   Use judgment to get to a good balance between safety and clarity on the
+        one hand, and flexibility on the other.
+    -   Annotate code that is prone to type-related errors (previous bugs or
+        complexity).
+    -   Annotate code that is hard to understand.
+    -   Annotate code as it becomes stable from a types perspective. In many
+        cases, you can annotate all the functions in mature code without losing
+        too much flexibility.
 
 <a id="s3.19.2-line-breaking"></a>
 <a id="3192-line-breaking"></a>
@@ -3017,8 +3020,9 @@ def my_method(
   ...
 ```
 
-`pylint` allows you to move the closing parenthesis to a new line and align
-with the opening one, but this is less readable.
+`pylint`
+allows you to move the closing parenthesis to a new line and align with the
+opening one, but this is less readable.
 
 ```python
 No:
@@ -3096,6 +3100,7 @@ Yes:
 def func(a: int = 0) -> int:
   ...
 ```
+
 ```python
 No:
 def func(a:int=0) -> int:
@@ -3115,22 +3120,22 @@ has to be declared! You can use `Union`, but if there is only one other type,
 use `Optional`.
 
 Use explicit `Optional` instead of implicit `Optional`. Earlier versions of PEP
-484 allowed `a: Text = None` to be interpretted as `a: Optional[Text] = None`,
-but that is no longer the preferred behavior.
+484 allowed `a: str = None` to be interpreted as `a: Optional[str] = None`, but
+that is no longer the preferred behavior.
 
 ```python
 Yes:
-def func(a: Optional[Text], b: Optional[Text] = None) -> Text:
+def func(a: Optional[str], b: Optional[str] = None) -> str:
   ...
-def multiple_nullable_union(a: Union[None, Text, int]) -> Text
+def multiple_nullable_union(a: Union[None, str, int]) -> str:
   ...
 ```
 
 ```python
 No:
-def nullable_union(a: Union[None, Text]) -> Text:
+def nullable_union(a: Union[None, str]) -> str:
   ...
-def implicit_optional(a: Text = None) -> Text:
+def implicit_optional(a: str = None) -> str:
   ...
 ```
 
@@ -3143,15 +3148,14 @@ def implicit_optional(a: Text = None) -> Text:
 #### 3.19.6 Type Aliases 
 
 You can declare aliases of complex types. The name of an alias should be
-CapWorded. If the alias is used only in this module, it should be
-\_Private.
+CapWorded. If the alias is used only in this module, it should be \_Private.
 
 For example, if the name of the module together with the name of the type is too
 long:
 
 ```python
 _ShortName = module_with_long_name.TypeWithLongName
-ComplexMap = Mapping[Text, List[Tuple[int, int]]]
+ComplexMap = Mapping[str, List[Tuple[int, int]]]
 ```
 
 Other examples are complex nested types and multiple return variables from a
@@ -3164,8 +3168,8 @@ function (as a tuple).
 <a id="typing-ignore"></a>
 #### 3.19.7 Ignoring Types 
 
-You can disable type checking on a line with the special comment
-`# type: ignore`.
+You can disable type checking on a line with the special comment `# type:
+ignore`.
 
 `pytype` has a disable option for specific errors (similar to lint):
 
@@ -3214,7 +3218,7 @@ The latter is commonly used as the return type from a function.
 ```python
 a = [1, 2, 3]  # type: List[int]
 b = (1, 2, 3)  # type: Tuple[int, ...]
-c = (1, "2", 3.5)  # type: Tuple[int, Text, float]
+c = (1, "2", 3.5)  # type: Tuple[int, str, float]
 ```
 
 <a id="s3.19.10-typevars"></a>
@@ -3242,7 +3246,7 @@ def next(l: List[T]) -> T:
 A TypeVar can be constrained:
 
 ```python
-AddableType = TypeVar("AddableType", int, float, Text)
+AddableType = TypeVar("AddableType", int, float, str)
 def add(a: AddableType, b: AddableType) -> AddableType:
   return a + b
 ```
@@ -3269,40 +3273,30 @@ def check_length(x: AnyStr) -> AnyStr:
 The proper type for annotating strings depends on what versions of Python the
 code is intended for.
 
-For Python 3 only code, prefer to use `str`. `Text` is also acceptable. Be
-consistent in using one or the other.
-
-For Python 2 compatible code, use `Text`. In some rare cases, `str` may make
-sense; typically to aid compatibility when the return types aren't the same
-between the two Python versions. Avoid using `unicode`: it doesn't exist in
-Python 3.
-
-The reason this discrepancy exists is because `str` means different things
-depending on the Python version.
+Prefer to use `str`, though `Text` is also acceptable. Be consistent in using
+one or the other. For code that deals with binary data, use `bytes`. For Python
+2 compatible code that processes text data (`str` or `unicode` in Python 2,
+`str` in Python 3), use `Text`.
 
 ```python
-No:
-def py2_code(x: str) -> unicode:
+def deals_with_text_data_in_py3(x: str) -> str:
   ...
-```
-
-For code that deals with binary data, use `bytes`.
-
-```python
 def deals_with_binary_data(x: bytes) -> bytes:
   ...
+def py2_compatible_text_data_processor(x: Text) -> Text:
+  ...
 ```
 
-For Python 2 compatible code that processes text data (`str` or `unicode` in
-Python 2, `str` in Python 3), use `Text`. For Python 3 only code that process
-text data, prefer `str`.
+In some uncommon Python 2 compatibility cases, `str` may make sense instead of
+`Text`, typically to aid compatibility when the return types aren't the same
+between Python 2 and Python 3. Never use `unicode` as it doesn't exist in Python
+3. The reason this discrepancy exists is because `str` means something different
+in Python 2 than in Python 3.
+
+No:
 
 ```python
-from typing import Text
-...
-def py2_compatible(x: Text) -> Text:
-  ...
-def py3_only(x: str) -> str:
+def py2_code(x: str) -> unicode:
   ...
 ```
 
@@ -3312,17 +3306,15 @@ type.
 ```python
 from typing import Text, Union
 ...
-def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
-  ...
 def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
+  ...
+def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
   ...
 ```
 
 If all the string types of a function are always the same, for example if the
 return type is the same as the argument type in the code above, use
 [AnyStr](#typing-type-var).
-
-Writing it like this will simplify the process of porting the code to Python 3.
 
 <a id="s3.19.12-imports-for-typing"></a>
 <a id="s3.19.12-imports"></a>
@@ -3342,8 +3334,8 @@ from typing import Any, Dict, Optional
 Given that this way of importing from `typing` adds items to the local
 namespace, any names in `typing` should be treated similarly to keywords, and
 not be defined in your Python code, typed or not. If there is a collision
-between a type and an existing name in a module, import it using
-`import x as y`.
+between a type and an existing name in a module, import it using `import x as
+y`.
 
 ```python
 from typing import Any as AnyType
@@ -3360,8 +3352,8 @@ needed for type checking must be avoided at runtime. This pattern is
 discouraged; alternatives such as refactoring the code to allow top level
 imports should be preferred.
 
-Imports that are needed only for type annotations can be placed within an
-`if TYPE_CHECKING:` block.
+Imports that are needed only for type annotations can be placed within an `if
+TYPE_CHECKING:` block.
 
 -   Conditionally imported types need to be referenced as strings, to be forward
     compatible with Python 3.6 where the annotation expressions are actually
@@ -3388,8 +3380,8 @@ def f(x: "sketch.Sketch"): ...
 
 Circular dependencies that are caused by typing are code smells. Such code is a
 good candidate for refactoring. Although technically it is possible to keep
-circular dependencies, the [build system](#typing-build-deps) will not let you
-do so because each module has to depend on the other.
+circular dependencies, various build systems will not let you do so
+because each module has to depend on the other.
 
 Replace modules that create circular dependency imports with `Any`. Set an
 [alias](#typing-aliases) with a meaningful name, and use the real type name from
@@ -3435,13 +3427,13 @@ remember that in many cases [`TypeVar`](#typing-type-var) might be more
 appropriate:
 
 ```python
-def get_names(employee_ids: List[Any]) -> Dict[Any, Text]:
+def get_names(employee_ids: List[Any]) -> Dict[Any, str]:
   """Returns a mapping from employee ID to employee name for given IDs."""
 ```
 
 ```python
 T = TypeVar('T')
-def get_names(employee_ids: List[T]) -> Dict[T, Text]:
+def get_names(employee_ids: List[T]) -> Dict[T, str]:
   """Returns a mapping from employee ID to employee name for given IDs."""
 ```
 
@@ -3464,3 +3456,4 @@ it. We present global style rules here so people know the vocabulary, but local
 style is also important. If code you add to a file looks drastically different
 from the existing code around it, it throws readers out of their rhythm when
 they go to read it. Avoid this.
+
