@@ -28,7 +28,7 @@ def create_commit_title(commit):
 
 
 def create_pr_title(commit):
-    return '['+commit['label']+'] 변역 요청 💬'
+    return '['+commit['label']+'] 번역 요청 💬'
 
 
 def create_pr_body():
