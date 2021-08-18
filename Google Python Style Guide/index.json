@@ -1,0 +1,230 @@
+{
+    "1": {
+        "full_path": "../Google Python Style Guide/1. \u1107\u1162\u1100\u1167\u11bc", 
+        "name": "\u1107\u1162\u1100\u1167\u11bc", 
+        "full_name": "1. \u1107\u1162\u1100\u1167\u11bc", 
+        "children": {
+            "1.1": {
+                "full_path": "../Google Python Style Guide/1. \u1107\u1162\u1100\u1167\u11bc/1.1 \u1107\u1162\u1100\u1167\u11bc.md", 
+                "name": "\u1107\u1162\u1100\u1167\u11bc.md", 
+                "full_name": "1.1 \u1107\u1162\u1100\u1167\u11bc.md"
+            }
+        }
+    }, 
+    "3": {
+        "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8", 
+        "name": "Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8", 
+        "full_name": "3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8", 
+        "children": {
+            "3.18": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.18 \u1112\u1161\u11b7\u1109\u116e \u1100\u1175\u11af\u110b\u1175.md", 
+                "name": "\u1112\u1161\u11b7\u1109\u116e \u1100\u1175\u11af\u110b\u1175.md", 
+                "full_name": "3.18 \u1112\u1161\u11b7\u1109\u116e \u1100\u1175\u11af\u110b\u1175.md"
+            }, 
+            "3.19": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.19 Type \uc8fc\uc11d \ubc29\ubc95.md", 
+                "name": "Type \uc8fc\uc11d \ubc29\ubc95.md", 
+                "full_name": "3.19 Type \uc8fc\uc11d \ubc29\ubc95.md"
+            }, 
+            "3.10": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.10 \ubb38\uc790\uc5f4.md", 
+                "name": "\ubb38\uc790\uc5f4.md", 
+                "full_name": "3.10 \ubb38\uc790\uc5f4.md"
+            }, 
+            "3.11": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.11 \ud30c\uc77c\uacfc \uc18c\ucf13.md", 
+                "name": "\ud30c\uc77c\uacfc \uc18c\ucf13.md", 
+                "full_name": "3.11 \ud30c\uc77c\uacfc \uc18c\ucf13.md"
+            }, 
+            "3.12": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.12 TODO \u110c\u116e\u1109\u1165\u11a8.md", 
+                "name": "TODO \u110c\u116e\u1109\u1165\u11a8.md", 
+                "full_name": "3.12 TODO \u110c\u116e\u1109\u1165\u11a8.md"
+            }, 
+            "3.13": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.13 import\ud615\uc2dd.md", 
+                "name": "import\ud615\uc2dd.md", 
+                "full_name": "3.13 import\ud615\uc2dd.md"
+            }, 
+            "3.14": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.14 statements.md", 
+                "name": "statements.md", 
+                "full_name": "3.14 statements.md"
+            }, 
+            "3.15": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.15 \u110c\u1165\u11b8\u1100\u1173\u11ab \u110c\u1166\u110b\u1165.md", 
+                "name": "\u110c\u1165\u11b8\u1100\u1173\u11ab \u110c\u1166\u110b\u1165.md", 
+                "full_name": "3.15 \u110c\u1165\u11b8\u1100\u1173\u11ab \u110c\u1166\u110b\u1165.md"
+            }, 
+            "3.16": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.16 \ub124\uc774\ubc0d.md", 
+                "name": "\ub124\uc774\ubc0d.md", 
+                "full_name": "3.16 \ub124\uc774\ubc0d.md"
+            }, 
+            "3.17": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.17 Main.md", 
+                "name": "Main.md", 
+                "full_name": "3.17 Main.md"
+            }, 
+            "3.6": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.6 Whitespace.md", 
+                "name": "Whitespace.md", 
+                "full_name": "3.6 Whitespace.md"
+            }, 
+            "3.7": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.7 Shebang_Line.md", 
+                "name": "Shebang_Line.md", 
+                "full_name": "3.7 Shebang_Line.md"
+            }, 
+            "3.4": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.4 \ub4e4\uc5ec\uc4f0\uae30.md", 
+                "name": "\ub4e4\uc5ec\uc4f0\uae30.md", 
+                "full_name": "3.4 \ub4e4\uc5ec\uc4f0\uae30.md"
+            }, 
+            "3.5": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.5 \u1107\u1175\u11ab \u110c\u116e\u11af.md", 
+                "name": "\u1107\u1175\u11ab \u110c\u116e\u11af.md", 
+                "full_name": "3.5 \u1107\u1175\u11ab \u110c\u116e\u11af.md"
+            }, 
+            "3.2": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.2 \uc904 \uae38\uc774.md", 
+                "name": "\uc904 \uae38\uc774.md", 
+                "full_name": "3.2 \uc904 \uae38\uc774.md"
+            }, 
+            "3.3": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.3 \u1100\u116a\u11af\u1112\u1169.md", 
+                "name": "\u1100\u116a\u11af\u1112\u1169.md", 
+                "full_name": "3.3 \u1100\u116a\u11af\u1112\u1169.md"
+            }, 
+            "3.1": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.1 \u1109\u1166\u1106\u1175\u110f\u1169\u11af\u1105\u1169\u11ab.md", 
+                "name": "\u1109\u1166\u1106\u1175\u110f\u1169\u11af\u1105\u1169\u11ab.md", 
+                "full_name": "3.1 \u1109\u1166\u1106\u1175\u110f\u1169\u11af\u1105\u1169\u11ab.md"
+            }, 
+            "3.8": {
+                "full_path": "../Google Python Style Guide/3. Python \u1109\u1173\u1110\u1161\u110b\u1175\u11af \u1100\u1172\u110e\u1175\u11a8/3.8 \uc8fc\uc11d\uacfc docstring.md", 
+                "name": "\uc8fc\uc11d\uacfc docstring.md", 
+                "full_name": "3.8 \uc8fc\uc11d\uacfc docstring.md"
+            }
+        }
+    }, 
+    "2": {
+        "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8", 
+        "name": "Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8", 
+        "full_name": "2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8", 
+        "children": {
+            "2.14": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.14 True, False \u1111\u1167\u11bc\u1100\u1161.md", 
+                "name": "True, False \u1111\u1167\u11bc\u1100\u1161.md", 
+                "full_name": "2.14 True, False \u1111\u1167\u11bc\u1100\u1161.md"
+            }, 
+            "2.7": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.7 list_comprehensions.md", 
+                "name": "list_comprehensions.md", 
+                "full_name": "2.7 list_comprehensions.md"
+            }, 
+            "2.18": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.18 \u1109\u1173\u1105\u1166\u1103\u1173.md", 
+                "name": "\u1109\u1173\u1105\u1166\u1103\u1173.md", 
+                "full_name": "2.18 \u1109\u1173\u1105\u1166\u1103\u1173.md"
+            }, 
+            "2.21": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.21 Type \u110c\u116e\u1109\u1165\u11a8.md", 
+                "name": "Type \u110c\u116e\u1109\u1165\u11a8.md", 
+                "full_name": "2.21 Type \u110c\u116e\u1109\u1165\u11a8.md"
+            }, 
+            "2.12": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.12 \u1100\u1175\u1107\u1169\u11ab \u110b\u1175\u11ab\u110c\u1161 \u1100\u1161\u11b9.md", 
+                "name": "\u1100\u1175\u1107\u1169\u11ab \u110b\u1175\u11ab\u110c\u1161 \u1100\u1161\u11b9.md", 
+                "full_name": "2.12 \u1100\u1175\u1107\u1169\u11ab \u110b\u1175\u11ab\u110c\u1161 \u1100\u1161\u11b9.md"
+            }, 
+            "2.6": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.6 \uc911\ucca9.md", 
+                "name": "\uc911\ucca9.md", 
+                "full_name": "2.6 \uc911\ucca9.md"
+            }, 
+            "2.3": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.3 package.md", 
+                "name": "package.md", 
+                "full_name": "2.3 package.md"
+            }, 
+            "2.9": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.9 \u110c\u1166\u1102\u1165\u1105\u1166\u110b\u1175\u1110\u1165.md", 
+                "name": "\u110c\u1166\u1102\u1165\u1105\u1166\u110b\u1175\u1110\u1165.md", 
+                "full_name": "2.9 \u110c\u1166\u1102\u1165\u1105\u1166\u110b\u1175\u1110\u1165.md"
+            }, 
+            "2.8": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.8 \uae30\ubcf8 \ubc18\ubcf5\uc790\uc640 \uc5f0\uc0b0\uc790.md", 
+                "name": "\uae30\ubcf8 \ubc18\ubcf5\uc790\uc640 \uc5f0\uc0b0\uc790.md", 
+                "full_name": "2.8 \uae30\ubcf8 \ubc18\ubcf5\uc790\uc640 \uc5f0\uc0b0\uc790.md"
+            }, 
+            "2.5": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.5 \uc804\uc5ed\ubcc0\uc218.md", 
+                "name": "\uc804\uc5ed\ubcc0\uc218.md", 
+                "full_name": "2.5 \uc804\uc5ed\ubcc0\uc218.md"
+            }, 
+            "2.19": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.19 \uac15\ud55c \uae30\ub2a5.md", 
+                "name": "\uac15\ud55c \uae30\ub2a5.md", 
+                "full_name": "2.19 \uac15\ud55c \uae30\ub2a5.md"
+            }, 
+            "2.2": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.2 import.md", 
+                "name": "import.md", 
+                "full_name": "2.2 import.md"
+            }, 
+            "2.17": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.17 \ud568\uc218\uc640 \uba54\uc11c\ub4dc Decorators.md", 
+                "name": "\ud568\uc218\uc640 \uba54\uc11c\ub4dc Decorators.md", 
+                "full_name": "2.17 \ud568\uc218\uc640 \uba54\uc11c\ub4dc Decorators.md"
+            }, 
+            "2.16": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.16 \ub809\uc2dc\uceec \uc2a4\ucf54\ud551(Lexical Scoping).md", 
+                "name": "\ub809\uc2dc\uceec \uc2a4\ucf54\ud551(Lexical Scoping).md", 
+                "full_name": "2.16 \ub809\uc2dc\uceec \uc2a4\ucf54\ud551(Lexical Scoping).md"
+            }, 
+            "2.20": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.20 \ud604\ub300\uc758 \ud30c\uc774\uc36c.md", 
+                "name": "\ud604\ub300\uc758 \ud30c\uc774\uc36c.md", 
+                "full_name": "2.20 \ud604\ub300\uc758 \ud30c\uc774\uc36c.md"
+            }, 
+            "2.4": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.4 \uc608\uc678\ucc98\ub9ac.md", 
+                "name": "\uc608\uc678\ucc98\ub9ac.md", 
+                "full_name": "2.4 \uc608\uc678\ucc98\ub9ac.md"
+            }, 
+            "2.13": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.13 Properties.md", 
+                "name": "Properties.md", 
+                "full_name": "2.13 Properties.md"
+            }, 
+            "2.1": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.1 Lint.md", 
+                "name": "Lint.md", 
+                "full_name": "2.1 Lint.md"
+            }, 
+            "2.11": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.11 \uc870\uac74\ubb38 \ud45c\ud604.md", 
+                "name": "\uc870\uac74\ubb38 \ud45c\ud604.md", 
+                "full_name": "2.11 \uc870\uac74\ubb38 \ud45c\ud604.md"
+            }, 
+            "2.10": {
+                "full_path": "../Google Python Style Guide/2. Python \u110b\u1165\u11ab\u110b\u1165 \u1100\u1172\u110e\u1175\u11a8/2.10 \ub78c\ub2e4.md", 
+                "name": "\ub78c\ub2e4.md", 
+                "full_name": "2.10 \ub78c\ub2e4.md"
+            }
+        }
+    }, 
+    "4": {
+        "full_path": "../Google Python Style Guide/4. \u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af", 
+        "name": "\u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af", 
+        "full_name": "4. \u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af", 
+        "children": {
+            "4.1": {
+                "full_path": "../Google Python Style Guide/4. \u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af/4.1 \u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af.md", 
+                "name": "\u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af.md", 
+                "full_name": "4.1 \u1106\u1162\u11bd\u110b\u1173\u11b7\u1106\u1161\u11af.md"
+            }
+        }
+    }
+}
