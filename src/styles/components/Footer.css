@@ -1,0 +1,22 @@
+.body .footer {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  padding-inline-start: 0px;
+  list-style: none;
+  font-size: small;
+}
+
+.body .footer::after {
+  top: 0px;
+  content: "";
+  width: calc(100% - 2px);
+  position: absolute;
+  border: 1px solid rgba(211, 211, 211, 0.4);
+}

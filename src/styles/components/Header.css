@@ -1,0 +1,40 @@
+.body .header {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body .header::after {
+  position: absolute;
+  width: calc(100% - 2px);
+  border: 1px solid rgba(211, 211, 211, 0.4);
+  content: "";
+  bottom: 0px;
+  left: 0px;
+}
+
+.body .header .title {
+  padding-left: 10px;
+  font-size: large;
+  text-decoration: none;
+}
+
+.body .header .menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.body .header .menu li {
+  padding-right: 10px;
+  list-style-type: none;
+  font-size: large;
+}
+
+.body .header .menu li a {
+  text-decoration: none;
+}

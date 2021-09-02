@@ -1,0 +1,65 @@
+.body .container .contents {
+  max-width: 700px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+  padding: 20px;
+  padding-right: 240px;
+}
+
+.body .container .contents * {
+  word-break: break-all;
+}
+
+.body .container .contents .result li a {
+  text-decoration: none;
+}
+
+.body .container .contents .result li a:hover {
+  text-decoration: underline;
+}
+
+.body .container .paging {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+
+.body .container .paging a {
+  text-decoration: none;
+}
+
+.body .container .loading {
+  position: fixed;
+  left: calc(50vw - 32px);
+  top: calc(50vh - 32px);
+}
+
+.body .container .loading.background::before {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(27, 31, 35, 0.2);
+  content: "";
+}
+
+.body .container .loading .loading-svg {
+  animation: loading 1s;
+  animation-iteration-count: infinite;
+  width: 64px;
+  height: 64px;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

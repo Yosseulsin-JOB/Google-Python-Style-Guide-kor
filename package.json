@@ -1,0 +1,34 @@
+{
+  "name": "google-python-style-guide-kor",
+  "version": "0.0.1-beta",
+  "description": "docs 문서를 보여줍니다.",
+  "main": "index.js",
+  "repository": "https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor.git",
+  "author": "Sotaneum <gnyontu39@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack serve"
+  },
+  "dependencies": {
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "css-loader": "^6.2.0",
+    "highlight.js": "^11.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "marked": "^3.0.0",
+    "react": "^17.0.2",
+    "react-app-polyfill": "^2.0.0",
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.9",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.50.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

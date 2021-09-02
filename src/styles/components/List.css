@@ -1,0 +1,79 @@
+.body .container .list {
+  position: relative;
+  max-width: 240px;
+  width: 100%;
+}
+
+.body .container .list::after {
+  position: absolute;
+  height: calc(100% - 2px);
+  border: 1px solid rgba(211, 211, 211, 0.4);
+  content: "";
+  bottom: 0px;
+  right: 0px;
+}
+
+.body .container .list .title,
+.body .container .list .subtitle {
+  margin-block-start: 0px;
+  list-style-type: none;
+}
+
+.body .container .list .title a,
+.body .container .list .subtitle a {
+  text-decoration: none;
+  padding: 10px 20px;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body .container .list .title li,
+.body .container .list .subtitle li {
+  display: flex;
+  position: relative;
+}
+.body .container .list .title a:hover,
+.body .container .list .subtitle a:hover {
+  background-color: rgba(211, 211, 211, 0.4);
+}
+
+.body .container .list .title a {
+  padding: 10px 20px;
+}
+.body .container .list .subtitle a {
+  padding: 10px 10px;
+}
+
+.body .container .list .title {
+  padding-inline-start: 0px;
+}
+
+.body .container .list .subtitle {
+  position: relative;
+  height: auto;
+  max-height: 0;
+  overflow: hidden;
+  padding-inline-start: 30px;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.body .container .list .title li.parent.selected::after {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  border-left: 8px solid #34568b;
+  content: " ";
+}
+
+.body .container .list .subtitle li.selected {
+  background-color: antiquewhite;
+}
+
+.body .container .list .title .children {
+  width: 24px;
+  stroke: rgb(212, 212, 212);
+  transition: transform 0.5s ease-in-out;
+}
