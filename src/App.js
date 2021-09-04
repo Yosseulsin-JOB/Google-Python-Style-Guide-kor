@@ -99,13 +99,11 @@ export default function App() {
         onToggleMenu={handleToggleMenu}
       />
       <div style={{ display: "flex", height: "calc(100vh - 100px - 56px)" }}>
-        <List
-          page={page}
-          show={showMenu}
-          contents={contents}
-          onHideClick={setShowMenu}
-        />
-        <div className="container">
+        <List page={page} show={showMenu} contents={contents} />
+        <div
+          className="container"
+          onClick={() => showMenu && setShowMenu(false)}
+        >
           <PageComponent page={page} contents={flatContents} />
         </div>
       </div>

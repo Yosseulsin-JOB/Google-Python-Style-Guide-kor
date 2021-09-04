@@ -6,20 +6,9 @@ import { isSelectedContent, toFlatContents } from "../utils";
 import ArrowSVG from "../svg/Arrow";
 import ExternalLink from "../svg/ExternalLink";
 
-export default function List({
-  page = {},
-  contents = [],
-  show = false,
-  onHideClick = () => {},
-}) {
-  const handleClick = (e) => {
-    if (e.clientX > 240) {
-      onHideClick(false);
-    }
-  };
-
+export default function List({ page = {}, contents = [], show = false }) {
   return (
-    <div className={`list${show ? " show" : ""}`} onClick={handleClick}>
+    <div className={`list${show ? " show" : ""}`}>
       <Search faltContents={toFlatContents(contents)} />
       <ul className="title">
         {contents.map((data) => (
