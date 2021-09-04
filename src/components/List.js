@@ -7,6 +7,7 @@ import ArrowSVG from "../svg/Arrow";
 import ExternalLink from "../svg/ExternalLink";
 
 export default function List({ page = {}, contents = [], show = false }) {
+  const [license, setLicense] = useState(false);
   return (
     <div className={`list${show ? " show" : ""}`}>
       <Search faltContents={toFlatContents(contents)} />
@@ -14,6 +15,34 @@ export default function List({ page = {}, contents = [], show = false }) {
         {contents.map((data) => (
           <Item key={data.sha} data={data} page={page} />
         ))}
+      </ul>
+      <ul className="title info">
+        <li
+          className={`parent${license ? " selected" : ""}`}
+          onClick={() => setLicense(!license)}
+        >
+          <a href={window.location.hash}>
+            License
+            <ArrowSVG
+              className="children"
+              style={{ transform: `rotate(${license ? 90 : 0}deg)` }}
+            />
+          </a>
+        </li>
+        <ul
+          className="subtitle info"
+          style={license ? { maxHeight: "1000px" } : {}}
+        >
+          <li>
+            <a href="https://google.github.io/styleguide/pyguide.html">원문</a>
+          </li>
+          <li>
+            <a href="https://github.com/yangheeryu/Gowun-Dodum">고운돋움글꼴</a>
+          </li>
+          <li>
+            <a href="https://github.com/Sotaneum">페이지</a>
+          </li>
+        </ul>
       </ul>
       <ul className="title github">
         <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">

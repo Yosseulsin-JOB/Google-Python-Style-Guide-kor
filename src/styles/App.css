@@ -47,7 +47,7 @@ table .body {
 
 .body .container {
   width: 100%;
-  height: calc(100vh - 156px);
+  height: calc(100vh - 56px);
   position: relative;
   overflow: hidden;
   overflow-y: scroll;

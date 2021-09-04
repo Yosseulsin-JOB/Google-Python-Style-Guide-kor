@@ -2,7 +2,7 @@
   position: relative;
   max-width: 240px;
   width: 100%;
-  height: calc(100vh - 100px - 56px);
+  height: calc(100vh - 56px);
   overflow: hidden;
   overflow-y: scroll;
   border-right: 2px solid rgba(211, 211, 211, 0.4);

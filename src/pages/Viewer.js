@@ -93,6 +93,8 @@ export default function Viewr({ page = {}, contents = [] }) {
       <Paging bothSidesContent={bothSidesContent} small={small} />
       <Markdown>{markdown}</Markdown>
       <Paging bothSidesContent={bothSidesContent} small={small} />
+      <br />
+      <br />
     </div>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Footer from "./components/Footer";
 import Header from "./components/Header";
 import List from "./components/List";
 
@@ -107,7 +106,6 @@ export default function App() {
           <PageComponent page={page} contents={flatContents} />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
