@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import "@/styles/components/Search.css";
 import SearchSVG from "../svg/Search";
 
 export default function Search() {

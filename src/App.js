@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Header from "./components/Header";
+
 import List from "./components/List";
+import Header from "./components/Header";
+
+import Viewer from "./pages/Viewer";
+import Loading from "./pages/Loading";
+import NotFound from "./pages/NotFound";
+import SearchResult from "./pages/SearchResult";
 
 import {
   getPage,
@@ -8,14 +14,6 @@ import {
   getContentData,
   toFlatContents,
 } from "./utils";
-
-import "@/styles/App.css";
-import "@/styles/components/Contents.css";
-
-import SearchResult from "./pages/SearchResult";
-import Viewer from "./pages/Viewer";
-import Loading from "./pages/Loading";
-import NotFound from "./pages/NotFound";
 
 const pages = {
   s: Viewer,

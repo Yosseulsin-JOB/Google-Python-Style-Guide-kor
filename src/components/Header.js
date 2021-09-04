@@ -3,13 +3,11 @@ import React from "react";
 import MenuSVG from "../svg/Menu";
 import ExternalLink from "../svg/ExternalLink";
 
-import "@/styles/components/Header.css";
-
 export default function Header({
   branchs = [],
   selected = "",
-  onChangeBranch = () => {},
   onToggleMenu = () => {},
+  onChangeBranch = () => {},
 }) {
   return (
     <div className="header">

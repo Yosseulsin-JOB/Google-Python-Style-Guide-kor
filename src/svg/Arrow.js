@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function ArrowSVG({ className = "", style = {} }) {
+export default function ArrowSVG({ style = {}, className = "" }) {
   return (
     <svg
-      className={className}
-      style={style}
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
+      style={style}
       viewBox="0 0 24 24"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         strokeLinecap="round"

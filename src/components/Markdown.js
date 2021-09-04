@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import * as marked from "marked";
+
 import { setNewOpen } from "../utils";
 
 export default function Markdown({ children }) {

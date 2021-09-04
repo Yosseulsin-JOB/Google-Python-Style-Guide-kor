@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Paging({ bothSidesContent = [], small = false }) {
+export default function Paging({ small = false, bothSidesContent = [] }) {
   const toName = ({ name }) => {
     const targetName = name.replace(".md", "");
     return small ? targetName.split(" ")[0] : targetName;

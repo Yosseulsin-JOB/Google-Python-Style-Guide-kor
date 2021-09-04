@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import "@/styles/components/List.css";
 import Search from "./Search";
 import { isSelectedContent, toFlatContents } from "../utils";
+
 import ArrowSVG from "../svg/Arrow";
 import ExternalLink from "../svg/ExternalLink";
 
-export default function List({ page = {}, contents = [], show = false }) {
+export default function List({ page = {}, show = false, contents = [] }) {
   const [license, setLicense] = useState(false);
   return (
     <div className={`list${show ? " show" : ""}`}>

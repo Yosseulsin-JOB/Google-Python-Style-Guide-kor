@@ -3,11 +3,11 @@ import React from "react";
 export default function SearchSVG({ style = {}, className = "" }) {
   return (
     <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      viewBox="0 0 24 24"
       style={style}
+      className={className}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         strokeLinecap="round"

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { contentToNum, getBothSidesContent, getContent } from "../utils";
-import { getRawByContent } from "../utils/github";
 import Paging from "../components/Paging";
 import Markdown from "../components/Markdown";
+
 import Loading from "./Loading";
 import NotFound from "./NotFound";
+
+import { getRawByContent } from "../utils/github";
+import { contentToNum, getBothSidesContent, getContent } from "../utils";
 
 export default function Viewr({ page = {}, contents = [] }) {
   const [content, setContent] = useState({});

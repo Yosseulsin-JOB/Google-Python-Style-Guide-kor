@@ -1,12 +1,13 @@
 import React from "react";
 
-export default function ExternalLink({ style = {} }) {
+export default function ExternalLink({ style = {}, className = "" }) {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       fill="none"
-      viewBox="0 0 24 24"
       style={style}
+      viewBox="0 0 24 24"
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
         strokeLinecap="round"

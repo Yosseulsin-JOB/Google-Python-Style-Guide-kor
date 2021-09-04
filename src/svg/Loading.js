@@ -3,12 +3,11 @@ import React from "react";
 export default function LoadingSVG({ style = {}, className = "" }) {
   return (
     <svg
-      className={className}
-      xmlns="http://www.w3.org/2000/svg"
-      version="1.1"
-      x="0px"
       y="0px"
+      x="0px"
+      className={className}
       viewBox="0 0 399.387 399.387"
+      xmlns="http://www.w3.org/2000/svg"
       style={{ enableBackground: "new 0 0 399.387 399.387", ...style }}
     >
       <g>
