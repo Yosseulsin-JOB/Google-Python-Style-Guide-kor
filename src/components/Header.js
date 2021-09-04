@@ -1,21 +1,30 @@
 import React from "react";
 
-import GithubSVG from "../svg/Github";
+import MenuSVG from "../svg/Menu";
+import ExternalLink from "../svg/ExternalLink";
 
 import "@/styles/components/Header.css";
-import DarkModeSVG from "../svg/ExternalLink";
-import ExternalLink from "../svg/ExternalLink";
 
 export default function Header({
   branchs = [],
   selected = "",
   onChangeBranch = () => {},
+  onToggleMenu = () => {},
 }) {
   return (
     <div className="header">
-      <a className="title" href="">
-        Google Python Style Guide
-      </a>
+      <div>
+        <a
+          className="m_menu"
+          href={window.location.hash}
+          onClick={onToggleMenu}
+        >
+          <MenuSVG style={{ stroke: "black", width: "18px" }} />
+        </a>
+        <a className="title" href="">
+          Google Python Style Guide
+        </a>
+      </div>
       <ul className="menu">
         <li className="github">
           <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">

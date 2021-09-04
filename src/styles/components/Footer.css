@@ -20,3 +20,8 @@
   position: absolute;
   border: 1px solid rgba(211, 211, 211, 0.4);
 }
+
+@media screen and (max-width: 980px) {
+  .body .footer {
+  }
+}

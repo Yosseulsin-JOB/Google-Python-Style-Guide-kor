@@ -1,26 +1,21 @@
-.body .container .list {
+.body .list {
   position: relative;
   max-width: 240px;
   width: 100%;
+  height: calc(100vh - 100px - 56px);
+  overflow: hidden;
+  overflow-y: scroll;
+  border-right: 2px solid rgba(211, 211, 211, 0.4);
 }
 
-.body .container .list::after {
-  position: absolute;
-  height: calc(100% - 2px);
-  border: 1px solid rgba(211, 211, 211, 0.4);
-  content: "";
-  bottom: 0px;
-  right: 0px;
-}
-
-.body .container .list .title,
-.body .container .list .subtitle {
+.body .list .title,
+.body .list .subtitle {
   margin-block-start: 0px;
   list-style-type: none;
 }
 
-.body .container .list .title a,
-.body .container .list .subtitle a {
+.body .list .title a,
+.body .list .subtitle a {
   text-decoration: none;
   padding: 10px 20px;
   width: 200px;
@@ -29,28 +24,28 @@
   align-items: center;
 }
 
-.body .container .list .title li,
-.body .container .list .subtitle li {
+.body .list .title li,
+.body .list .subtitle li {
   display: flex;
   position: relative;
 }
-.body .container .list .title a:hover,
-.body .container .list .subtitle a:hover {
+.body .list .title a:hover,
+.body .list .subtitle a:hover {
   background-color: rgba(211, 211, 211, 0.4);
 }
 
-.body .container .list .title a {
+.body .list .title a {
   padding: 10px 20px;
 }
-.body .container .list .subtitle a {
+.body .list .subtitle a {
   padding: 10px 10px;
 }
 
-.body .container .list .title {
+.body .list .title {
   padding-inline-start: 0px;
 }
 
-.body .container .list .subtitle {
+.body .list .subtitle {
   position: relative;
   height: auto;
   max-height: 0;
@@ -59,7 +54,7 @@
   transition: max-height 0.5s ease-in-out;
 }
 
-.body .container .list .title li.parent.selected::after {
+.body .list .title li.parent.selected::after {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -68,12 +63,47 @@
   content: " ";
 }
 
-.body .container .list .subtitle li.selected {
+.body .list .subtitle li.selected {
   background-color: antiquewhite;
 }
 
-.body .container .list .title .children {
+.body .list .title .children {
   width: 24px;
   stroke: rgb(212, 212, 212);
   transition: transform 0.5s ease-in-out;
+}
+
+.body .list .title.github {
+  display: none;
+}
+
+@media screen and (min-width: 1300px) {
+  .body .list {
+    position: absolute;
+    background: white;
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .body .list {
+    position: absolute;
+    background: white;
+    z-index: 1;
+    display: none;
+  }
+  .body .list.show {
+    display: block;
+  }
+  .body .list.show::before {
+    width: calc(100% - 240px);
+    height: calc(100% - 100px - 56px);
+    background: rgba(211, 211, 211, 0.8);
+    content: " ";
+    position: fixed;
+    right: 0px;
+  }
+  .body .list .title.github {
+    display: block;
+  }
 }

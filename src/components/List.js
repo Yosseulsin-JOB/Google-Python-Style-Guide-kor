@@ -4,15 +4,33 @@ import "@/styles/components/List.css";
 import Search from "./Search";
 import { isSelectedContent, toFlatContents } from "../utils";
 import ArrowSVG from "../svg/Arrow";
+import ExternalLink from "../svg/ExternalLink";
 
-export default function List({ page = {}, contents = [] }) {
+export default function List({
+  page = {},
+  contents = [],
+  show = false,
+  onHideClick = () => {},
+}) {
+  const handleClick = (e) => {
+    if (e.clientX > 240) {
+      onHideClick(false);
+    }
+  };
+
   return (
-    <div className="list">
+    <div className={`list${show ? " show" : ""}`} onClick={handleClick}>
       <Search faltContents={toFlatContents(contents)} />
       <ul className="title">
         {contents.map((data) => (
           <Item key={data.sha} data={data} page={page} />
         ))}
+      </ul>
+      <ul className="title github">
+        <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">
+          Github
+          <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
+        </a>
       </ul>
     </div>
   );
@@ -52,10 +70,7 @@ function Item({ data, page = {} }) {
         </a>
       </li>
       {hasChildren && (
-        <ul
-          className="subtitle"
-          style={show ? { maxHeight: window.outerHeight } : {}}
-        >
+        <ul className="subtitle" style={show ? { maxHeight: "1500px" } : {}}>
           {children.map((data) => (
             <SubItem
               data={data}

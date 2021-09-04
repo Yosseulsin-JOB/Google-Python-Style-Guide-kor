@@ -46,8 +46,11 @@ table .body {
 }
 
 .body .container {
-  height: 100%;
-  min-height: calc(100vh - 156px);
+  width: 100%;
+  height: calc(100vh - 156px);
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }

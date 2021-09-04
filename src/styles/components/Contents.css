@@ -1,11 +1,7 @@
 .body .container .contents {
   max-width: 700px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100%;
+  width: calc(100% - 40px);
   padding: 20px;
-  padding-right: 240px;
 }
 
 .body .container .contents * {

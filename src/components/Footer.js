@@ -7,10 +7,10 @@ export default function Footer() {
     <ul className="footer">
       <li>
         <a href="https://google.github.io/styleguide/pyguide.html">
-          구글 Python 스타일 가이드(영문)
+          Google Python Style Guide(ENG)
         </a>
-        는 <a href="https://creativecommons.org/licenses/by/3.0/">CC-By 3.0</a>
-        에 따라 부여되고 공유할 수 있습니다.
+        {"-"}
+        <a href="https://creativecommons.org/licenses/by/3.0/">CC-By 3.0</a>
       </li>
 
       <li>

@@ -12,8 +12,16 @@ export default function Viewr({ page = {}, contents = [] }) {
   const [markdown, setMarkdown] = useState("");
   const [fetch, setFetch] = useState(false);
   const [error, setError] = useState(null);
+  const [small, setSmall] = useState(false);
 
   const [bothSidesContent, setBothSidesContent] = useState([null, null]);
+
+  useEffect(() => {
+    const handleResize = () => setSmall(window.innerWidth <= 480);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const { type, name } = page;
@@ -82,9 +90,9 @@ export default function Viewr({ page = {}, contents = [] }) {
 
   return (
     <div className="contents">
-      <Paging bothSidesContent={bothSidesContent} />
+      <Paging bothSidesContent={bothSidesContent} small={small} />
       <Markdown>{markdown}</Markdown>
-      <Paging bothSidesContent={bothSidesContent} />
+      <Paging bothSidesContent={bothSidesContent} small={small} />
     </div>
   );
 }

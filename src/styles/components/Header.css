@@ -38,3 +38,17 @@
 .body .header .menu li a {
   text-decoration: none;
 }
+
+.body .header .m_menu {
+  padding-left: 10px;
+  display: none;
+}
+
+@media screen and (max-width: 980px) {
+  .body .header .menu {
+    display: none;
+  }
+  .body .header .m_menu {
+    display: inline-block;
+  }
+}

@@ -1,7 +1,10 @@
 import React from "react";
 
-export default function Paging({ bothSidesContent = [] }) {
-  const toName = ({ name }) => name.replace(".md", "");
+export default function Paging({ bothSidesContent = [], small = false }) {
+  const toName = ({ name }) => {
+    const targetName = name.replace(".md", "");
+    return small ? targetName.split(" ")[0] : targetName;
+  };
   const toLink = ({ name }) => `#s${name.replace(" ", "-")}`;
 
   const [prev, next] = bothSidesContent;
