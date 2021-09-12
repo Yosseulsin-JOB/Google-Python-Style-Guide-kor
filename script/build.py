@@ -77,6 +77,8 @@ def tree_to_contents():
 			continue
 		contents.append("    *   ["+item[0]["title"]+"](#"+item[0]["link"]+")")
 		for part in item[1:]:
+			if part["title"].split(" ")[1] in ["정의", "장점", "단점", "결론"]:
+				continue
 			contents.append("        +   ["+part["title"]+"](#"+part["link"]+")")
 			
 	return "\n".join(["\n<details>", "  <summary>Table of Contents</summary>\n\n"]) + "\n".join(contents)+ "\n\n</details>\n"
