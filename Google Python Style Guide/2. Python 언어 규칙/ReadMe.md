@@ -2,7 +2,7 @@
 
 ### 2.1 Lint
 
-- 작성한 코드에 대해 `pylint`를 실행시키세요.
+- 이 [pylintrc](https://google.github.io/styleguide/pylintrc)를 사용하여 코드에서 `pylint`를 실행합니다.
 
 <a id="s2.1.1-definition"></a>
 
@@ -62,7 +62,7 @@
 - 아래 예시를 참고하세요.
 
   ```python
-  def viking_cafe_order(spam, beans, eggs=None):
+  def viking_cafe_order(spam: str, beans: str, eggs: Optional[str] = None) -> str:
       del beans, eggs  # Unused by vikings.
       return spam + spam + spam
   ```
@@ -74,7 +74,11 @@
 
 ### 2.2 Imports
 
-- `import`문을 사용할때 package와 module을 대상으로만 사용해야하고 각각의 클래스나 함수에 대해 사용하면 안됩니다. 다만 [typing 모듈](#s3.19.12-imports)을 사용할때는 예외입니다.
+- `import`문을 사용할때 package와 module을 대상으로만 사용해야하고 각각의 클래스나 함수에 대해 사용하면 안됩니다. 다만 
+  [typing 모듈](#s3.19.12-imports),
+  [typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions),
+  그리고 [six.moves module](https://six.readthedocs.io/#module-six.moves)
+  을 사용할때는 예외입니다.
 
 <a id="s2.2.1-definition"></a>
 
@@ -113,8 +117,7 @@
 
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
-- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#s3.19.12-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
-
+- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 
 ---
 <a id="s2.3-packages"></a>
 
@@ -181,9 +184,9 @@
 
 <a id="s2.4.1-definition"></a>
 
-#### 2.4.1 결정
+#### 2.4.1 정의
 
-- 예외는 코드블록에서 정상적인 상황에 발생한 에러나 다른 예외적인 상황을 다루는 방법입니다.
+- 예외는 코드블록에서 정상적인 상황에 발생한 에러나 다른 예외적인 상황을 다루기 위해 정상적인 흐름에서 벗어나는것을 의미합니다.
 
 <a id="s2.4.2-pros"></a>
 
@@ -191,7 +194,7 @@
 
 - 일반적인 연산자에 대한 제어흐름은 에러 핸들링 코드에 의해 난잡해지지 않습니다.
 - 특정 조건이 발생했을 때 제어 흐름이 몇몇 프레임들을 생략할 수 있습니다.
-- 예를 들어, N이라는 중첩된 함수에서 앞으로 돌아가는 것 대신, 에러코드를 전달합니다.
+- 예를 들어, 에러 코드를 살펴보는 것 대신 한 번에 N개의 중첩 함수로부터 반환합니다.
 
 <a id="s2.4.3-cons"></a>
 
@@ -205,8 +208,6 @@
 
 ##### 예외는 다음과 같은 조건을 만족해야 합니다
 
-- `raise MyError('Error message')` 또는 `raise MyError()` 같이 예외를 발생시킵니다.
-- 두개의 인자를 가지는 형식을 사용하지 않습니다. (`raise Myerror, 'Error message'`).
 - 적절한 경우 내장 예외 클래스를 사용하세요.
 - 예를 들어, 만약 양수를 예상하는데 음수가 통과한다면 `ValueError`를 발생시는 것이 그 예입니다.
 - 공공 API에 있는 인수의 값을 검증하기 위해 `assert`문을 사용하지마세요.
@@ -215,7 +216,7 @@
   - 올바른 예
 
     ```python
-    def connect_to_next_port(self, minimum):
+    def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -240,7 +241,7 @@
   - 부적절한 예
 
     ```python
-    def connect_to_next_port(self, minimum):
+    def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -260,14 +261,6 @@
 - 예외를 다시 발생시키거나 쓰레드의 가장 바깥 쪽 블록에 있지않으면 절대 포괄적인 `except:`문을 사용하거나 `Exception`, `StandardError`을 사용하지마세요. (그리고 에러메시지를 출력하세요.) Python은 이와 관련해서 매우 관용적이며 `except:` 모든 오탈자를 비롯하여, sys.exit() 호출, Ctrl+C로 인한 인터럽트, 유닛테스트 실패와 마지막으로 당신이 포착을 원하지 않았던 다른 모든 종류의 예외들까지 모두 잡아낼 것입니다.
 - 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야 할 에러를 가리게 됩니다.
 - 예외가 `try` 블록에서 발생하던 안하던 `finally`절은 코드를 실행시킨다. 이건 가끔 깔끔히 하는데 유용합니다. 예를들어, 파일을 닫을 때 가 그 예입니다.
-- 예외를 포착했을때, `,` 보다 `as` 를 사용하세요. 예시는 다음과 같습니다.
-
-  ```python
-  try:
-      raise Error()
-  except Error as error:
-      pass
-  ```
 
 ---
 <a id="s2.5-global-variables"></a>
@@ -301,7 +294,7 @@
 - 전역 변수를 사용하지 마세요.
 
 - 전역변수는 기술적으로는 변수이지만, module-level 상수가 허용되고 권장됩니다.
-- 예를들어 `MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다. [Naming](#s3.16-naming) 을 참고하세요.
+- 예를들어 `_MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다.
 - 만약 전역변수가 필요하다면 module-level에서 선언되고 모듈 내부에서 이름에 `_`를 붙여서 만들어져야 합니다.
 - 외부 접근은 반드시 public단위의 module-level 함수를 통해서 동작되어야 합니다. [Naming](#s3.16-naming)을 참고하세요.
 
@@ -333,17 +326,16 @@
 
 #### 2.6.3 단점
 
-- 중첩 또는 로컬클래스의 인스턴스들은 pickle을 할 수 없습니다.
 - 중첩된 함수와 클래스는 직접 테스트할 수 없습니다.
-- 중첩은 외부함수를 더 길고 읽기 어렵게 만듭니다.
+- 중첩은 외부함수를 더 길고 읽기 어렵게 만들 수 있습니다.
 
 <a id="s2.6.4-decision"></a>
 
 #### 2.6.4 결론
 
 - 몇가지 주의사항을 지키면 사용해도 괜찮습니다.
-- local value에 접근할 때를 제외하고 중첩함수나 중첩 클래스 사용을 피하세요.
-- 함수를 모듈 사용자들에게 숨기기 위해 중첩하지마세요. 대신, module level에서는 이름 앞에 `_`을 붙여 계속해서 test할 수 있게 하세요.
+- `self` 나 `cls`를 제외한 local value을 접근할 때 중첩함수나 중첩 클래스 사용을 피하세요.
+- 단순히 모듈 내 함수를 사용자들에게 숨기기 위해 중첩하지마세요. 대신, 모듈 수준에서 이름 앞에 \_을 붙여 test가 접근할 수 있게 하세요.
 
 ---
 <a id="s2.7-comprehensions"></a>
@@ -462,10 +454,8 @@
 #### 2.8.4 결론
 
 - 리스트와 딕셔너리, 파일과 같은 연산자를 지원해주는 타입에서 기본 반복자와 연산자를 사용하세요.
-- 내장된 타입은 기본 반복자 메소드도 정의하고 있습니다.
 - built-in 타입은 iterator 메서드도 정의합니다.
-- 컨테이너를 반복하는 동안 컨테이너를 변형시키지 않아야 한다는 점을 제외하고 리스트를 반환하는 방법보다 이런 메서드를 선호하세요.
-- 필요한 경우가 아니면 절대 파이썬2 문법의 `dict.iter8()`와 같은 특정 반복 메소드를 사용하지 마세요.
+- 컨테이너를 반복하는 동안 컨테이너를 변경해서는 안 된다는 점을 제외하고 list를 반환하는 메서드보다 이러한 메서드를 선호합니다.
 - 올바른 예
 
   ```python
@@ -524,14 +514,14 @@
 
 ### 2.10 람다 함수
 
-- 한 줄로 작성하세요.
+- 한 줄 작성에 사용하세요.
+- `lambda`에는 `map()` 또는 `filter()` 보다 제너레이터 구문이 더 적합합니다
 
 <a id="s2.10.1-definition"></a>
 
 #### 2.10.1 정의
 
 - 람다는 표현에 있어 다른 `문` 과는 달리 익명 함수들을 정의합니다.
-- 람다는 `map()`이나 `filter()`와 같은 higher-order functions(고차 함수)에 대해 콜백이나 연산자를 정의하기 위해 가끔 사용됩니다.
 
 <a id="s2.10.2-pros"></a>
 
@@ -550,7 +540,8 @@
 
 #### 2.10.4 결론
 
-- 람다를 한 줄로 사용하세요. 만약 코드 내부에 있는 람다 함수가 60~80글자 수 정도로 길다면 그건 아마 더 일반적인 [Lexical Scoping(렉시컬 스코핑)](#s2.16-lexical-scoping)으로 정의하는게 나을 것입니다.
+- 람다를 한 줄로 사용하세요. 만약 코드 내부에 있는 람다 함수가 60~80글자 수 정도로 길다면 그건 아마 더 일반적인 
+  [Lexical Scoping(렉시컬 스코핑)](#s2.16-lexical-scoping)으로 정의하는게 나을 것입니다.
 
 - 곱셈 같은 일반 연산자에서는 `operator`모듈 대신에 람다 함수를 사용하세요.
 - 예를 들어, `operator.mul`을 `lambda x,y : x * y` 처럼 사용하시면 됩니다.
@@ -582,10 +573,32 @@
 
 <a id="s2.11.4-decision"></a>
 
-#### 2.11.4
+#### 2.11.4 결론
 
 - 간단한 상황에 좋습니다. 그 외의 경우에는 if 문을 사용하는 것이 좋습니다.
+- `true-false`, `if-else` 표현 등 각각의 코드가 반드시 한 줄에 표현되어야 합니다.
+- 보다 복잡한 구문이 필요하다면 `lambda`가 아닌 완전한 `if` 구문을 사용하세요.
 
+```python
+
+올바른 예:
+    one_line = 'yes' if predicate(value) else 'no'
+    slightly_split = ('yes' if predicate(value)
+                      else 'no, nein, nyet')
+    the_longest_ternary_style_that_can_be_done = (
+        'yes, true, affirmative, confirmed, correct'
+        if predicate(value)
+        else 'no, false, negative, nay')
+
+잘못된 예:
+    bad_line_breaking = ('yes' if predicate(value) else
+                         'no')
+    portion_too_long = ('yes'
+                        if some_long_module.some_long_predicate_function(
+                            really_long_variable_name)
+                        else 'no, false, negative, nay')
+
+```
 ---
 <a id="s2.12-default-argument-values"></a>
 
@@ -685,14 +698,13 @@
 
 #### 2.13.3 단점
 
-- `Python 2`에서는 `object`에 상속되어있어야 합니다.
 - 연산자 오버 로딩(operator overloading)과 같은 부작용을 숨길 수 있습니다. 하위 클래스의 경우 혼란스러울 수 있습니다.
 
 <a id="s2.13.4-decision"></a>
 
 #### 2.13.4 결론
 
-- 새 코드에서 속성을 사용하여 일반적으로 단순하고 가벼운 접근자 또는 `setter` 메소드를 사용했던 데이터를 접근하거나 설정합니다.
+- 새 코드에서 속성을 사용하여 일반적으로 가벼운 접근자 또는 `setter` 메소드를 사용했던 데이터를 접근하거나 설정합니다.
 - 속성은 `@property` [decorator](#s2.17-function-and-method-decorators)로 만들어야 합니다.
 - 속성 자체가 재정의되지 않은 경우 속성에 대한 상속은 명백하지 않을 수 있습니다. 따라서 하위 클래스에서 재정의 된 메서드가 속성에 의해 호출되도록하려면 접근자 메서드를 간접적으로 호출해야합니다([template method design pattern](https://en.wikipedia.org/wiki/Template_method_pattern)를 사용합니다.).
 - 올바른 예
@@ -715,28 +727,28 @@
       16
       """
 
-      def __init__(self, side):
+      def __init__(self, side: float):
           self.side = side
 
       @property
-      def area(self):
+      def area(self) -> float:
           """사각형의 면적을 가져오거나 설정합니다."""
           return self._get_area()
 
       @area.setter
-      def area(self, area):
-          return self._set_area(area)
+      def area(self, area: float):
+          self._set_area(area)
 
-      def _get_area(self):
+      def _get_area(self) -> float:
           """'면적'속성을 계산하기 위한 간접 접근자입니다."""
           return self.side ** 2
 
-      def _set_area(self, area):
+      def _set_area(self, area: float):
           """'면적' 속성을 설정하기 위한 간접 설정자입니다."""
           self.side = math.sqrt(area)
 
       @property
-      def perimeter(self):
+      def perimeter(self) -> float:
           return self.side * 4
   ```
 
@@ -815,47 +827,6 @@
 - `'0'`(즉, `0` 문자열)은 참으로 평가한다는 점에 유의해야합니다.
 
 ---
-<a id="s2.15-deprecated-language-features"></a>
-
-### 2.15 사용하지 않는 언어의 기능
-
-- 가능한 `string` 모듈 대신 string 함수를 사용하세요. `apply`를 사용하는 대신에 함수 호출(function call) 구문을 사용하세요.
-- 함수의 인자 값이 inlined lambda일 때 `filter` 와 `map` 대신에 `list comprehensions` 와 `for`문을 사용하세요. `reduce` 대신에 `for`문을 사용하세요.
-
-<a id="s2.15.1-definition"></a>
-
-#### 2.15.1 정의
-
-- 현재 버전의 Python은 사람들이 일반적으로 선호하는 대체 구문을 제공합니다.
-
-<a id="s2.15.2-decision"></a>
-
-#### 2.15.2 결론
-
-- 이러한 기능을 지원하지 않은 Python 버전은 사용하지 않으므로, 새로운 스타일을 사용하지 않을 이유가 없습니다.
-- 올바른 예
-
-  ```python
-  words = foo.split(':')
-
-  [x[1] for x in my_list if x[2] == 5]
-
-  map(math.sqrt, data)    # 좋습니다. inlined lambda 식이 없습니다.
-
-  fn(*args, **kwargs)
-  ```
-
-- 부적절한 예
-
-  ```python
-  words = string.split(foo, ':')
-
-  map(lambda x: x[1], filter(lambda x: x[2] == 5, my_list))
-
-  apply(fn, args, kwargs)
-  ```
-
----
 <a id="s2.16-lexical-scoping"></a>
 
 ### 2.16 렉시컬 스코핑(Lexical Scoping)
@@ -873,9 +844,9 @@
 - 이 기능에 대해 사용예는 다음과 같습니다.
 
   ```python
-  def get_adder(summand1):
+  def get_adder(summand1: float) -> Callable[[float], float]:
       """주어진 숫자에 숫자를 더하는 함수를 반환합니다."""
-      def adder(summand2):
+      def adder(summand2: float) -> float:
           return summand1 + summand2
 
       return adder
@@ -895,7 +866,7 @@
 
   ```python
   i = 4
-  def foo(x):
+  def foo(x: Iterable[int]):
       def bar():
           print(i, end='') # foo 함수 밖에 있는 i와 동일한 i를 사용합니다.
       # ...
@@ -919,7 +890,7 @@
 
 ### 2.17 함수와 메서드 Decorators
 
-- Decorators는 확실하게 이점이 있을 때에 신중하게 사용하세요. `@staticmethod`는 피하고 `@classmethod`의 사용은 제한하세요.
+- Decorators는 확실하게 이점이 있을 때에 신중하게 사용하세요. `staticmethod`는 피하고 `classmethod`의 사용은 제한하세요.
 
 <a id="s2.17.1-definition"></a>
 
@@ -965,8 +936,8 @@
 - Decorator는 분명한 이점이 있더라도 현명하게 사용해야 합니다. Decorator는 import와 명명 지침을 따라야 합니다. Decorator pydoc는 decorator 함수 임을 분명히 명시해야합니다. dcorator를 위한 유닛 테스트(unit test)를 사용해야합니다.
 - Decorator(예. 파일, 소켓, 데이터베이스 연결 등) 를 실행할 때 (`pydoc` 혹은 기타 도구를 import 시간에 가져올 때) 사용 못할 수 있으므로 Decorator의 외부 의존성을 피하세요. 유효한 매개변수를 가진 Decorator은 모든 경우에 작동할 수 있도록 보장되어야 합니다.
 - Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
-- 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "@static method"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
-- 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "@classmethod"를 사용하세요.
+- 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "staticmethod"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
+- 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "classmethod"를 사용하세요.
 
 ---
 <a id="s2.18-threading"></a>
@@ -986,7 +957,7 @@
 
 #### 2.19.1 정의
 
-- Python은 매우 유연한 언어로서 당신에게 많은 화려한 기능을 줍니다. (e.g. 사용자 정의 mtaclasses, bytecode 접근, 즉각적인 컴파일, 동적 상속, object reparenting, import hacks, reflection (`getattr()`의 일부 사용), 시스템 내부 수정 등.)
+- Python은 매우 유연한 언어로서 당신에게 많은 화려한 기능을 줍니다. (e.g. 사용자 정의 mtaclasses, bytecode 접근, 즉각적인 컴파일, 동적 상속, object reparenting, import hacks, reflection (`getattr()`의 일부 사용), 시스템 내부 수정, 커스텀 Cleanup을 위한 `__del__` 메소드 등.)
 
 <a id="s2.19.2-pros"></a>
 
@@ -1006,14 +977,14 @@
 #### 2.19.4 결론
 
 - 코드에서 이러한 기능은 피하세요.
-- 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `collections.namedtuple`, `dataclasses`, `enum`)
+- 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `dataclasses`, `enum`)
 
 ---
 <a id="s2.20-modern-python"></a>
 
 ### 2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports
 
-- Python 3 버전이 나왔습니다. 아직 프로젝트에 Python 3을 사용할 준비가 되어있는 건 아니지만 모든 코드는 호환되도록 작성되어야 합니다. (가능한 경우에 Python 3에 따라 테스트합니다.)
+- Python 3 버전이 나왔습니다! 아직 프로젝트에 Python 3을 사용할 준비가 되어있는 건 아니지만 모든 코드는 호환되도록 작성되어야 합니다. (가능한 경우에 Python 3에 따라 테스트합니다.)
 
 <a id="s2.20.1-definition"></a>
 
