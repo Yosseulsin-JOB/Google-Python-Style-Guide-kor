@@ -34,21 +34,3 @@ export default function SearchResult({ page = {}, contents = [] }) {
     </div>
   );
 }
-
-/*
-
-
-    const pageReg = /#s([0-9\.]+)-(.+)?/;
-    const resultReg = /#result-(.*)/;
-    const hash = window.location.hash;
-    const resultRegExec = resultReg.exec(hash);
-
-    // if (resultRegExec && contents.length > 0) {
-    //   const searchText = resultRegExec[1];
-    //   setSearchResult(null);
-    //   searchData(toFlatContents(contents), decodeURI(searchText)).then(
-    //     setSearchResult
-    //   );
-    // }
-
-*/
