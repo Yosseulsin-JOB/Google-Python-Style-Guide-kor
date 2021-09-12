@@ -1,5 +1,5 @@
 import { GITHUB_REPO, GITHUB_ROOT_FOLDER } from "../constants";
-import { getBranchs, getFiles, getFolders, getRawByContent } from "./github";
+import { getFiles, getFolders, getReleases, getRawByContent } from "./github";
 
 export function contentToNum(content) {
   return content?.name ? content?.name.split(" ")[0] || "" : "";
@@ -69,13 +69,17 @@ export function getContentData(branch = "master") {
     .then(sortContents);
 }
 
+function releaseToBranch({ name, tag_name }) {
+  const [branch, date = "2019.12.10"] = name.split(" ")[0].split("_");
+  return { date, label: `${date} (${branch})`, value: tag_name };
+}
+
 export function getBranchData() {
-  const handleFilter = ({ name }) =>
-    name === "master" || name.split("/")[0] === "original";
-  return getBranchs({
-    repo: GITHUB_REPO,
-    onFilter: handleFilter,
-  });
+  return getReleases({ repo: GITHUB_REPO })
+    .then((releases) =>
+      releases.map(releaseToBranch).sort((a, b) => a.date < b.date)
+    )
+    .then((branch) => [{ value: "master", label: "최신 (master)" }, ...branch]);
 }
 
 export function getContent(num, contents = []) {

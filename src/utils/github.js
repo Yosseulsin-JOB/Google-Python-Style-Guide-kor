@@ -5,8 +5,7 @@ function isNotFound(defaultValue = [], onMap = (response) => response) {
     response?.message === "Not Found" ? defaultValue : onMap(response);
 }
 
-export function getBranchs({ repo, onFilter = (branch) => branch }) {
-  const url = `${GITHUB_API_URL}/repos/${repo}/branches`;
+function fetchData(url, onFilter = (branch) => branch) {
   const notFound = isNotFound([], (response) =>
     Array.isArray(response) ? response : [response]
   );
@@ -16,14 +15,19 @@ export function getBranchs({ repo, onFilter = (branch) => branch }) {
     .then((response) => response.filter(onFilter));
 }
 
+/* 2021.09.12 : release 값을 기반으로 branch 데이터를 처리하기로 결정. */
+// export function getBranchs({ repo, onFilter = (branch) => branch }) {
+//   return fetchData(`${GITHUB_API_URL}/repos/${repo}/branches`, onFilter);
+// }
+
+export function getReleases({ repo, onFilter = (release) => release }) {
+  return fetchData(`${GITHUB_API_URL}/repos/${repo}/releases`, onFilter);
+}
+
 export function getContents({ repo, path = "", branch = "master" }) {
-  const url = `${GITHUB_API_URL}/repos/${repo}/contents/${path}?ref=${branch}`;
-  const notFound = isNotFound([], (response) =>
-    Array.isArray(response) ? response : [response]
+  return fetchData(
+    `${GITHUB_API_URL}/repos/${repo}/contents/${path}?ref=${branch}`
   );
-  return fetch(url)
-    .then((response) => response.json())
-    .then(notFound);
 }
 
 export function getFiles({

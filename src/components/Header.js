@@ -51,14 +51,11 @@ function SelectBranch({
 
   return (
     <select defaultValue={selected} onChange={handleChangeBracnh}>
-      {branchs.map(({ name }) => {
-        const label = name === "master" ? `${name} : 최신` : name.split("/")[1];
-        return (
-          <option key={name} value={name}>
-            {label}
-          </option>
-        );
-      })}
+      {branchs.map(({ label, value }) => (
+        <option key={value} value={value}>
+          {label}
+        </option>
+      ))}
     </select>
   );
 }
