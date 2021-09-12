@@ -2,7 +2,7 @@
 
 - [**_`Google Python Style Guide`_(영문)**](http://google.github.io/styleguide/pyguide.html)을 번역하였습니다.
 - 많은 오타와 오역이 있을 수 있습니다. 계속해서 좋은 번역을 위한 [_`issues`_](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/issues)와 [_`pull requests`_](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/pulls) 부탁드립니다.
-- 번역은 [구글 파이썬 스타일 가이드 페이지](https://yosseulsin-job.github.io/Google-Python-Style-Guide-kor)와 [여기(Github)](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md)에서 보실 수 있습니다.
+- 번역은 [**_`구글 파이썬 스타일 가이드 페이지`_**](https://yosseulsin-job.github.io/Google-Python-Style-Guide-kor)와 [**_`여기(Github)`_**](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md)에서 보실 수 있습니다.
 - Contributors : [`0113bernoyoun`](https://github.com/0113bernoyoun), [`Sotaneum`](https://github.com/Sotaneum), [`denmark111`](https://github.com/denmark111), [`heumsi`](https://github.com/heumsi)
 
 ## Team 소개
