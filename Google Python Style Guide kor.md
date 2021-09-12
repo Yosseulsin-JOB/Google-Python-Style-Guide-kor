@@ -20,7 +20,7 @@
         +   [2.3.2 단점](#S2.3.2-cons)
         +   [2.3.3 결론](#s2.3.3-decision)
     *   [2.4 예외](#s2.4-exceptions)
-        +   [2.4.1 결정](#s2.4.1-definition)
+        +   [2.4.1 정의](#s2.4.1-definition)
         +   [2.4.2 장점](#s2.4.2-pros)
         +   [2.4.3 단점](#s2.4.3-cons)
         +   [2.4.4 결론](#s2.4.4-decision)
@@ -58,7 +58,7 @@
         +   [2.11.1 정의](#s2.11.1-definition)
         +   [2.11.2 장점](#s2.11.2-pros)
         +   [2.11.3 단점](#s2.11.3-cons)
-        +   [2.11.4](#s2.11.4-decision)
+        +   [2.11.4 결론](#s2.11.4-decision)
     *   [2.12 기본 인자 값](#s2.12-default-argument-values)
         +   [2.12.1 정의](#s2.12.1-definition)
         +   [2.12.2 장점](#s2.12.2-pros)
@@ -74,9 +74,6 @@
         +   [2.14.2 장점](#s2.14.2-pros)
         +   [2.14.3 단점](#s2.14.3-cons)
         +   [2.14.4 결론](#s2.14.4-decision)
-    *   [2.15 사용하지 않는 언어의 기능](#s2.15-deprecated-language-features)
-        +   [2.15.1 정의](#s2.15.1-definition)
-        +   [2.15.2 결론](#s2.15.2-decision)
     *   [2.16 렉시컬 스코핑(Lexical Scoping)](#s2.16-lexical-scoping)
         +   [2.16.1 정의](#s2.16.1-definition)
         +   [2.16.2 장점](#s2.16.2-pros)
@@ -119,17 +116,20 @@
         +   [3.8.4 Classes](#s3.8.4-comments-in-classes)
         +   [3.8.5 Block and Inline Comments](#s3.8.5-comments-in-block-and-inline)
         +   [3.8.6 Punctuation, Spelling and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
-    *   [3.9 Classes](#s3.9-classes)
     *   [3.10 Strings](#s3.10-strings)
-    *   [3.11 Files and Sockets](#s3.11-files-and-sockets)
+        +   [3.10.1 Logging](#s3.10.1-logging)
+        +   [3.10.2 Error Messages](#s3.10.2-error-messages)
+    *   [3.11 파일과 소켓 그리고 유사한 Stateful Resources](#s3.11-files-and-sockets)
     *   [3.12 TODO Comments](#s3.12-todo-comments)
     *   [3.13 import 형식](#s3.13-imports-formatting)
     *   [3.14 Statements](#s3.14-statements)
     *   [3.15 접근 제어](#s3.15-access-control)
     *   [3.16 네이밍](#s3.16-naming)
         +   [3.16.1 피해야 할 이름](#s3.16.1-names-to-avoid)
+        +   [3.16.2 Naming Conventions](#s3.16.2-naming-conventions)
         +   [3.16.3 파일 네이밍](#s3.16.3-file-naming)
         +   [3.16.4 Guido의 권고에 따른 가이드라인](#s3.16.4-guidelines-derived-from-guidos-recommendations)
+        +   [3.16.5 수학 표기법](#math-notation)
     *   [3.17 Main](#s3.17-main)
     *   [3.18 함수 길이](#s3.18-function-length)
     *   [3.19 Type 주석 방법](#s3.19-type-annotations)
@@ -176,7 +176,7 @@
 
 ### 2.1 Lint
 
-- 작성한 코드에 대해 `pylint`를 실행시키세요.
+- 이 [pylintrc](https://google.github.io/styleguide/pylintrc)를 사용하여 코드에서 `pylint`를 실행합니다.
 
 <a id="s2.1.1-definition"></a>
 
@@ -236,7 +236,7 @@
 - 아래 예시를 참고하세요.
 
   ```python
-  def viking_cafe_order(spam, beans, eggs=None):
+  def viking_cafe_order(spam: str, beans: str, eggs: Optional[str] = None) -> str:
       del beans, eggs  # Unused by vikings.
       return spam + spam + spam
   ```
@@ -248,7 +248,11 @@
 
 ### 2.2 Imports
 
-- `import`문을 사용할때 package와 module을 대상으로만 사용해야하고 각각의 클래스나 함수에 대해 사용하면 안됩니다. 다만 [typing 모듈](#s3.19.12-imports)을 사용할때는 예외입니다.
+- `import`문을 사용할때 package와 module을 대상으로만 사용해야하고 각각의 클래스나 함수에 대해 사용하면 안됩니다. 다만 
+  [typing 모듈](#s3.19.12-imports),
+  [typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions),
+  그리고 [six.moves module](https://six.readthedocs.io/#module-six.moves)
+  을 사용할때는 예외입니다.
 
 <a id="s2.2.1-definition"></a>
 
@@ -287,8 +291,7 @@
 
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
-- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 다만 [typing 모듈](#s3.19.12-imports) 를 import할때는 이러한 규칙들에서 예외될 수 있습니다.
-
+- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 
 ---
 <a id="s2.3-packages"></a>
 
@@ -355,9 +358,9 @@
 
 <a id="s2.4.1-definition"></a>
 
-#### 2.4.1 결정
+#### 2.4.1 정의
 
-- 예외는 코드블록에서 정상적인 상황에 발생한 에러나 다른 예외적인 상황을 다루는 방법입니다.
+- 예외는 코드블록에서 정상적인 상황에 발생한 에러나 다른 예외적인 상황을 다루기 위해 정상적인 흐름에서 벗어나는것을 의미합니다.
 
 <a id="s2.4.2-pros"></a>
 
@@ -365,7 +368,7 @@
 
 - 일반적인 연산자에 대한 제어흐름은 에러 핸들링 코드에 의해 난잡해지지 않습니다.
 - 특정 조건이 발생했을 때 제어 흐름이 몇몇 프레임들을 생략할 수 있습니다.
-- 예를 들어, N이라는 중첩된 함수에서 앞으로 돌아가는 것 대신, 에러코드를 전달합니다.
+- 예를 들어, 에러 코드를 살펴보는 것 대신 한 번에 N개의 중첩 함수로부터 반환합니다.
 
 <a id="s2.4.3-cons"></a>
 
@@ -379,8 +382,6 @@
 
 ##### 예외는 다음과 같은 조건을 만족해야 합니다
 
-- `raise MyError('Error message')` 또는 `raise MyError()` 같이 예외를 발생시킵니다.
-- 두개의 인자를 가지는 형식을 사용하지 않습니다. (`raise Myerror, 'Error message'`).
 - 적절한 경우 내장 예외 클래스를 사용하세요.
 - 예를 들어, 만약 양수를 예상하는데 음수가 통과한다면 `ValueError`를 발생시는 것이 그 예입니다.
 - 공공 API에 있는 인수의 값을 검증하기 위해 `assert`문을 사용하지마세요.
@@ -389,7 +390,7 @@
   - 올바른 예
 
     ```python
-    def connect_to_next_port(self, minimum):
+    def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -414,7 +415,7 @@
   - 부적절한 예
 
     ```python
-    def connect_to_next_port(self, minimum):
+    def connect_to_next_port(self, minimum: int) -> int:
         """Connects to the next available port.
 
         Args:
@@ -434,14 +435,6 @@
 - 예외를 다시 발생시키거나 쓰레드의 가장 바깥 쪽 블록에 있지않으면 절대 포괄적인 `except:`문을 사용하거나 `Exception`, `StandardError`을 사용하지마세요. (그리고 에러메시지를 출력하세요.) Python은 이와 관련해서 매우 관용적이며 `except:` 모든 오탈자를 비롯하여, sys.exit() 호출, Ctrl+C로 인한 인터럽트, 유닛테스트 실패와 마지막으로 당신이 포착을 원하지 않았던 다른 모든 종류의 예외들까지 모두 잡아낼 것입니다.
 - 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야 할 에러를 가리게 됩니다.
 - 예외가 `try` 블록에서 발생하던 안하던 `finally`절은 코드를 실행시킨다. 이건 가끔 깔끔히 하는데 유용합니다. 예를들어, 파일을 닫을 때 가 그 예입니다.
-- 예외를 포착했을때, `,` 보다 `as` 를 사용하세요. 예시는 다음과 같습니다.
-
-  ```python
-  try:
-      raise Error()
-  except Error as error:
-      pass
-  ```
 
 ---
 <a id="s2.5-global-variables"></a>
@@ -475,7 +468,7 @@
 - 전역 변수를 사용하지 마세요.
 
 - 전역변수는 기술적으로는 변수이지만, module-level 상수가 허용되고 권장됩니다.
-- 예를들어 `MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다. [Naming](#s3.16-naming) 을 참고하세요.
+- 예를들어 `_MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다.
 - 만약 전역변수가 필요하다면 module-level에서 선언되고 모듈 내부에서 이름에 `_`를 붙여서 만들어져야 합니다.
 - 외부 접근은 반드시 public단위의 module-level 함수를 통해서 동작되어야 합니다. [Naming](#s3.16-naming)을 참고하세요.
 
@@ -507,17 +500,16 @@
 
 #### 2.6.3 단점
 
-- 중첩 또는 로컬클래스의 인스턴스들은 pickle을 할 수 없습니다.
 - 중첩된 함수와 클래스는 직접 테스트할 수 없습니다.
-- 중첩은 외부함수를 더 길고 읽기 어렵게 만듭니다.
+- 중첩은 외부함수를 더 길고 읽기 어렵게 만들 수 있습니다.
 
 <a id="s2.6.4-decision"></a>
 
 #### 2.6.4 결론
 
 - 몇가지 주의사항을 지키면 사용해도 괜찮습니다.
-- local value에 접근할 때를 제외하고 중첩함수나 중첩 클래스 사용을 피하세요.
-- 함수를 모듈 사용자들에게 숨기기 위해 중첩하지마세요. 대신, module level에서는 이름 앞에 `_`을 붙여 계속해서 test할 수 있게 하세요.
+- `self` 나 `cls`를 제외한 local value을 접근할 때 중첩함수나 중첩 클래스 사용을 피하세요.
+- 단순히 모듈 내 함수를 사용자들에게 숨기기 위해 중첩하지마세요. 대신, 모듈 수준에서 이름 앞에 \_을 붙여 test가 접근할 수 있게 하세요.
 
 ---
 <a id="s2.7-comprehensions"></a>
@@ -636,10 +628,8 @@
 #### 2.8.4 결론
 
 - 리스트와 딕셔너리, 파일과 같은 연산자를 지원해주는 타입에서 기본 반복자와 연산자를 사용하세요.
-- 내장된 타입은 기본 반복자 메소드도 정의하고 있습니다.
 - built-in 타입은 iterator 메서드도 정의합니다.
-- 컨테이너를 반복하는 동안 컨테이너를 변형시키지 않아야 한다는 점을 제외하고 리스트를 반환하는 방법보다 이런 메서드를 선호하세요.
-- 필요한 경우가 아니면 절대 파이썬2 문법의 `dict.iter8()`와 같은 특정 반복 메소드를 사용하지 마세요.
+- 컨테이너를 반복하는 동안 컨테이너를 변경해서는 안 된다는 점을 제외하고 list를 반환하는 메서드보다 이러한 메서드를 선호합니다.
 - 올바른 예
 
   ```python
@@ -698,14 +688,14 @@
 
 ### 2.10 람다 함수
 
-- 한 줄로 작성하세요.
+- 한 줄 작성에 사용하세요.
+- `lambda`에는 `map()` 또는 `filter()` 보다 제너레이터 구문이 더 적합합니다
 
 <a id="s2.10.1-definition"></a>
 
 #### 2.10.1 정의
 
 - 람다는 표현에 있어 다른 `문` 과는 달리 익명 함수들을 정의합니다.
-- 람다는 `map()`이나 `filter()`와 같은 higher-order functions(고차 함수)에 대해 콜백이나 연산자를 정의하기 위해 가끔 사용됩니다.
 
 <a id="s2.10.2-pros"></a>
 
@@ -724,7 +714,8 @@
 
 #### 2.10.4 결론
 
-- 람다를 한 줄로 사용하세요. 만약 코드 내부에 있는 람다 함수가 60~80글자 수 정도로 길다면 그건 아마 더 일반적인 [Lexical Scoping(렉시컬 스코핑)](#s2.16-lexical-scoping)으로 정의하는게 나을 것입니다.
+- 람다를 한 줄로 사용하세요. 만약 코드 내부에 있는 람다 함수가 60~80글자 수 정도로 길다면 그건 아마 더 일반적인 
+  [Lexical Scoping(렉시컬 스코핑)](#s2.16-lexical-scoping)으로 정의하는게 나을 것입니다.
 
 - 곱셈 같은 일반 연산자에서는 `operator`모듈 대신에 람다 함수를 사용하세요.
 - 예를 들어, `operator.mul`을 `lambda x,y : x * y` 처럼 사용하시면 됩니다.
@@ -756,10 +747,32 @@
 
 <a id="s2.11.4-decision"></a>
 
-#### 2.11.4
+#### 2.11.4 결론
 
 - 간단한 상황에 좋습니다. 그 외의 경우에는 if 문을 사용하는 것이 좋습니다.
+- `true-false`, `if-else` 표현 등 각각의 코드가 반드시 한 줄에 표현되어야 합니다.
+- 보다 복잡한 구문이 필요하다면 `lambda`가 아닌 완전한 `if` 구문을 사용하세요.
 
+```python
+
+올바른 예:
+    one_line = 'yes' if predicate(value) else 'no'
+    slightly_split = ('yes' if predicate(value)
+                      else 'no, nein, nyet')
+    the_longest_ternary_style_that_can_be_done = (
+        'yes, true, affirmative, confirmed, correct'
+        if predicate(value)
+        else 'no, false, negative, nay')
+
+잘못된 예:
+    bad_line_breaking = ('yes' if predicate(value) else
+                         'no')
+    portion_too_long = ('yes'
+                        if some_long_module.some_long_predicate_function(
+                            really_long_variable_name)
+                        else 'no, false, negative, nay')
+
+```
 ---
 <a id="s2.12-default-argument-values"></a>
 
@@ -859,14 +872,13 @@
 
 #### 2.13.3 단점
 
-- `Python 2`에서는 `object`에 상속되어있어야 합니다.
 - 연산자 오버 로딩(operator overloading)과 같은 부작용을 숨길 수 있습니다. 하위 클래스의 경우 혼란스러울 수 있습니다.
 
 <a id="s2.13.4-decision"></a>
 
 #### 2.13.4 결론
 
-- 새 코드에서 속성을 사용하여 일반적으로 단순하고 가벼운 접근자 또는 `setter` 메소드를 사용했던 데이터를 접근하거나 설정합니다.
+- 새 코드에서 속성을 사용하여 일반적으로 가벼운 접근자 또는 `setter` 메소드를 사용했던 데이터를 접근하거나 설정합니다.
 - 속성은 `@property` [decorator](#s2.17-function-and-method-decorators)로 만들어야 합니다.
 - 속성 자체가 재정의되지 않은 경우 속성에 대한 상속은 명백하지 않을 수 있습니다. 따라서 하위 클래스에서 재정의 된 메서드가 속성에 의해 호출되도록하려면 접근자 메서드를 간접적으로 호출해야합니다([template method design pattern](https://en.wikipedia.org/wiki/Template_method_pattern)를 사용합니다.).
 - 올바른 예
@@ -889,28 +901,28 @@
       16
       """
 
-      def __init__(self, side):
+      def __init__(self, side: float):
           self.side = side
 
       @property
-      def area(self):
+      def area(self) -> float:
           """사각형의 면적을 가져오거나 설정합니다."""
           return self._get_area()
 
       @area.setter
-      def area(self, area):
-          return self._set_area(area)
+      def area(self, area: float):
+          self._set_area(area)
 
-      def _get_area(self):
+      def _get_area(self) -> float:
           """'면적'속성을 계산하기 위한 간접 접근자입니다."""
           return self.side ** 2
 
-      def _set_area(self, area):
+      def _set_area(self, area: float):
           """'면적' 속성을 설정하기 위한 간접 설정자입니다."""
           self.side = math.sqrt(area)
 
       @property
-      def perimeter(self):
+      def perimeter(self) -> float:
           return self.side * 4
   ```
 
@@ -989,47 +1001,6 @@
 - `'0'`(즉, `0` 문자열)은 참으로 평가한다는 점에 유의해야합니다.
 
 ---
-<a id="s2.15-deprecated-language-features"></a>
-
-### 2.15 사용하지 않는 언어의 기능
-
-- 가능한 `string` 모듈 대신 string 함수를 사용하세요. `apply`를 사용하는 대신에 함수 호출(function call) 구문을 사용하세요.
-- 함수의 인자 값이 inlined lambda일 때 `filter` 와 `map` 대신에 `list comprehensions` 와 `for`문을 사용하세요. `reduce` 대신에 `for`문을 사용하세요.
-
-<a id="s2.15.1-definition"></a>
-
-#### 2.15.1 정의
-
-- 현재 버전의 Python은 사람들이 일반적으로 선호하는 대체 구문을 제공합니다.
-
-<a id="s2.15.2-decision"></a>
-
-#### 2.15.2 결론
-
-- 이러한 기능을 지원하지 않은 Python 버전은 사용하지 않으므로, 새로운 스타일을 사용하지 않을 이유가 없습니다.
-- 올바른 예
-
-  ```python
-  words = foo.split(':')
-
-  [x[1] for x in my_list if x[2] == 5]
-
-  map(math.sqrt, data)    # 좋습니다. inlined lambda 식이 없습니다.
-
-  fn(*args, **kwargs)
-  ```
-
-- 부적절한 예
-
-  ```python
-  words = string.split(foo, ':')
-
-  map(lambda x: x[1], filter(lambda x: x[2] == 5, my_list))
-
-  apply(fn, args, kwargs)
-  ```
-
----
 <a id="s2.16-lexical-scoping"></a>
 
 ### 2.16 렉시컬 스코핑(Lexical Scoping)
@@ -1047,9 +1018,9 @@
 - 이 기능에 대해 사용예는 다음과 같습니다.
 
   ```python
-  def get_adder(summand1):
+  def get_adder(summand1: float) -> Callable[[float], float]:
       """주어진 숫자에 숫자를 더하는 함수를 반환합니다."""
-      def adder(summand2):
+      def adder(summand2: float) -> float:
           return summand1 + summand2
 
       return adder
@@ -1069,7 +1040,7 @@
 
   ```python
   i = 4
-  def foo(x):
+  def foo(x: Iterable[int]):
       def bar():
           print(i, end='') # foo 함수 밖에 있는 i와 동일한 i를 사용합니다.
       # ...
@@ -1093,7 +1064,7 @@
 
 ### 2.17 함수와 메서드 Decorators
 
-- Decorators는 확실하게 이점이 있을 때에 신중하게 사용하세요. `@staticmethod`는 피하고 `@classmethod`의 사용은 제한하세요.
+- Decorators는 확실하게 이점이 있을 때에 신중하게 사용하세요. `staticmethod`는 피하고 `classmethod`의 사용은 제한하세요.
 
 <a id="s2.17.1-definition"></a>
 
@@ -1139,8 +1110,8 @@
 - Decorator는 분명한 이점이 있더라도 현명하게 사용해야 합니다. Decorator는 import와 명명 지침을 따라야 합니다. Decorator pydoc는 decorator 함수 임을 분명히 명시해야합니다. dcorator를 위한 유닛 테스트(unit test)를 사용해야합니다.
 - Decorator(예. 파일, 소켓, 데이터베이스 연결 등) 를 실행할 때 (`pydoc` 혹은 기타 도구를 import 시간에 가져올 때) 사용 못할 수 있으므로 Decorator의 외부 의존성을 피하세요. 유효한 매개변수를 가진 Decorator은 모든 경우에 작동할 수 있도록 보장되어야 합니다.
 - Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
-- 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "@static method"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
-- 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "@classmethod"를 사용하세요.
+- 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "staticmethod"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
+- 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "classmethod"를 사용하세요.
 
 ---
 <a id="s2.18-threading"></a>
@@ -1160,7 +1131,7 @@
 
 #### 2.19.1 정의
 
-- Python은 매우 유연한 언어로서 당신에게 많은 화려한 기능을 줍니다. (e.g. 사용자 정의 mtaclasses, bytecode 접근, 즉각적인 컴파일, 동적 상속, object reparenting, import hacks, reflection (`getattr()`의 일부 사용), 시스템 내부 수정 등.)
+- Python은 매우 유연한 언어로서 당신에게 많은 화려한 기능을 줍니다. (e.g. 사용자 정의 mtaclasses, bytecode 접근, 즉각적인 컴파일, 동적 상속, object reparenting, import hacks, reflection (`getattr()`의 일부 사용), 시스템 내부 수정, 커스텀 Cleanup을 위한 `__del__` 메소드 등.)
 
 <a id="s2.19.2-pros"></a>
 
@@ -1180,14 +1151,14 @@
 #### 2.19.4 결론
 
 - 코드에서 이러한 기능은 피하세요.
-- 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `collections.namedtuple`, `dataclasses`, `enum`)
+- 이러한 기능을 내부적으로 사용하는 표준 라이브러리 모듈과 클래스는 사용할 수 있습니다. (예를 들면, `abc.ABCMeta`, `dataclasses`, `enum`)
 
 ---
 <a id="s2.20-modern-python"></a>
 
 ### 2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports
 
-- Python 3 버전이 나왔습니다. 아직 프로젝트에 Python 3을 사용할 준비가 되어있는 건 아니지만 모든 코드는 호환되도록 작성되어야 합니다. (가능한 경우에 Python 3에 따라 테스트합니다.)
+- Python 3 버전이 나왔습니다! 아직 프로젝트에 Python 3을 사용할 준비가 되어있는 건 아니지만 모든 코드는 호환되도록 작성되어야 합니다. (가능한 경우에 Python 3에 따라 테스트합니다.)
 
 <a id="s2.20.1-definition"></a>
 
@@ -1361,7 +1332,7 @@
     ```python
     with VeryLongFirstExpressionFunction() as spam, \
             VeryLongSecondExpressionFunction() as beans:
-        PlaceOrder(eggs, beans, spam, beans)
+        PlaceOrder(beans, spam)
     ```
 
   - 올바른 예
@@ -1374,6 +1345,10 @@
 
 - 위의 예시에서 각 요소에 사용된 들여쓰기를 잘 기억하세요. 더 자세한 정보는 [들여쓰기](#s3.4-indentation) 챕터를 확인하세요.
 
+위에서 언급되지 않은 상황에서 한 줄의 길이가 80자를 초과함에도 
+[yapf](https://github.com/google/yapf/)
+오토포메터가 별다른 도움을 주지 못한다면 80자 이상 초과가 허용됩니다.  
+작성자는 상식적인 수준내에서 위 문서의 사항을 참고하여 줄을 분리하는것이 바람직합니다.
 ---
 <a id="s3.3-parentheses"></a>
 
@@ -1434,8 +1409,8 @@
 
   # Aligned with opening delimiter in a dictionary
   foo = {
-      long_dictionary_key: value1 +
-                          value2,
+      'long_dictionary_key': value1 +
+                             value2,
       ...
   }
 
@@ -1449,7 +1424,7 @@
 
   # 4-space hanging indent in a dictionary
   foo = {
-      long_dictionary_key:
+      'long_dictionary_key':
           long_dictionary_value,
       ...
   }
@@ -1471,7 +1446,7 @@
 
   # No hanging indent in a dictionary
   foo = {
-      long_dictionary_key:
+      'long_dictionary_key':
       long_dictionary_value,
       ...
   }
@@ -1479,7 +1454,7 @@
 
 <a id="s3.4.1-trailing-comma"></a>
 
-### 3.4.1 원소 나열 시 후행 쉼표
+#### 3.4.1 원소 나열 시 후행 쉼표
 
 - 여러 원소를 나열할 때 후행 쉼표는 `]`, `)`, `}` 와 같이 컨테이너를 닫는 토큰이 마지막 원소와 같은 줄에 있지 않을 때만 권장됩니다.
 - 또한 후행 쉼표의 존재 여부는 파이썬 코드 오토-포메터 [YAPF](https://pypi.org/project/yapf/) 가 컨테이너의 원소를 한 줄에 하나씩 `,` 기호를 붙여 자동 정렬하도록 지시하는 힌트로도 사용됩니다.
@@ -1529,13 +1504,13 @@
   - 올바른 예
 
     ```python
-    spam(ham[1], {eggs: 2}, [])
+    spam(ham[1], {'eggs']: 2}, [])
     ```
 
   - 부적절한 예
 
     ```python
-    spam( ham[ 1 ], { eggs: 2 }, [ ] )
+    spam( ham[ 1 ], { 'eggs': 2 }, [ ] )
     ```
 
 - 컴마, 세미콜론, 콜론 앞에는 화이트스페이스가 없어야 합니다.
@@ -1647,7 +1622,7 @@
 ### 3.7 Shebang Line
 
 - 대부분의 `.py` 파일은 `#!` 로 시작하지 않아도 됩니다.
-- 프로그램의 메인 파일을 `#!/usr/bin/python` 과 [PEP-394](https://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0394/) 에 따른 `2` 또는 `3`을 붙여 사용하면 됩니다.
+- [PEP-394](https://www.python.org/dev/peps/pep-0394/)에 따라 프로그램의 메인 파일 첫 줄에 `#!/usr/bin/env python3` (virtualenvs 지원) 또는 `#!/usr/bin/python3`사용하면 됩니다.
 
 - 이 줄은 파이썬 파일을 import 할때는 무시되지만 실행 될때는 커널이 어떤 파이썬 인터프리터를 사용해야 하는지 알려줍니다.
 - 따라서 직접 실행될 파일에 기록하는것이 적합합니다.
@@ -1690,6 +1665,9 @@
   - 잘 알려져 있음
 
 - docstring 은 직접 함수의 코드를 읽어보지 않더라도 충분히 함수를 호출하는 코드를 작성 할 수 있을만큼 정보를 제공해야 합니다.
+- docstring은 함수의 호출방식이나 시멘틱등을 반드시 기술하되 함수의 사용함에 있어 영항을 주지 않는 한 함수 내부의 상세한 구현방법은 기술하지 아니합니다
+- 예를들어 한 함수가 구동과정에서 인자로 받은 변수 하나를 변형시킨다면 이는 docstring에 기술되어야 합니다.
+- 이외 함수의 호출과 상관이 없는 자잘하지만 중요한 항목들은 함수 내 docstring 보단 주석으로 기록하는 것이 좋습니다
 - docstring 은 (`"""Fetches rows from a Bigtable."""`) 처럼 _설명조_ 를 사용하여야 하며 (`"""Fetch rows from a Bigtable."""`) 처럼 _명령조_ 를 사용하지 않아야 합니다.
 - docstring 은 함수의 구현방식이 아닌 호출 방법과 의미를 기술해야 합니다.
 - 복잡한 코드의 경우 docstring 을 사용하는 것보다 코드 한 줄마다 주석을 첨가하는 것이 더 알맞습니다.
@@ -1730,7 +1708,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                           keys: Sequence[Union[bytes, str]],
                           require_all_keys: bool = False,
-                        ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str]]:
     """Fetches rows from a Smalltable.
 
     Retrieves rows pertaining to the given keys from the Table instance
@@ -1767,7 +1745,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                             keys: Sequence[Union[bytes, str]],
                             require_all_keys: bool = False,
-                          ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str]]:
       """Fetches rows from a Smalltable.
 
       Retrieves rows pertaining to the given keys from the Table instance
@@ -1820,7 +1798,7 @@ class SampleClass:
         eggs: An integer count of the eggs we have laid.
     """
 
-    def __init__(self, likes_spam=False):
+    def __init__(self, likes_spam: bool = False):
         """Inits SampleClass with blah."""
         self.likes_spam = likes_spam
         self.eggs = 0
@@ -1874,44 +1852,13 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 - 올바른 구두점, 스펠링 그리고 문법은 이를 얻을 수 있도록 도와줍니다.
 
 ---
-<a id="s3.9-classes"></a>
-
-### 3.9 Classes
-
-- 클래스는 `object`에서 명시적으로 상속할 필요가 없습니다. (Python 2와 호환되는 경우는 제외합니다.)
-
-- Modern
-
-  ```python
-  class SampleClass:
-      pass
-
-  class OuterClass:
-
-      class InnerClass:
-          pass
-
-  ```
-
-- Ancient
-
-  ```python
-  class SampleClass(object):
-      pass
-
-  class OuterClass(object):
-
-      class InnerClass(object):
-          pass
-  ```
-
----
 <a id="s3.10-strings"></a>
 
 ### 3.10 Strings
 
-- 매개변수가 모두 문자열인 경우에도 `format` 메소드나 `%` 연산자를 사용하여 포메팅하세요.
-- 물론 `+` 나 `%` 를 언제 사용할지는 개발자의 판단에 따릅니다.
+- 매개변수가 모두 문자열인 경우에도 [f-string](https://docs.python.org/3/reference/lexical_analysis.html#f-strings), `format` 메소드나 `%` 연산자를 사용하여 포메팅하세요.
+- 물론 `+` 나 `%` (또는 `format`) 를 언제 사용할지는 개발자의 판단에 따릅니다.
+- 문자열을 합치기 위해 `%` 또는 `format`을 사용하지 마세요.
 
   - 올바른 예
 
@@ -1921,7 +1868,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
     x = '{}, {}'.format(first, second)
     x = 'name: %s; score: %d' % (name, n)
     x = 'name: {}; score: {}'.format(name, n)
-    x = f'name: {name}; score: {n}'  # Python 3.6+
+    x = f'name: {name}; score: {n}'
     ```
 
   - 부적절한 예
@@ -1934,7 +1881,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
     ```
 
 - 반목문에서 `+` 나 `+=` 연산자를 사용하여 문자열을 누적하는 행위는 삼가세요.
-- 문자열은 변형이 불가하기 때문에 위와 같은 연산자를 사용하는 것은 불필요한 임시 오브젝트를 생성하게 되고 결국 리니어한 실행시간이 아닌 제곱형태의 실행시간이 소요됩니다.
+- 몇몇 상황에서 위 연산자를 이용하여 문자열을 누적하는 경우 리니어한 실행시간이 아닌 제곱형태의 실행시간이 소요될 수 있습니다.
+- 물론 이러한 문자열 누적은 CPython의 수정을 통하여 최적화 될 수도 있지만 최적화 여부는 매번 변경될 수도 있으며 이를 예측하는 것 또한 어렵습니다.
 - 위의 연산자 대신 리스트에 문자열을 넣고 반복문이 종료되면 `''.join` 를 사용하는것이 더 바람직합니다. (또는 각각의 문자열을 `io.BytesIO` 버퍼에 기록하는 것도 방법입니다.)
 
   - 올바른 예
@@ -1978,8 +1926,9 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 - 다수의 문장을 이용할 때는 `'''` 보단 `"""` 를 이용하세요.
 - 프로젝트에 따라 docstring이 아닌 다른 여러줄의 문자열을 `'''` 를 이용하여 작성할 수 있습니다.
 - docstring은 상황과 무관하게 `"""` 를 사용합니다.
-- 여러줄의 문자열은 나머지 코드의 들여쓰기와 잘 호환되지 않기에 종종 묵시적인 라인결합 방식을 사용하는 것이 전체적으로 더 깔끔해 보인다는 점을 알아두세요.
-- If you need to avoid embedding extra space in the string, use either concatenated single-line strings or a multi-line string with [`textwrap.dedent()`](https://docs.python.org/3/library/textwrap.html#textwrap.dedent) to remove the initial space on each line
+
+- 다중 라인 문자열은 다른 코드의 들여쓰기를 따르지 않습니다.
+- 만약에 문자열에 추가 공간을 포함하는 것을 피하려면 단일 행 문자열을 연결하거나 [`textwrap.dedent()`](https://docs.python.org/3/library/textwrap.html#textwrap.dedent)와 함께 다중 라인 문자열을 사용하여 각 줄의 초기 공백을 제거합니다.
 
   - 부적절한 예
 
@@ -2014,27 +1963,116 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
         will collapse common leading spaces in each line.""")
     ```
 
+<a id="s3.10.1-logging"></a>
+
+#### 3.10.1 Logging
+
+- 첫번째 인자로 패턴문자열(% placeholder)이 요구되는 함수의 경우 아래 내용을 확인하세요.
+  - 반드시 스트링 리터럴(f 스트링 아님)을 첫번째 인자, 패턴인자를 이후에 사용하여 호출하세요.
+  - 일부 로깅방식의 경우 예상되지 않은 패턴문자열을 쿼리항목으로 이용합니다.
+  - 또 로거가 필요없는 문자를 출력하는데에 시간을 낭비하지 않도록 방지합니다.
+
+```python
+  올바른 예:
+  import tensorflow as tf
+  logger = tf.get_logger()
+  logger.info('TensorFlow Version is: %s', tf.__version__)
+```
+
+```python
+  올바른 예:
+  import os
+  from absl import logging
+  logging.info('Current $PAGER is: %s', os.getenv('PAGER', default=''))
+  homedir = os.getenv('HOME')
+  if homedir is None or not os.access(homedir, os.W_OK):
+    logging.error('Cannot write to home directory, $HOME=%r', homedir)
+```
+
+```python
+  잘못된 예:
+  import os
+  from absl import logging
+  logging.info('Current $PAGER is:')
+  logging.info(os.getenv('PAGER', default=''))
+  homedir = os.getenv('HOME')
+  if homedir is None or not os.access(homedir, os.W_OK):
+    logging.error(f'Cannot write to home directory, $HOME={homedir!r}')
+```
+
+<a id="s3.10.2-error-messages"></a>
+
+#### 3.10.2 Error Messages
+
+- 에러 메시지(`ValueError`와 같은 에외메시지, 유저에게 보여지는 메시지 등)는 아래의 가이드라인을 따라야합니다.
+
+1. 에러메시지는 반드시 에러 조건과 정확하게 일치하여야 합니다.
+2. 메시지 발생위치는 아래 예시와 같이 명확하게 알아볼 수 있어야합니다.
+3. 에러메시지는 간단한 자동화 처리를 허용해야 합니다. (예: grepping)
+
+```python
+  올바른 예:
+  if not 0 <= p <= 1:
+    raise ValueError(f'Not a probability: {p!r}')
+  try:
+    os.rmdir(workdir)
+  except OSError as error:
+    logging.warning('Could not remove directory (reason: %r): %r',
+                    error, workdir)
+```
+
+```python
+  잘못된 예:
+  if p < 0 or p > 1:  # PROBLEM: also false for float('nan')!
+    raise ValueError(f'Not a probability: {p!r}')
+  try:
+    os.rmdir(workdir)
+  except OSError:
+    # 문제: 에러메시지가 사실이 아닐 수 있는 내용을 포함하고 있습니다:
+    # 삭제작업이 실패했을 수도 있기에 이를 디버깅할 누군가가 오해할 수 있습니다
+    logging.warning('Directory already was deleted: %s', workdir)
+  try:
+    os.rmdir(workdir)
+  except OSError:
+    # 문제: 메시지가 불필요하게 grep 하기 어려우며
+    # `workdir`의 값에 따라 사용자가 혼란스러울 수도 있습니다
+    # 누군가가 아래와 같은 workdir을 사용하는 경우를 생각해보세요
+    # workdir = 'deleted'.:
+    # 경고는 아래와 같이 표시될 것입니다.
+    # "The deleted directory could not be deleted."
+    logging.warning('The %s directory could not be deleted.', workdir)
+```
+
 ---
 <a id="s3.11-files-and-sockets"></a>
 
-### 3.11 Files and Sockets
+### 3.11 파일과 소켓 그리고 유사한 Stateful Resources
 
 - 파일과 소켓의 사용이 끝나면 명시적으로 연결을 종료해주세요.
+- 이 규칙은 당연히 데이터베이스 연결과 같이 내부적으로 소켓을 사용하는 종료가 필요한 자원에도 적용됩니다.
+- 몇가지 예시를 들어보자면 아래의 경우가 있습니다
 
-- 파일이나 소켁과 같은 file-like 객체를 불필요하게 열어둔체로 남겨놓는것은 아래와 같은 단점들이 있습니다:
+  - [mmap](https://docs.python.org/3/library/mmap.html)
+  - [h5py File objects](https://docs.h5py.org/en/stable/high/file.html)
+  - [matplotlib.pyplot figure windows](https://matplotlib.org/2.1.0/api/_as_gen/matplotlib.pyplot.close.html)
+
+- 파일이나 소켓과 같은 stateful 한 객체를 불필요하게 열어둔체로 남겨놓는것은 아래와 같은 단점들이 있습니다:
 
   - 파일 디스크립터와 같은 제한된 시스템 자원을 소모합니다.
     - 이러한 객체들을 많이 이용하는 코드라면 사용 후 시스템에 곧바로 반납하지 않는 행위는 자원의 고갈로 이어질 수 있습니다.
-  - 파일을 열어둔 채로 방치하는 것은 파일의 이동이나 제거가 불가능 할 수 있습니다.
+  - 파일을 열어둔 채로 방치하는 것은 파일의 이동, 제거 또는 마운트 해제가 불가능 할 수 있습니다.
   - 공유되는 파일이나 소켓의 경우 이용 종료 후에 다른 프로그램에 의해 의도치 않게 읽어지거나 쓰여질 수 있습니다.
+    - 만약 정말 객체가 닫혀있다면 read/write를 시도할 때 exception을 일으켜 문제를 빠르게 알 수 있습니다.
 
-- 더욱이, 파일이나 소켓은 객체가 소멸될 때 자동으로 닫혀지는 것은 맞으나 객체의 수명주기를 파일의 상태에 구속하는 것은 나쁜 습관입니다:
+- 더욱이, 파일이나 소켓(비슷하게 동작하는 다른 자원 포함)은 객체가 소멸될 때 자동으로 닫혀지는 것은 맞으나 객체의 생명주기를 파일의 상태에 구속하는 것은 나쁜 습관입니다:
 
-  - 런타임이 언제 파일의 소멸자를 호출하는지 보장 할 수 없습니다.
-    - 지연된 Garbage Collection 과 같이 파이썬의 종류에 따라 다른 방식의 메모리 관리 기법을 사용하기에 객체의 수명주기가 임의의 또는 영원히 지속될 수 있습니다.
-  - globals 또는 예외추적 과 같이 의도치 않은 파일의 참조는 본래 수명보다 더 오랫동안 유지시킬 수 있습니다.
+  - 런타임이 언제 `__del__` 메소드를 호출하는지 보장 할 수 없습니다.
+    - 지연된 Garbage Collection 과 같이 파이썬의 종류에 따라 다른 방식의 메모리 관리 기법을 사용하기에 객체의 생명주기가 임의로 늘어나거나 영원히 죽지 않을 수도 있습니다.
+  - globals 또는 예외추적 과 같이 의도치 않은 파일의 참조는 본래 생명주기보다 더 오랫동안 유지시킬 수 있습니다.
 
-- 가장 선호되는 파일관리 방식은 [`with` 구문](http://docs.python.org/reference/compound_stmts.html#the-with-statement) 입니다
+- 수십 년 동안 여러 언어로 [finalizers](https://en.wikipedia.org/wiki/Finalizer)에 의한 자동 정리를 수행하는 것은 주목할 만한 사이드 임팩트를 거듭해서 재발견되었고 중대한 문제로 이어지고 있습니다. ( [Java에 대한 이 기사 참조](https://wiki.sei.cmu.edu/confluence/display/java/MET12-J.+Do+not+use+finalizers) )
+
+- 가장 선호되는 파일(비슷하게 동작하는 다른 자원 포함)관리 방식은 [`with` 구문](http://docs.python.org/reference/compound_stmts.html#the-with-statement) 입니다
 
   ```python
   with open("hello.txt") as hello_file:
@@ -2051,6 +2089,8 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
       for line in front_page:
           print(line)
   ```
+
+드물게 컨텍스트 기반 자원관리가 불가피한 경우 코드의 설명을 통해 어떻게 해당 자원의 생명주기가 관리되고 있는지 반드시 기술하여야 합니다
 
 ---
 <a id="s3.12-todo-comments"></a>
@@ -2132,7 +2172,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
    - 오래된 Google Python Style code에서 이걸 발견했을 것입니다. 그러나 이건 오래 사용되지는 않았습니다.
    - **새로운 코드는 이에 대해 신경쓰지 않도록 되어있습니다.** 간단하게 어플리케이션 서브 패키지를 import 하는 것을 다른 서브 패키지를 import하는 것과 동일하게 취급하세요.
 
-- 각각의 grouping에서 import는 사전 순으로 정렬되어야 하지만 이러한 조건을 무시해도 될 때는 각각의 모듈의 전체 패키지 경로를 따랐을 경우입니다.
+- 각각의 grouping에서 import는 사전 순으로 정렬되어야 하지만 이러한 조건을 무시해도 될 때는 각각의 모듈의 전체 패키지 경로(`from path import ...` 의 `path`)를 따랐을 경우입니다.
 - 코드는 import부분에서 선택적으로 개행을 두어도 됩니다.
 
   ```python
@@ -2147,6 +2187,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
   import tensorflow as tf
 
   from book.genres import scifi
+  from myproject.backend import huxley
   from myproject.backend.hgwells import time_machine
   from myproject.backend.state_machine import main_loop
   from otherproject.ai import body
@@ -2234,8 +2275,22 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 - package/module 이름에서 dashes(`-`)를 사용할 때
 - `__이중_선행_및_후행_밑줄__` 이름을 사용할 때 (Python에서 예약어)
   - 원본에 없는 추가 설명 : double leading and trailing underscore : (앞 뒤로 \_가 2개씩 있는것 e.g **name**, **init**)
-- 모듈에서 사용할 때
-  - 자바와는 다르게 하나의 모듈에 대해 하나의 클래스로 제한을 할 필요가 없습니다.
+- 공격적인 단어
+- 불필요하게 변수 타입을 포함하는 이름 (예 : `id_to_name_dict`)
+
+<a id="s3.16.2-naming-conventions"></a>
+
+#### 3.16.2 Naming Conventions
+
+모듈에 관련 클래스와 최상위 기능을 함께 배치합니다.
+
+- "Internal"는 모듈의 내부 또는 클래스 내에서 protected 또는 private를 의미합니다.
+- 단일 밑줄(`_`)을 추가하면 모듈 변수와 함수를 보호하기 위한 몇 가지 지원이 있습니다. (linters는 보호된 멤버 접근에 플래그를 지정합니다.)
+- 인스턴스 변수나 메소드에 이중 밑줄(`__` : dunder)을 추가하면 변수나 메소드가 해당 클래스에 대해 효과적으로 private 됩니다.
+  - 가독성과 테스트 가능성에 영향을 미치고 _실제로_ 비공개가 아니므로 사용을 권장하지 않습니다.
+  - 하나의 밑줄을 선호합니다.
+- 모듈에 관련 클래스와 top-level 함수를 함께 배치합니다.
+- 자바와는 다르게 하나의 모듈에 대해 하나의 클래스로 제한을 할 필요가 없습니다.
 - CapWords(단어의 첫 글자를 대문자로 하는 방식)을 사용하지만 모듈의 이름이 \_with_under.py 같은 경우에는 소문자로 합니다.
   - 비록 몇몇 오래된 모듈의 이름이 CapWords.py일지라도 이제는 모듈의 이름을 class이름에 따라 짓게 되면 혼란스러우므로 권장하지 않습니다. (e.g "잠깐만, -- 내가 `import StringIO`를 한거야 아니면 `from StringIO import StringIO`를 한거야 ?" 같은 상황이 발생할 수 있습니다.)
 - 구성 요소가 CapWord를 사용하더라도 "test"로 시작하는 _unittest_ 메서드 이름에 Undercore가 나타날 수 있습니다.
@@ -2263,20 +2318,27 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 | 함수                 | `lower_with_under()` | `_lower_with_under()`             |
 | 글로벌/클래스 상수   | `CAPS_WITH_UNDER`    | `_CAPS_WITH_UNDER`                |
 | 글로벌/클래스 변수   | `lower_with_under`   | `_lower_with_under`               |
-| 인스턴스 변수        | `lower_with_under`   | `_lower_with_under`               |
+| 인스턴스 변수        | `lower_with_under`   | `_lower_with_under` (protected)   |
 | 메서드 이름          | `lower_with_under()` | `_lower_with_under()` (protected) |
 | 함수/메서드 매개변수 | `lower_with_under`   |                                   |
 | 지역 변수            | `lower_with_under`   |                                   |
+
+<a id="math-notation"></a>
+
+#### 3.16.5 수학 표기법
+
+- 수학적으로 복잡한 코드의 경우 일반적으로 코딩 스타일 가이드를 벗어나는 짧은 변수이더라도 참고서나 알고리즘에서 보편적으로 사용되는 정립된 표식은 허용됩니다.
+- 이런 경우 주석이나 docstring으로 표식의 출처를 참조해주세요.
+- 출처에 접근할 수 없는 경우 명확하게 명명규칙을 기술하세요.
+- 공개 API의 경우 더 자주 사용되는 PEP8-compliant `descriptive_names`이 선호됩니다.
 
 ---
 <a id="s3.17-main"></a>
 
 ### 3.17 Main
 
-- 실행 파일로 사용되도록 의도된 파일도 가져올 수 있어야 하며 단순히 import를 해도 프로그램의 main 함수의 기능을 실행하는 일이 없어야 합니다.
-- 메인은 기능적으로 `main()` 함수 안에 있어야 합니다.
-
 - 파이썬에서 `pydoc`과 유닛 테스트는 모듈을 import할 수 있어야 합니다.
+- 파일이 실행파일로써 사용되어야 하더라도 주된 기능은 `main()` 함수에 포함되어야 합니다.
 - 당신의 코드에서 메인 프로그램이 모듈을 import 할 때 실행되지 않도록 메인 프로그램을 실행시키기 전에 `if __name__ == '__main__'`을 항상 확인해야 합니다.
 
 - [absl](https://github.com/abseil/abseil-py)를 사용할 때 `app.run`를 사용하세요.
@@ -2285,7 +2347,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 from absl import app
 ...
 
-def main(argv):
+def main(argv: Sequence[str]):
     # process non-flag arguments
     ...
 
@@ -2476,23 +2538,23 @@ class MyClass:
 
 - 파이썬 타입 시스템에서 `NoneType`은 "first class" Type 이며 작성을 위해 `None`은 `NoneType`의 alias(별칭)입니다. 인자는 `None`이 될 수 있다면 선언을 해야합니다! `Union`을 사용할 수 있지만 다른 Type이 하나만 있는 경우 `Optional`를 사용하세요.
 
-- 암시작 `Optional` 대신 명시적 `Optional` 사용해야 합니다. PEP 484 이전 버전에서는 `a: Optional[Text] = None` 대신에 `a: Text = None` 를 선호했지만 지금은 그렇지 않습니다.
+- 암시적 `Optional` 대신 명시적 `Optional` 사용해야 합니다. PEP 484 이전 버전에서는 `a: Optional[str] = None` 대신에 `a: str = None` 를 선호했지만 지금은 그렇지 않습니다.
 
 - 올바른 예
 
   ```python
-  def func(a: Optional[Text], b: Optional[Text] = None) -> Text:
+  def func(a: Optional[str], b: Optional[str] = None) -> str:
   ...
-  def multiple_nullable_union(a: Union[None, Text, int]) -> Text
+  def multiple_nullable_union(a: Union[None, str, int]) -> str:
   ...
   ```
 
 - 부적절한 예
 
   ```python
-  def nullable_union(a: Union[None, Text]) -> Text:
+  def nullable_union(a: Union[None, str]) -> str:
   ...
-  def implicit_optional(a: Text = None) -> Text:
+  def implicit_optional(a: str = None) -> str:
   ...
   ```
 
@@ -2509,7 +2571,7 @@ class MyClass:
 
   ```python
   _ShortName = module_with_long_name.TypeWithLongName
-  ComplexMap = Mapping[Text, List[Tuple[int, int]]]
+  ComplexMap = Mapping[str, List[Tuple[int, int]]]
   ```
 
 - 다른 예로는 복잡한 중첩 유형과 함수의 복수 반환 변수(튜플)가 있습니다.
@@ -2550,7 +2612,7 @@ a = SomeUndecoratedFunction()  # type: Foo
 ```python
 a = [1, 2, 3]  # type: List[int]
 b = (1, 2, 3)  # type: Tuple[int, ...]
-c = (1, "2", 3.5)  # type: Tuple[int, Text, float]
+c = (1, "2", 3.5)  # type: Tuple[int, str, float]
 ```
 
 <a id="s3.19.10-typevars"></a>
@@ -2574,7 +2636,7 @@ c = (1, "2", 3.5)  # type: Tuple[int, Text, float]
 - TypeVar는 부자연스러울 수도 있습니다.
 
   ```python
-  AddableType = TypeVar("AddableType", int, float, Text)
+  AddableType = TypeVar("AddableType", int, float, str)
   def add(a: AddableType, b: AddableType) -> AddableType:
   return a + b
   ```
@@ -2704,7 +2766,7 @@ def f(x: "sketch.Sketch"): ...
 - Circular 종속의 원인은 심오한 문제(code smells)를 작성하는 것입니다.
 
   - 그런 코드는 리팩터링에 적합합니다.
-  - 하지만 기술적으로 Circular 종속성을 유지하는 것은 가능하지만, [빌드 시스템(build system)](#typing-build-deps)이 다른 모듈에 의존해야 하기 때문에 그렇게 하도록 허락하지 않을 것입니다.
+  - 하지만 기술적으로 Circular 종속성을 유지하는 것은 가능하지만, 다양한 빌드 시스템은 다른 모듈에 의존해야 하기 때문에 그렇게 하도록 허락하지 않을 것입니다.
 
 - Circular 종속을 생성하는 모듈을 `Any`로 교체합니다.
   - 의미있는 이름으로 [alias](#s3.19.6-aliases)를 지정하고 모듈의 실제 Type 이름을 사용하세요 (어떤 것의 어떤 속성인 Any).
@@ -2743,13 +2805,13 @@ def get_names(employee_ids: List) -> Dict:
 - 파라미터의 적합한 Type이 `Any`일 때, 명시적으로 표현되며, 많은 경우에 [`TypeVar`](#s3.19.10-type-var)가 더 적합할 수 있음을 기억해야합니다.
 
 ```python
-def get_names(employee_ids: List[Any]) -> Dict[Any, Text]:
+def get_names(employee_ids: List[Any]) -> Dict[Any, str]:
   """직원의 아이디를 이름과 연결하여 반환합니다."""
 ```
 
 ```python
 T = TypeVar('T')
-def get_names(employee_ids: List[T]) -> Dict[T, Text]:
+def get_names(employee_ids: List[T]) -> Dict[T, str]:
   """직원의 아이디를 이름과 연결하여 반환합니다."""
 ```
 
