@@ -16,6 +16,13 @@ export default function List({ page = {}, show = false, contents = [] }) {
           <Item key={data.sha} data={data} page={page} />
         ))}
       </ul>
+      <ul className="title all">
+        <li>
+          <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md">
+            Github에서 보기
+          </a>
+        </li>
+      </ul>
       <ul className="title info">
         <li
           className={`parent${license ? " selected" : ""}`}
