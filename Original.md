@@ -11,155 +11,77 @@ See README.md for details.
 <details markdown="1">
   <summary>Table of Contents</summary>
 
-- [Google Python Style Guide](#google-python-style-guide)
-  - [1 Background](#1-background)
-  - [2 Python Language Rules](#2-python-language-rules)
-    - [2.1 Lint](#21-lint)
-      - [2.1.1 Definition](#211-definition)
-      - [2.1.2 Pros](#212-pros)
-      - [2.1.3 Cons](#213-cons)
-      - [2.1.4 Decision](#214-decision)
-    - [2.2 Imports](#22-imports)
-      - [2.2.1 Definition](#221-definition)
-      - [2.2.2 Pros](#222-pros)
-      - [2.2.3 Cons](#223-cons)
-      - [2.2.4 Decision](#224-decision)
-    - [2.3 Packages](#23-packages)
-      - [2.3.1 Pros](#231-pros)
-      - [2.3.2 Cons](#232-cons)
-      - [2.3.3 Decision](#233-decision)
-    - [2.4 Exceptions](#24-exceptions)
-      - [2.4.1 Definition](#241-definition)
-      - [2.4.2 Pros](#242-pros)
-      - [2.4.3 Cons](#243-cons)
-      - [2.4.4 Decision](#244-decision)
-    - [2.5 Global variables](#25-global-variables)
-      - [2.5.1 Definition](#251-definition)
-      - [2.5.2 Pros](#252-pros)
-      - [2.5.3 Cons](#253-cons)
-      - [2.5.4 Decision](#254-decision)
-    - [2.6 Nested/Local/Inner Classes and Functions](#26-nestedlocalinner-classes-and-functions)
-      - [2.6.1 Definition](#261-definition)
-      - [2.6.2 Pros](#262-pros)
-      - [2.6.3 Cons](#263-cons)
-      - [2.6.4 Decision](#264-decision)
-    - [2.7 Comprehensions & Generator Expressions](#27-comprehensions--generator-expressions)
-      - [2.7.1 Definition](#271-definition)
-      - [2.7.2 Pros](#272-pros)
-      - [2.7.3 Cons](#273-cons)
-      - [2.7.4 Decision](#274-decision)
-    - [2.8 Default Iterators and Operators](#28-default-iterators-and-operators)
-      - [2.8.1 Definition](#281-definition)
-      - [2.8.2 Pros](#282-pros)
-      - [2.8.3 Cons](#283-cons)
-      - [2.8.4 Decision](#284-decision)
-    - [2.9 Generators](#29-generators)
-      - [2.9 Definition](#29-definition)
-      - [2.9.2 Pros](#292-pros)
-      - [2.9.3 Cons](#293-cons)
-      - [2.9.4 Decision](#294-decision)
-    - [2.10 Lambda Functions](#210-lambda-functions)
-      - [2.10.1 Definition](#2101-definition)
-      - [2.10.2 Pros](#2102-pros)
-      - [2.10.3 Cons](#2103-cons)
-      - [2.10.4 Decision](#2104-decision)
-    - [2.11 Conditional Expressions](#211-conditional-expressions)
-      - [2.11.1 Definition](#2111-definition)
-      - [2.11.2 Pros](#2112-pros)
-      - [2.11.3 Cons](#2113-cons)
-      - [2.11.4 Decision](#2114-decision)
-    - [2.12 Default Argument Values](#212-default-argument-values)
-      - [2.12.1 Definition](#2121-definition)
-      - [2.12.2 Pros](#2122-pros)
-      - [2.12.3 Cons](#2123-cons)
-      - [2.12.4 Decision](#2124-decision)
-    - [2.13 Properties](#213-properties)
-      - [2.13.1 Definition](#2131-definition)
-      - [2.13.2 Pros](#2132-pros)
-      - [2.13.3 Cons](#2133-cons)
-      - [2.13.4 Decision](#2134-decision)
-    - [2.14 True/False Evaluations](#214-truefalse-evaluations)
-      - [2.14.1 Definition](#2141-definition)
-      - [2.14.2 Pros](#2142-pros)
-      - [2.14.3 Cons](#2143-cons)
-      - [2.14.4 Decision](#2144-decision)
-    - [2.16 Lexical Scoping](#216-lexical-scoping)
-      - [2.16.1 Definition](#2161-definition)
-      - [2.16.2 Pros](#2162-pros)
-      - [2.16.3 Cons](#2163-cons)
-      - [2.16.4 Decision](#2164-decision)
-    - [2.17 Function and Method Decorators](#217-function-and-method-decorators)
-      - [2.17.1 Definition](#2171-definition)
-      - [2.17.2 Pros](#2172-pros)
-      - [2.17.3 Cons](#2173-cons)
-      - [2.17.4 Decision](#2174-decision)
-    - [2.18 Threading](#218-threading)
-    - [2.19 Power Features](#219-power-features)
-      - [2.19.1 Definition](#2191-definition)
-      - [2.19.2 Pros](#2192-pros)
-      - [2.19.3 Cons](#2193-cons)
-      - [2.19.4 Decision](#2194-decision)
-    - [2.20 Modern Python: Python 3 and from \_\_future\_\_ imports](#220-modern-python-python-3-and-from-__future__-imports)
-      - [2.20.1 Definition](#2201-definition)
-      - [2.20.2 Pros](#2202-pros)
-      - [2.20.3 Cons](#2203-cons)
-      - [2.20.4 Decision](#2204-decision)
-        - [from \_\_future\_\_ imports](#from-__future__-imports)
-        - [The six, future, and past libraries](#the-six-future-and-past-libraries)
-    - [2.21 Type Annotated Code](#221-type-annotated-code)
-      - [2.21.1 Definition](#2211-definition)
-      - [2.21.2 Pros](#2212-pros)
-      - [2.21.3 Cons](#2213-cons)
-      - [2.21.4 Decision](#2214-decision)
-  - [3 Python Style Rules](#3-python-style-rules)
-    - [3.1 Semicolons](#31-semicolons)
-    - [3.2 Line length](#32-line-length)
-    - [3.3 Parentheses](#33-parentheses)
-    - [3.4 Indentation](#34-indentation)
-      - [3.4.1 Trailing commas in sequences of items?](#341-trailing-commas-in-sequences-of-items)
-    - [3.5 Blank Lines](#35-blank-lines)
-    - [3.6 Whitespace](#36-whitespace)
-    - [3.7 Shebang Line](#37-shebang-line)
-    - [3.8 Comments and Docstrings](#38-comments-and-docstrings)
-      - [3.8.1 Docstrings](#381-docstrings)
-      - [3.8.2 Modules](#382-modules)
-      - [3.8.3 Functions and Methods](#383-functions-and-methods)
-      - [3.8.4 Classes](#384-classes)
-      - [3.8.5 Block and Inline Comments](#385-block-and-inline-comments)
-      - [3.8.6 Punctuation, Spelling, and Grammar](#386-punctuation-spelling-and-grammar)
-    - [3.10 Strings](#310-strings)
-      - [3.10.1 Logging](#3101-logging)
-      - [3.10.2 Error Messages](#3102-error-messages)
-    - [3.11 Files, Sockets, and similar Stateful Resources](#311-files-sockets-and-similar-stateful-resources)
-    - [3.12 TODO Comments](#312-todo-comments)
-    - [3.13 Imports formatting](#313-imports-formatting)
-    - [3.14 Statements](#314-statements)
-    - [3.15 Accessors](#315-accessors)
-    - [3.16 Naming](#316-naming)
-      - [3.16.1 Names to Avoid](#3161-names-to-avoid)
-      - [3.16.2 Naming Conventions](#3162-naming-conventions)
-      - [3.16.3 File Naming](#3163-file-naming)
-      - [3.16.4 Guidelines derived from Guido's Recommendations](#3164-guidelines-derived-from-guidos-recommendations)
-      - [3.16.5 Mathematical Notation](#3165-mathematical-notation)
-    - [3.17 Main](#317-main)
-    - [3.18 Function length](#318-function-length)
-    - [3.19 Type Annotations](#319-type-annotations)
-      - [3.19.1 General Rules](#3191-general-rules)
-      - [3.19.2 Line Breaking](#3192-line-breaking)
-      - [3.19.3 Forward Declarations](#3193-forward-declarations)
-      - [3.19.4 Default Values](#3194-default-values)
-      - [3.19.5 NoneType](#3195-nonetype)
-      - [3.19.6 Type Aliases](#3196-type-aliases)
-      - [3.19.7 Ignoring Types](#3197-ignoring-types)
-      - [3.19.8 Typing Variables](#3198-typing-variables)
-      - [3.19.9 Tuples vs Lists](#3199-tuples-vs-lists)
-      - [3.19.10 TypeVars](#31910-typevars)
-      - [3.19.11 String types](#31911-string-types)
-      - [3.19.12 Imports For Typing](#31912-imports-for-typing)
-      - [3.19.13 Conditional Imports](#31913-conditional-imports)
-      - [3.19.14 Circular Dependencies](#31914-circular-dependencies)
-      - [3.19.15 Generics](#31915-generics)
-  - [4 Parting Words](#4-parting-words)
+-   [1 Background](#s1-background)
+-   [2 Python Language Rules](#s2-python-language-rules)
+    *   [2.1 Lint](#s2.1-lint)
+    *   [2.2 Imports](#s2.2-imports)
+    *   [2.3 Packages](#s2.3-packages)
+    *   [2.4 Exceptions](#s2.4-exceptions)
+    *   [2.5 Global variables](#s2.5-global-variables)
+    *   [2.6 Nested/Local/Inner Classes and Functions](#s2.6-nested)
+    *   [2.7 Comprehensions & Generator Expressions](#s2.7-comprehensions)
+    *   [2.8 Default Iterators and Operators](#s2.8-default-iterators-and-operators)
+    *   [2.9 Generators](#s2.9-generators)
+    *   [2.10 Lambda Functions](#s2.10-lambda-functions)
+    *   [2.11 Conditional Expressions](#s2.11-conditional-expressions)
+    *   [2.12 Default Argument Values](#s2.12-default-argument-values)
+    *   [2.13 Properties](#s2.13-properties)
+    *   [2.14 True/False Evaluations](#s2.14-truefalse-evaluations)
+    *   [2.16 Lexical Scoping](#s2.16-lexical-scoping)
+    *   [2.17 Function and Method Decorators](#s2.17-function-and-method-decorators)
+    *   [2.18 Threading](#s2.18-threading)
+    *   [2.19 Power Features](#s2.19-power-features)
+    *   [2.20 Modern Python: from \_\_future\_\_ imports](#s2.20-modern-python)
+    *   [2.21 Type Annotated Code](#s2.21-type-annotated-code)
+-   [3 Python Style Rules](#s3-python-style-rules)
+    *   [3.1 Semicolons](#s3.1-semicolons)
+    *   [3.2 Line length](#s3.2-line-length)
+    *   [3.3 Parentheses](#s3.3-parentheses)
+    *   [3.4 Indentation](#s3.4-indentation)
+        +   [3.4.1 Trailing commas in sequences of items?](#s3.4.1-trailing-commas)
+    *   [3.5 Blank Lines](#s3.5-blank-lines)
+    *   [3.6 Whitespace](#s3.6-whitespace)
+    *   [3.7 Shebang Line](#s3.7-shebang-line)
+    *   [3.8 Comments and Docstrings](#s3.8-comments-and-docstrings)
+        +   [3.8.1 Docstrings](#s3.8.1-comments-in-doc-strings)
+        +   [3.8.2 Modules](#s3.8.2-comments-in-modules)
+        +   [3.8.3 Functions and Methods](#s3.8.3-functions-and-methods)
+        +   [3.8.4 Classes](#s3.8.4-comments-in-classes)
+        +   [3.8.5 Block and Inline Comments](#s3.8.5-block-and-inline-comments)
+        +   [3.8.6 Punctuation, Spelling, and Grammar](#s3.8.6-punctuation-spelling-and-grammar)
+    *   [3.10 Strings](#s3.10-strings)
+        +   [3.10.1 Logging](#s3.10.1-logging)
+        +   [3.10.2 Error Messages](#s3.10.2-error-messages)
+    *   [3.11 Files, Sockets, and similar Stateful Resources](#s3.11-files-sockets-closeables)
+    *   [3.12 TODO Comments](#s3.12-todo-comments)
+    *   [3.13 Imports formatting](#s3.13-imports-formatting)
+    *   [3.14 Statements](#s3.14-statements)
+    *   [3.15 Accessors](#s3.15-accessors)
+    *   [3.16 Naming](#s3.16-naming)
+        +   [3.16.1 Names to Avoid](#s3.16.1-names-to-avoid)
+        +   [3.16.2 Naming Conventions](#s3.16.2-naming-conventions)
+        +   [3.16.3 File Naming](#s3.16.3-file-naming)
+        +   [3.16.4 Guidelines derived from Guido's Recommendations](#s3.16.4-guidelines-derived-from-guidos-recommendations)
+    *   [3.17 Main](#s3.17-main)
+    *   [3.18 Function length](#s3.18-function-length)
+    *   [3.19 Type Annotations](#s3.19-type-annotations)
+        +   [3.19.1 General Rules](#s3.19.1-general-rules)
+        +   [3.19.2 Line Breaking](#s3.19.2-line-breaking)
+        +   [3.19.3 Forward Declarations](#s3.19.3-forward-declarations)
+        +   [3.19.4 Default Values](#s3.19.4-default-values)
+        +   [3.19.5 NoneType](#s3.19.5-nonetype)
+        +   [3.19.6 Type Aliases](#s3.19.6-type-aliases)
+        +   [3.19.7 Ignoring Types](#s3.19.7-ignoring-types)
+        +   [3.19.8 Typing Variables](#s3.19.8-typing-variables)
+        +   [3.19.9 Tuples vs Lists](#s3.19.9-tuples-vs-lists)
+        +   [3.19.10 TypeVars](#s3.19.10-typevars)
+        +   [3.19.11 String types](#s3.19.11-string-types)
+        +   [3.19.12 Imports For Typing](#s3.19.12-imports-for-typing)
+        +   [3.19.13 Conditional Imports](#s3.19.13-conditional-imports)
+        +   [3.19.14 Circular Dependencies](#s3.19.14-circular-dependencies)
+        +   [3.19.15 Generics](#s3.19.15-generics)
+        +   [3.19.16 Build Dependencies](#s3.19.16-build-dependencies)
+-   [4 Parting Words](#4-parting-words)
 
 </details>
 
@@ -384,31 +306,32 @@ All new code should import each module by its full package name.
 
 Imports should be as follows:
 
+```python
 Yes:
+  # Reference absl.flags in code with the complete name (verbose).
+  import absl.flags
+  from doctor.who import jodie
 
-```python
-# Reference absl.flags in code with the complete name (verbose).
-import absl.flags
-from doctor.who import jodie
-
-FLAGS = absl.flags.FLAGS
+  FLAGS = absl.flags.FLAGS
 ```
 
 ```python
-# Reference flags in code with just the module name (common).
-from absl import flags
-from doctor.who import jodie
+Yes:
+  # Reference flags in code with just the module name (common).
+  from absl import flags
+  from doctor.who import jodie
 
-FLAGS = flags.FLAGS
+  FLAGS = flags.FLAGS
 ```
 
-No: _(assume this file lives in `doctor/who/` where `jodie.py` also exists)_
+_(assume this file lives in `doctor/who/` where `jodie.py` also exists)_
 
 ```python
-# Unclear what module the author wanted and what will be imported.  The actual
-# import behavior depends on external factors controlling sys.path.
-# Which possible jodie module did the author intend to import?
-import jodie
+No:
+  # Unclear what module the author wanted and what will be imported.  The actual
+  # import behavior depends on external factors controlling sys.path.
+  # Which possible jodie module did the author intend to import?
+  import jodie
 ```
 
 The directory the main binary is located in should not be assumed to be in
@@ -519,7 +442,7 @@ Exceptions must follow certain conditions:
 
 -   Libraries or packages may define their own exceptions. When doing so they
     must inherit from an existing exception class. Exception names should end in
-    `Error` and should not introduce stutter (`foo.FooError`).
+    `Error` and should not introduce repetition (`foo.FooError`).
 
 -   Never use catch-all `except:` statements, or catch `Exception` or
     `StandardError`, unless you are
@@ -1046,8 +969,10 @@ No:  def foo(a, b: Mapping = {}):  # Could still get passed to unchecked code
 <a id="properties"></a>
 ### 2.13 Properties 
 
-Use properties for accessing or setting data where you would normally have used
-simple, lightweight accessor or setter methods.
+Properties may be used to control getting or setting attributes that require
+trivial, but unsurprising, computations or logic. Property implementations must
+match the general expectations of regular attribute access: that they are cheap,
+straightforward, and unsurprising.
 
 <a id="s2.13.1-definition"></a>
 <a id="2131-definition"></a>
@@ -1086,9 +1011,19 @@ subclasses.
 <a id="properties-decision"></a>
 #### 2.13.4 Decision 
 
-Use properties in new code to access or set data where you would normally have
-used lightweight accessor or setter methods. Properties should be created with
-the `@property` [decorator](#s2.17-function-and-method-decorators).
+Properties are allowed, but, like operator overloading, should only be used when
+necessary and match the expectations of typical attribute access; follow the
+[getters and setters](#getters-and-setters) rules otherwise.
+
+For example, using a property to simply both get and set an internal attribute
+isn't allowed: there is no computation occurring, so the property is unnecessary
+([make it public instead](#getters-and-setters)). In comparison, using a
+property to control attribute access, or calculate a *trivially* derived value,
+is allowed: the logic is trivial, but unsurprising.
+
+Properties should be created with the `@property`
+[decorator](#s2.17-function-and-method-decorators). Manually implementing a
+property descriptor is considered a [power feature](#power-features).
 
 Inheritance with properties can be non-obvious if the property itself is not
 overridden. Thus one must make sure that accessor methods are called indirectly
@@ -1205,9 +1140,6 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
     Yes: if not users:
              print('no users')
 
-         if foo == 0:
-             self.handle_zero()
-
          if i % 10 == 0:
              self.handle_multiple_of_ten()
 
@@ -1219,9 +1151,6 @@ Use the "implicit" false if possible, e.g., `if foo:` rather than `if foo !=
     ```python
     No:  if len(users) == 0:
              print('no users')
-
-         if foo is not None and not foo:
-             self.handle_zero()
 
          if not i % 10:
              self.handle_multiple_of_ten()
@@ -1464,11 +1393,10 @@ to use (for example, `abc.ABCMeta`, `dataclasses`, and `enum`).
 <a id="220-modern-python"></a>
 
 <a id="modern-python"></a>
-### 2.20 Modern Python: Python 3 and from \_\_future\_\_ imports 
+### 2.20 Modern Python: from \_\_future\_\_ imports 
 
-Python 3 is here! While not every project is ready to use it yet,
-all code should be written to be 3 compatible (and tested under 3 when
-possible).
+New language version semantic changes may be gated behind a special future
+import to enable them on a per-file basis within earlier runtimes.
 
 <a id="s2.20.1-definition"></a>
 <a id="2201-definition"></a>
@@ -1476,10 +1404,9 @@ possible).
 <a id="modern-python-definition"></a>
 #### 2.20.1 Definition 
 
-Python 3 is a significant change in the Python language. While existing code is
-often written with 2.7 in mind, there are some simple things to do to make code
-more explicit about its intentions and thus better prepared for use under Python
-3 without modification.
+Being able to turn on some of the more modern features via `from __future__
+import` statements allows early use of features from expected future Python
+versions.
 
 <a id="s2.20.2-pros"></a>
 <a id="2202-pros"></a>
@@ -1487,8 +1414,11 @@ more explicit about its intentions and thus better prepared for use under Python
 <a id="modern-python-pros"></a>
 #### 2.20.2 Pros 
 
-Code written with Python 3 in mind is more explicit and easier to get running
-under Python 3 once all of the dependencies of your project are ready.
+This has proven to make runtime version upgrades smoother as changes can be made
+on a per-file basis while declaring compatibility and preventing regressions
+within those files. Modern code is more maintainable as it is less likely to
+accumulate technical debt that will be problematic during future runtime
+upgrades.
 
 <a id="s2.20.3-cons"></a>
 <a id="2203-cons"></a>
@@ -1496,9 +1426,9 @@ under Python 3 once all of the dependencies of your project are ready.
 <a id="modern-python-cons"></a>
 #### 2.20.3 Cons 
 
-Some people find the additional boilerplate to be ugly. It's unusual to add
-imports to a module that doesn't actually require the features added by the
-import.
+Such code may not work on very old interpreter versions prior to the
+introduction of the needed future statement. The need for this is more common in
+projects supporting an extremely wide variety of environments.
 
 <a id="s2.20.4-decision"></a>
 <a id="2204-decision"></a>
@@ -1508,9 +1438,18 @@ import.
 
 ##### from \_\_future\_\_ imports
 
-Use of `from __future__ import` statements is encouraged. All new code should
-contain the following and existing code should be updated to be compatible when
-possible:
+Use of `from __future__ import` statements is encouraged. It allows a given
+source file to start using more modern Python syntax features today. Once you no
+longer need to run on a version where the features are hidden behind a
+`__future__` import, feel free to remove those lines.
+
+In code that may execute on versions as old as 3.5 rather than >= 3.7, import:
+
+```python
+from __future__ import generator_stop
+```
+
+For legacy code with the burden of continuing to support 2.7, import:
 
 ```python
 from __future__ import absolute_import
@@ -1518,27 +1457,26 @@ from __future__ import division
 from __future__ import print_function
 ```
 
-For more information on these imports, see
-[absolute imports](https://www.python.org/dev/peps/pep-0328/),
-[`/` division behavior](https://www.python.org/dev/peps/pep-0238/), and
-[the `print` function](https://www.python.org/dev/peps/pep-3105/).
+For more information read the
+[Python future statement definitions](https://docs.python.org/3/library/__future__.html)
+documentation.
 
+Please don't remove these imports until you are confident the code is only ever
+used in a sufficiently modern environment. Even if you do not currently use the
+feature a specific future import enables in your code today, keeping it in place
+in the file prevents later modifications of the code from inadvertently
+depending on the older behavior.
 
-Please don't omit or remove these imports, even if they're not currently used in
-the module, unless the code is Python 3 only. It is better to always have the
-future imports in all files so that they are not forgotten during later edits
-when someone starts using such a feature.
-
-There are other `from __future__` import statements. Use them as you see fit. We
-do not include `unicode_literals` in our recommendations as it is not a clear
-win due to implicit default codec conversion consequences it introduces in many
-places within Python 2.7. Most code is better off with explicit use of `b''` and
-`u''` bytes and unicode string literals as necessary.
+Use other `from __future__` import statements as you see fit. We did not include
+`unicode_literals` in our recommendations for 2.7 as it was not a clear win due
+to implicit default codec conversion consequences it introduced in many places
+within 2.7. Most dual-version 2-and-3 code was better off with explicit use of
+`b''` and `u''` bytes and unicode string literals where necessary.
 
 ##### The six, future, and past libraries
 
-When your project needs to actively support use under both Python 2 and 3, use
-the [six](https://pypi.org/project/six/),
+When your project still needs to support use under both Python 2 and 3, use the
+[six](https://pypi.org/project/six/),
 [future](https://pypi.org/project/future/), and
 [past](https://pypi.org/project/past/) libraries as you see fit. They exist to
 make your code cleaner and life easier.
@@ -1874,6 +1812,10 @@ definitions. One blank line between method definitions and between the `class`
 line and the first method. No blank line following a `def` line. Use single
 blank lines as you judge appropriate within functions or methods.
 
+Blank lines need not be anchored to the definition. For example, related
+comments immediately preceding function, class, and method definitions can make
+sense. Consider if your comment might be more useful as part of the docstring.
+
 <a id="s3.6-whitespace"></a>
 <a id="36-whitespace"></a>
 
@@ -2119,7 +2061,14 @@ aptly described using a one-line docstring.
     returns None, this section is not required. It may also be omitted if the
     docstring starts with Returns or Yields (e.g. `"""Returns row from Bigtable
     as a tuple of strings."""`) and the opening sentence is sufficient to
-    describe return value.
+    describe the return value. Do not imitate 'NumPy style'
+    ([example](http://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)),
+    which frequently documents a tuple return value as if it were multiple
+    return values with individual names (never mentioning the tuple). Instead,
+    describe such a return value as: "Returns a tuple (mat_a, mat_b), where
+    mat_a is ..., and ...". The auxiliary names in the docstring need not
+    necessarily correspond to any internal names used in the function body (as
+    those are not part of the API).
 
 <a id="doc-function-raises"></a>
 [*Raises:*](#doc-function-raises)
@@ -2144,8 +2093,8 @@ def fetch_smalltable_rows(table_handle: smalltable.Table,
         table_handle: An open smalltable.Table instance.
         keys: A sequence of strings representing the key of each table
           row to fetch.  String keys will be UTF-8 encoded.
-        require_all_keys: Optional; If require_all_keys is True only
-          rows with values set for all keys will be returned.
+        require_all_keys: If True only rows with values set for all keys will be
+          returned.
 
     Returns:
         A dict mapping keys to the corresponding table row data
@@ -2184,8 +2133,7 @@ def fetch_smalltable_rows(table_handle: smalltable.Table,
         A sequence of strings representing the key of each table row to
         fetch.  String keys will be UTF-8 encoded.
       require_all_keys:
-        Optional; If require_all_keys is True only rows with values set
-        for all keys will be returned.
+        If True only rows with values set for all keys will be returned.
 
     Returns:
       A dict mapping keys to the corresponding table row data
@@ -2352,7 +2300,7 @@ No: employee_table = '<table>'
 
 Be consistent with your choice of string quote character within a file. Pick `'`
 or `"` and stick with it. It is okay to use the other quote character on a
-string to avoid the need to `\\ ` escape within the string.
+string to avoid the need to backslash-escape quote characters within the string.
 
 ```python
 Yes:
@@ -2747,22 +2695,33 @@ No:
 <a id="s3.15-access-control"></a>
 <a id="315-access-control"></a>
 <a id="access-control"></a>
-
 <a id="accessors"></a>
-### 3.15 Accessors 
 
-If an accessor function would be trivial, you should use public variables
-instead of accessor functions to avoid the extra cost of function calls in
-Python. When more functionality is added you can use `property` to keep the
-syntax consistent.
+<a id="getters-and-setters"></a>
+### 3.15 Getters and Setters 
 
-On the other hand, if access is more complex, or the cost of accessing the
-variable is significant, you should use function calls (following the
-[Naming](#s3.16-naming) guidelines) such as `get_foo()` and `set_foo()`. If the
-past behavior allowed access through a property, do not bind the new accessor
-functions to the property. Any code still attempting to access the variable by
-the old method should break visibly so they are made aware of the change in
-complexity.
+Getter and setter functions (also called accessors and mutators) should be used
+when they provide a meaningful role or behavior for getting or setting a
+variable's value.
+
+In particular, they should be used when getting or setting the variable is
+complex or the cost is significant, either currently or in a reasonable future.
+
+If, for example, a pair of getters/setters simply read and write an internal
+attribute, the internal attribute should be made public instead. By comparison,
+if setting a variable means some state is invalidated or rebuilt, it should be a
+setter function. The function invocation hints that a potentially non-trivial
+operation is occurring. Alternatively, [properties](#properties) may be an
+option when simple logic is needed, or refactoring to no longer need getters and
+setters.
+
+Getters and setters should follow the [Naming](#s3.16-naming) guidelines, such
+as `get_foo()` and `set_foo()`.
+
+If the past behavior allowed access through a property, do not bind the new
+getter/setter functions to the property. Any code still attempting to access the
+variable by the old method should break visibly so they are made aware of the
+change in complexity.
 
 <a id="s3.16-naming"></a>
 <a id="316-naming"></a>
@@ -3342,40 +3301,30 @@ def check_length(x: AnyStr) -> AnyStr:
 The proper type for annotating strings depends on what versions of Python the
 code is intended for.
 
-For Python 3 only code, prefer to use `str`. `Text` is also acceptable. Be
-consistent in using one or the other.
-
-For Python 2 compatible code, use `Text`. In some rare cases, `str` may make
-sense; typically to aid compatibility when the return types aren't the same
-between the two Python versions. Avoid using `unicode`: it doesn't exist in
-Python 3.
-
-The reason this discrepancy exists is because `str` means different things
-depending on the Python version.
+Prefer to use `str`, though `Text` is also acceptable. Be consistent in using
+one or the other. For code that deals with binary data, use `bytes`. For Python
+2 compatible code that processes text data (`str` or `unicode` in Python 2,
+`str` in Python 3), use `Text`.
 
 ```python
-No:
-def py2_code(x: str) -> unicode:
+def deals_with_text_data_in_py3(x: str) -> str:
   ...
-```
-
-For code that deals with binary data, use `bytes`.
-
-```python
 def deals_with_binary_data(x: bytes) -> bytes:
   ...
+def py2_compatible_text_data_processor(x: Text) -> Text:
+  ...
 ```
 
-For Python 2 compatible code that processes text data (`str` or `unicode` in
-Python 2, `str` in Python 3), use `Text`. For Python 3 only code that process
-text data, prefer `str`.
+In some uncommon Python 2 compatibility cases, `str` may make sense instead of
+`Text`, typically to aid compatibility when the return types aren't the same
+between Python 2 and Python 3. Never use `unicode` as it doesn't exist in Python
+3. The reason this discrepancy exists is because `str` means something different
+in Python 2 than in Python 3.
+
+No:
 
 ```python
-from typing import Text
-...
-def py2_compatible(x: Text) -> Text:
-  ...
-def py3_only(x: str) -> str:
+def py2_code(x: str) -> unicode:
   ...
 ```
 
@@ -3385,17 +3334,15 @@ type.
 ```python
 from typing import Text, Union
 ...
-def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
-  ...
 def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
+  ...
+def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
   ...
 ```
 
 If all the string types of a function are always the same, for example if the
 return type is the same as the argument type in the code above, use
 [AnyStr](#typing-type-var).
-
-Writing it like this will simplify the process of porting the code to Python 3.
 
 <a id="s3.19.12-imports-for-typing"></a>
 <a id="s3.19.12-imports"></a>
