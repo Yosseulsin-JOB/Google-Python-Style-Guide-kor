@@ -12,6 +12,8 @@
 
 ## log
 
+- `2023.10.08` : [`6e7639a`](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/releases/tag/6e7639a) 기준 업데이트
+
 - `2021.07.16` : [`4044bbd`](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/releases/tag/4044bbd) 기준 업데이트
 
 - `2020.08.09` : [`f87ee84`](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/releases/tag/f87ee84) 기준 업데이트
