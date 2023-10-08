@@ -23,7 +23,7 @@
     *   [2.17 함수와 메서드 Decorators](#s2.17-function-and-method-decorators)
     *   [2.18 스레드](#s2.18-threading)
     *   [2.19 강한 기능](#s2.19-power-features)
-    *   [2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports](#s2.20-modern-python)
+    *   [2.20 Modern Python : from, \_\_future\_\_, imports](#s2.20-modern-python)
     *   [2.21 Type 주석](#s2.21-typed-code)
 -   [3. Python 스타일 규칙](#s3)
     *   [3.1 Semicolons](#s3.1-semicolons)
@@ -48,7 +48,7 @@
     *   [3.12 TODO Comments](#s3.12-todo-comments)
     *   [3.13 import 형식](#s3.13-imports-formatting)
     *   [3.14 Statements](#s3.14-statements)
-    *   [3.15 접근 제어](#s3.15-access-control)
+    *   [3.15 접근 제어](#getters-and-setters)
     *   [3.16 네이밍](#s3.16-naming)
         +   [3.16.1 피해야 할 이름](#s3.16.1-names-to-avoid)
         +   [3.16.2 Naming Conventions](#s3.16.2-naming-conventions)
@@ -173,11 +173,7 @@
 
 ### 2.2 Imports
 
-- `import`문을 사용할때 package와 module을 대상으로만 사용해야하고 각각의 클래스나 함수에 대해 사용하면 안됩니다. 다만 
-  [typing 모듈](#s3.19.12-imports),
-  [typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions),
-  그리고 [six.moves module](https://six.readthedocs.io/#module-six.moves)
-  을 사용할때는 예외입니다.
+- `import`문을 사용할때 package와 module에 사용하고 개별 클래스나 함수에 대해 사용하면 안됩니다. 다만 [typing 모듈](#s3.19.12-imports), [typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions)에서 가져온 클래스 및 [six.moves module](https://six.readthedocs.io/#module-six.moves)에서의 리디렉션은 이 규칙에서 제외됩니다.
 
 <a id="s2.2.1-definition"></a>
 
@@ -216,7 +212,8 @@
 
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
-- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다. 
+- 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다.
+
 ---
 <a id="s2.3-packages"></a>
 
@@ -262,7 +259,7 @@
     FLAGS = flags.FLAGS
     ```
 
-  - 부적절한 예 (이 파일은 `doctor/who/` 에 있다고 가정하고 `jodie.py`또한 존재한다고 가정합니다.)
+  - 부적절한 예 _(이 파일은 `doctor/who/` 에 있다고 가정하고 `jodie.py`또한 존재한다고 가정합니다.)_
 
     ```python
     # Unclear what module the author wanted and what will be imported.  The actual
@@ -356,7 +353,7 @@
 
 - 라이브러리나 패키지는 고유의 예외가 정의되어 있을 것입니다.
 - 사용하는 동안, 기존에 존재하는 예외 클래스(exception class)로부터 상속을 받아야 합니다.
-- 예외 이름은 `Error`로 끝나야 하고 말더듬이(stutter)로 시작하면 안됩니다.(`foo.fooError`).
+- 예외 이름은 `Error`로 끝나야 하고 되풀이로 시작하면 안됩니다.(`foo.fooError`).
 - 예외를 다시 발생시키거나 쓰레드의 가장 바깥 쪽 블록에 있지않으면 절대 포괄적인 `except:`문을 사용하거나 `Exception`, `StandardError`을 사용하지마세요. (그리고 에러메시지를 출력하세요.) Python은 이와 관련해서 매우 관용적이며 `except:` 모든 오탈자를 비롯하여, sys.exit() 호출, Ctrl+C로 인한 인터럽트, 유닛테스트 실패와 마지막으로 당신이 포착을 원하지 않았던 다른 모든 종류의 예외들까지 모두 잡아낼 것입니다.
 - 코드상에서 `try`/`except` 블록의 수를 최소화시키세요. `try`문의 내부가 커질수록 예외는 당신이 예외가 발생할것이라 예상하지 않았던 코드에 의해 점점 더 발생할 것입니다. 이러한 상황에서, `try`/`except` 블록은 진짜 검출해야 할 에러를 가리게 됩니다.
 - 예외가 `try` 블록에서 발생하던 안하던 `finally`절은 코드를 실행시킨다. 이건 가끔 깔끔히 하는데 유용합니다. 예를들어, 파일을 닫을 때 가 그 예입니다.
@@ -776,80 +773,44 @@
 
 ### 2.13 Properties
 
-- `Properties`을 접근하거나 데이터값을 설정할 때 보통 간단한 방법인 가벼운 접근자나 `setter` 메서드를 사용했을 것입니다.
+- `Properties`는 간단한 계산이나 로직이 필요한 attribute을 가져오거나 설정하는 것을 제어하는 데 사용될 수 있습니다.
+- `Properties` 구현은 보통의 attribute 접근에 대한 일반적인 기대와 일치되어야 합니다.
 
 <a id="s2.13.1-definition"></a>
 
 #### 2.13.1 정의
 
-- 간단한 계산을 할 때 일반적인 속성을 접근하듯이 속성을 가져오거나 설정하는 메서드 호출을 포장하는 방법입니다.
+- 일반적인 속성을 접근하듯이 속성을 가져오거나 설정하는 메서드 호출을 포장하는 방법입니다.
 
 <a id="s2.13.2-pros"></a>
 
 #### 2.13.2 장점
 
-- 간단한 속성 접근에 대해 명시적인 `get`, `set` 메서드 호출을 제거함으로써 가독성이 증가합니다.
+- getter, setter method 호출 대신 attribute 접근 및 할당 API를 허용합니다.
+- attribute를 읽기 전용으로 만드는 데 사용할 수 있습니다.
 - [느긋한 계산법](https://ko.wikipedia.org/wiki/느긋한_계산법)을 허용합니다.
-- 클래스의 인터페이스를 유지하는 방법으로 [Pythonic](https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/wiki/2.13-properties#pythonic)을 고려합니다.
-- 성능 측면에서, trivial 접근자 메서드는 직접 변수 접근이 합리적일 때 속성 우회를 허용할 필요가 있습니다. 또한, 인터페이스를 파괴하지 않고 미래에 접근자 메서드를 추가할 수 있게 합니다.
+- 내부가 class 사용자와 독립적으로 발전할 때 클레스의 public interface를 유지 관리하는 방법을 제공합니다.
 
 <a id="s2.13.3-cons"></a>
 
 #### 2.13.3 단점
 
-- 연산자 오버 로딩(operator overloading)과 같은 부작용을 숨길 수 있습니다. 하위 클래스의 경우 혼란스러울 수 있습니다.
+- 연산자 오버 로딩(operator overloading)과 같은 부작용을 숨길 수 있습니다.
+- 하위 클래스의 경우 혼란스러울 수 있습니다.
 
 <a id="s2.13.4-decision"></a>
 
 #### 2.13.4 결론
 
-- 새 코드에서 속성을 사용하여 일반적으로 가벼운 접근자 또는 `setter` 메소드를 사용했던 데이터를 접근하거나 설정합니다.
-- 속성은 `@property` [decorator](#s2.17-function-and-method-decorators)로 만들어야 합니다.
-- 속성 자체가 재정의되지 않은 경우 속성에 대한 상속은 명백하지 않을 수 있습니다. 따라서 하위 클래스에서 재정의 된 메서드가 속성에 의해 호출되도록하려면 접근자 메서드를 간접적으로 호출해야합니다([template method design pattern](https://en.wikipedia.org/wiki/Template_method_pattern)를 사용합니다.).
-- 올바른 예
-
-  ```python
-  import math
-  class Square:
-      """두 가지 속성을 가진 사각형: 쓰기 가능한 면적(area)과 읽기전용인 둘레(perimeter)
-
-      사용방법:
-      >>> sq = Square(3)
-      >>> sq.area
-      9
-      >>> sq.perimeter
-      12
-      >>> sq.area = 16
-      >>> sq.side
-      4
-      >>> sq.perimeter
-      16
-      """
-
-      def __init__(self, side: float):
-          self.side = side
-
-      @property
-      def area(self) -> float:
-          """사각형의 면적을 가져오거나 설정합니다."""
-          return self._get_area()
-
-      @area.setter
-      def area(self, area: float):
-          self._set_area(area)
-
-      def _get_area(self) -> float:
-          """'면적'속성을 계산하기 위한 간접 접근자입니다."""
-          return self.side ** 2
-
-      def _set_area(self, area: float):
-          """'면적' 속성을 설정하기 위한 간접 설정자입니다."""
-          self.side = math.sqrt(area)
-
-      @property
-      def perimeter(self) -> float:
-          return self.side * 4
-  ```
+- Properties는 허용하지만 연산자 오버로딩과 마찬가지로 필요한 경우에만 사용해야 하며 일반적인 attribute 접근에 대한 기대와 일치해야합니다
+  - 그렇지 않은 경우에는 [getters and setters](#getters-and-setters)규칙을 따르세요.
+- 예를 들어, 단순히 attribute를 가져오고 설정하기 위해 property를 사용하는 것은 허용되지 않습니다.
+  - 계산이 발생하지 않으므로 property는 불필요합니다. ([대신 attribute를 public으로 설정합니다.](#getters-and-setters))
+- 이에 비해 attribute 접근을 제어하거나 사소한 파생 값을 계산하기 위해 property를 사용하는 것은 허용됩니다.
+  - 로직은 간단하고 놀랍지 않습니다.
+- Properties는 `@property` [decorator](#s2.17-function-and-method-decorators)를 사용하여 생성해야합니다.
+- property descriptor를 수동으로 구현하는 것은 [power feature](#power-features)로 간주됩니다.
+- 속성에 대한 상속은 명백하지 않을 수 있습니다. subclass가 재정의하고 확장하기 위한 계산 도구로 properties를 사용하지 마세요.
 
 ---
 <a id="s2.14-truefalse-evaluations"></a>
@@ -896,9 +857,6 @@
   if not users:
       print('사용자가 없습니다.')
 
-  if foo == 0:
-      self.handle_zero()
-
   if i % 10 == 0:
       self.handle_multiple_of_ten()
 
@@ -913,9 +871,6 @@
   if len(users) == 0:
       print('사용자가 없습니다.')
 
-  if foo is not None and not foo:
-      self.handle_zero()
-
   if not i % 10:
       self.handle_multiple_of_ten()
 
@@ -924,6 +879,7 @@
   ```
 
 - `'0'`(즉, `0` 문자열)은 참으로 평가한다는 점에 유의해야합니다.
+- Numpy 배열은 암시적 boolean 컨텍스트에서 예외를 발생시킬 수 있습니다. `np.array`의 비어 있음을 테스트할 때 `.size` attribute를 선호합니다. (e.g. `if not users.size`)
 
 ---
 <a id="s2.16-lexical-scoping"></a>
@@ -1026,7 +982,9 @@
 
 #### 2.17.3 단점
 
-- Decorator는 함수의 인자, 반환 값에 대해 임의의 동작을 수행할 수 있으며 결과적으로 놀라운 암묵적 행동을 할 수 있습니다. 게다가, Decorator는 import할 때 실행합니다. 잘못된 Decorator 코드는 회복이 거의 불가능합니다.
+- Decorator는 함수의 인자, 반환 값에 대해 임의의 동작을 수행할 수 있으며 결과적으로 놀라운 암묵적 행동을 할 수 있습니다.
+- 게다가, Decorator는 object 정의 시 실행합니다. module-level 객체(classes, module functions, ...)의 경우 import할 때 발생합니다.
+- Decorator 코드 오류는 복구가 거의 불가능합니다.
 
 <a id="s2.17.4-decision"></a>
 
@@ -1081,28 +1039,30 @@
 ---
 <a id="s2.20-modern-python"></a>
 
-### 2.20 Modern Python : Python 3 그리고 from, \_\_future\_\_, imports
+### 2.20 Modern Python : from, \_\_future\_\_, imports
 
-- Python 3 버전이 나왔습니다! 아직 프로젝트에 Python 3을 사용할 준비가 되어있는 건 아니지만 모든 코드는 호환되도록 작성되어야 합니다. (가능한 경우에 Python 3에 따라 테스트합니다.)
+- 새로운 언어 버전 의미 체계 변경 사항은 이전 런타임 내에서 파일 단위로 활성화하기 위해 특별한 향후 가져오기 뒤에 제어될 수 있습니다.
+  (New language version semantic changes may be gated behind a special future import to enable them on a per-file basis within earlier runtimes.)
 
 <a id="s2.20.1-definition"></a>
 
 #### 2.20.1 정의
 
-- Python 3는 Python언어에서 중요한 변화가 있습니다. 현재 사용하고 있는 코드는 2.7 버전을 염두하여 작성하는 경우가 많습니다.
-- Python3에서 수정없이 사용할 수 있도록 잘 준비하기 위해서 코드의 의도를 명확하게 만들 수 있게 하는 몇몇 간단한 것들이 있습니다.
+- `from __future__ import`문을 통해 보다 현대적인 기능 중 일부를 활성화할 수 있으면 예상되는 향후 Python 버전의 기능을 조기에 사용할 수 있습니다.
 
 <a id="s2.20.2-pros"></a>
 
 #### 2.20.2 장점
 
-- Python 3를 염두해 두고 작성된 코드는 명확하고 프로젝트의 모든 의존성이 Python 3에서 실행하기가 더 쉬워집니다.
+- 이는 호환성을 선언하고 해당 파일 내에서 회귀를 방지하면서 파일별로 변경이 이루어질 수 있으므로 런타임 버전 업그레이드를 더 원활하게 만드는 것으로 입중되었습니다.
+- 최신 코드는 향후 런타임 업그레이드 중에 문제가 될 수 있는 기술적 부채가 축적될 가능성이 적기 때문에 유지 관리가 더 쉽습니다.
 
 <a id="s2.20.3-cons"></a>
 
 #### 2.20.3 단점
 
-- 어떤 사람들은 추가된 boilerplate가 추하다고 생각합니다. 사용하지 않는 기능을 import하는 것은 이례적입니다.
+- 이러한 코드는 필요한 feature 문을 도입하기 전에는 매우 오래된 인터프리터 버전에서 동작하지 않을 수 있습니다.
+- 일반적으로 다양한 환경을 지원해야하는 프로젝트에서 필요합니다.
 
 <a id="s2.20.4-decision"></a>
 
@@ -1110,7 +1070,16 @@
 
 ##### from \_\_future\_\_ imports
 
-- `from __future__ import` 형태를 사용하는 것이 바람직합니다. 모든 새로운 코드는 다음 사항이 포함되어야 하며 가능한 경우 기존 코드가 호환되도록 업데이트 해야 합니다
+- `from __future__ import`문을 사용하는 것이 좋습니다.
+- 주어진 소스파일에서 더욱 현대적인 Python 구문 기능을 사용할 수 있습니다.
+- `__future__` import 뒤에 기능이 숨겨져 있는 버전에서 더 이상 실행할 필요가 없다면 해당 줄을 자유롭게 제거하세요.
+- 3.7 이상이 아닌 3.5 이전 버전에서 실행될 수 있는 코드에서 가져올 경우
+
+  ```python
+  from __future__ import generator_stop
+  ```
+
+- 2.7 버전을 계속 지원해야하는 부담이 있는 레거시 코드의 경우
 
   ```python
   from __future__ import absolute_import
@@ -1118,13 +1087,17 @@
   from __future__ import print_function
   ```
 
-- `import`에 대한 자세한 내용은 [absolute imports](https://www.python.org/dev/peps/pep-0328/), [`/` division behavior](https://www.python.org/dev/peps/pep-0238/), [the `print` function](https://www.python.org/dev/peps/pep-3105/)을 참조하세요.
-- 이러한 import는 현재 모듈에서 사용되지 않더라도 생략하거나 제거하지 마세요. 모든 파일에 항상 향후 import가 있으므로 나중에 이러한 기능을 사용하기 시작할 때 편집하는 동안 잊지 않도록 하는 것이 좋습니다.
-- 다른 `from __future__` import 명세도 있으니 알맞게 사용하세요. `unicode_literals`는 파이썬 2.7 내 여러 곳에서 도입되는 암묵적 기본 코덱 변환 결과 때문에 명확하지 않기 때문에 권고사항에 포함시키지 않았습니다. 대부분의 코드는 필요에 따라 `b''`, `u''` 바이트를 명시적으로 사용하고 유니코드 문자열 literal를 사용하면 더 좋습니다.
+- 자세한 내용은 [Python future statement definitions](https://docs.python.org/3/library/__future__.html) 문서를 읽어보세요.
+- 코드가 충분히 현대적인 환경에서만 사용된다는 확신이 들 때까지 이러한 import를 제거하지 마세요.
+- 현재 코드에서 특정 향후 import를 통해 활성화되는 기능을 현재 사용하지 않더라도 파일에 해당 기능을 유지하면 나중에 코드가 이전 동작에 따라 실수로 수정되는 것을 방지할 수 있습니다.
+- 적절하다고 생각되는 다른 `from __future__` import 문을 사용하세요.
+- 2.7버전 내에 여러 위치에서 도입된 암시적 기본 코덱 변환 결과로 인해 확실하지 않았기 때문에 2.7버전에 대한 권장 사항에 `unicode_literals`를 포함하지 않았습니다.
+- 대부분의 이중 버전 2-3 코드는 필요한 경우 `b''` 와 `u''` q바트와 유니코드 문자열 리터럴을 명시적으로 사용하는 것이 더 나았습니다.
 
 ##### six, future 그리고 past 라이브러리
 
-- 프로젝트가 Python 2, 3 모두 지원해야하는 경우에 라이브러리를 적합하게 사용하는 것을 권장합니다. 코드를 더 깨끗하고 삶을 더 쉽게 만들기 위해 존재합니다.
+- 프로젝트가 여전히 Python 2, 3 모두에서 사용을 지원해야하는 경우 적합하다고 판단되는 대로 [six](https://pypi.org/project/six/), [future](https://pypi.org/project/future/), 및 [past](https://pypi.org/project/past/) 라이브러리를 사용하세요.
+- 코드를 더 깨끗하고 삶을 더 쉽게 만들기 위해 존재합니다.
 
 ---
 <a id="s2.21-type-annotated-code"></a>
@@ -1417,6 +1390,10 @@
 - `def` 줄 이후에는 빈 줄이 없어야 합니다.
 - 함수와 메소드 사이에 개발자의 판단하에 적절하게 한 개의 빈 줄을 사용하세요.
 
+- 빈 줄을 정의에 고정할 필요는 없습니다.
+- 예를 들어, 함수와 클래스 및 메서드 정의 바로 앞에 있는 관련 주석이 의미가 있을 수 있습니다.
+- comment가 Docstring의 일부로 더 유용할 수 있는 지 고려해야합니다.
+
 ---
 <a id="s3.6-whitespace"></a>
 
@@ -1620,6 +1597,10 @@
 
 - 반환값의 자료형과 의미를 기록합니다. 만약 함수가 None만을 반환한다면 이 섹션은 필요없습니다.
 - 또한 만약 docstring이 Returns 나 Yields로 시작하거나(e.g. `"""Returns row from Bigtable as a tuple of strings."""`) 충분한 설명이 제공된다면 생략 될 수 있습니다.
+- Tuple 반환 값을 개별 이름이 있는 여러 반환 값인 것처럼 자주 문서화하는 'NumPy style' ([example](http://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html))을 모방하지 마세요. (Tuple를 언급하지 않습니다.)
+- 대신, 다음과 같은 반환값으로 기술하세요.
+  - "Returns a tuple (mat_a, mat_b), where mat_a is ..., and ...".
+- Docstring의 보조 이름은 함수 본문에 사용된 내부 이름과 반드시 일치할 필요는 없습니다. (해당 이름은 API의 일부가 아니기 때문입니다.)
 
 <a id="doc-function-raises"></a>
 
@@ -1633,7 +1614,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                           keys: Sequence[Union[bytes, str]],
                           require_all_keys: bool = False,
-  ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str, ...]]:
     """Fetches rows from a Smalltable.
 
     Retrieves rows pertaining to the given keys from the Table instance
@@ -1643,8 +1624,8 @@
         table_handle: An open smalltable.Table instance.
         keys: A sequence of strings representing the key of each table
           row to fetch.  String keys will be UTF-8 encoded.
-        require_all_keys: Optional; If require_all_keys is True only
-          rows with values set for all keys will be returned.
+        require_all_keys: If True only rows with values set for all keys will be
+          returned.
 
     Returns:
         A dict mapping keys to the corresponding table row data
@@ -1670,7 +1651,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                             keys: Sequence[Union[bytes, str]],
                             require_all_keys: bool = False,
-  ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str, ...]]:
       """Fetches rows from a Smalltable.
 
       Retrieves rows pertaining to the given keys from the Table instance
@@ -1683,8 +1664,7 @@
           A sequence of strings representing the key of each table row to
           fetch.  String keys will be UTF-8 encoded.
         require_all_keys:
-          Optional; If require_all_keys is True only rows with values set
-          for all keys will be returned.
+          If True only rows with values set for all keys will be returned.
 
       Returns:
         A dict mapping keys to the corresponding table row data
@@ -1830,7 +1810,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
     ```
 
 - 하나의 파일에는 따옴표를 일관되게 사용하세요. `'` 또는 `"` 중 하나를 선택하고 그것만 사용하세요.
-- 다만 `\\` 사용을 피하기 위해 같은 파일이더라도 다른 따옴표를 사용하는 것은 괜찮습니다. `gpylint` 가 이를 검사합니다.
+- 다만 backslash-escape 따음표 문자 사용을 피하기 위해 같은 파일이더라도 다른 따옴표를 사용하는 것은 괜찮습니다.
 
   - 올바른 예
 
@@ -2155,15 +2135,19 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 ---
 <a id="s3.15-access-control"></a>
+<a id="getters-and-setters"></a>
 
 ### 3.15 접근 제어
 
-- 만약 접근제어자 함수를 무시할 경우 파이썬에서는 함수에 대해 추가적인 비용을 피하기 위해 접근제어자 함수 대신에 public 변수로 사용해야 합니다.
-- 더 많은 기능이 추가된다면 `property`를 사용하여 문법을 일관적으로 유지 할 수 있습니다.
-
-- 반면에 접근이 복잡하거나 변수의 접근에 대한 비용이 큰 경우, `get_foo()` 와 `set_foo()`와 같은 함수 호출([네이밍](#s3.16-naming) 가이드 라인을 참고하라)을 사용해야 합니다.
-- 만약 전에 했던 행동이 property를 통해 접근을 허락했다면 새로운 접근제어자 함수를 property와 묶지마세요.
-- 어떤 코드가 여전히 변수에 오래된 메서드를 통해 접근하려 시도한다면 반드시 눈에 보이게 부수어 복잡성의 변화를 인식하게 만들어야 합니다.
+- Getter/Setter 함수(접근자 및 변경자라고도함)는 변수 값을 가져오거나 설정하기 위한 의미 있는 역할이나 동작을 제공하는 경우 사용해야 합니다.
+- 특히 현재 또는 합리적인 미래에 변수를 가져오거나 설정하는 것이 복잡하거나 비용이 상당할 때 사용해야 합니다.
+- 예를 들어 한 쌍의 getter/setter가 단순히 내부 속성을 읽고 쓰는 경우 내부 속성은 대신 공개되어야 합니다.
+- 이에 비해 변수를 설정하면 일부 상태가 무효화되거나 다시 작성됨을 의미하는 경우 이는 setter 함수여야 합니다.
+- 함수 호출은 잠재적으로 사소하지 않은 작업이 발생하고 있음을 암시합니다.
+- 또한 간단한 논리가 필요하거나 더 이상 getter/setter가 필요하지 않도록 리팩토링할 때 [properties](#properties) 옵션이 될 수 있습니다.
+- Getter/Setter는 `get_foo()`, `set_foo()`와 같은 [Naming](#s3.16-naming) 지침을 따라야 합니다.
+- 이전 동작에서 property을 통한 엑세스가 허용된 경우 새 getter/setter함수를 property에 바인딩하지 마세요.
+- 여전히 이전 방법으로 변수에 액세스하려고 시도하는 코드는 눈에 띄게 중단되어 복잡성의 변화를 인식할 수 있습니다.
 
 ---
 <a id="s3.16-naming"></a>
@@ -2425,13 +2409,15 @@ if __name__ == '__main__':
 
 #### 3.19.3 전방선언
 
-- 아직 정의되지 않은 동일한 모듈의 클래스 이름을 사용해야 하는 경우(예, 클래스 선언 내에 클래스가 필요한 경우 또는 아래에 정의된 클래스를 사용하는 경우) 클래스 이름을 문자열로 사용하세요.
+- 아직 정의되지 않은 동일한 모듈의 클래스 이름을 사용해야 하는 경우(예, 클래스 선언 내에 클래스가 필요한 경우 또는 아래에 정의된 클래스를 사용하는 경우) `from __future__ import annotations`를 사용하세요.
+- 간단한 경우에는 주석을 사용하거나 클래스 이름에 문자열을 사용하세요.
 
 ```python
+from __future__ import annotations
+
 class MyClass:
 
-  def __init__(self,
-               stack: List["MyClass"]) -> None:
+  def __init__(self, stack: Sequence[MyClass]) -> None:
 ```
 
 <a id="s3.19.4-default-values"></a>
@@ -2583,54 +2569,41 @@ c = (1, "2", 3.5)  # type: Tuple[int, str, float]
 
 - String 주석에 대한 적절한 Type은 코드의 용도에 따라 달라집니다.
 
-- Python 3 호환 코드일 경우 `str`를 사용하세요.
+- `str`을 사용하는 것을 선호하지만 `Text`도 허용됩니다. 둘 중 하나를 일관성 있게 사용하세요.
+- 바이너리 데이터를 다루는 코드의 경우 `bytes`를 사용하세요.
+- 텍스트 데이터(Python 2에서는 `str` 또는 `unicode`, Python3에서는 `str`)를 처리하는 Python 2 호환 코드의 경우 `Text`를 사용하세요.
 
-  - `Text`도 가능합니다.
-  - 하나를 사용하더라도 일관성을 유지하여 사용해야 합니다.
+```python
+def deals_with_text_data_in_py3(x: str) -> str:
+  ...
+def deals_with_binary_data(x: bytes) -> bytes:
+  ...
+def py2_compatible_text_data_processor(x: Text) -> Text:
+  ...
+```
 
-- Python 2 호환 코드의 경우 `Text`를 사용하세요.
-
-  - 드믄 경우에 `str`은 적절할 수 있습니다.
-  - 일반적으로 두 Python 버전 간에 반환 유형이 동일하지 않을 때 호환성을 돕습니다. Python 3에 존재하지 않는 `unicode`를 사용하지 마세요.
-
-- 이런 불일치가 존재하는 이유는 `str`은 Python 버전에 따라 다른 것을 의미하기 때문입니다.
+- 일부 흔하지 않은 Python2 호환성 사례에서는 `Text` 대신 `str`이 의미가 있을 수 있으며 일반적으로 Python2와 Python3 간에 반환 유형이 동일하지 않을 때 호환성을 돕기 위해 사용됩니다.
+- Python3에는 `unicode`가 없으므로 절대 사용하지 마세요.
+- 이러한 불일치가 존재하는 이유는 `str`이 Python3와 Python2에서 다른 의미를 갖기 때문입니다.
 
 - 부적절한 예
 
-  ```python
-  def py2_code(x: str) -> unicode:
+```python
+def py2_code(x: str) -> unicode:
   ...
-  ```
+```
 
-- 이진 데이터를 처리하는 경우라면 `bytes`를 사용하세요.
+If the type can be either bytes or text, use `Union`, with the appropriate text
+type.
 
-  ```python
-  def deals_with_binary_data(x: bytes) -> bytes:
+```python
+from typing import Text, Union
+...
+def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
   ...
-  ```
-
-- Python 2에서 Text 데이터(`str`, `unicode`는 python 2, `str`은 python 3)는 `Text`를 사용합니다.
-- Python 3에서만 Text 데이터를 처리하는 경우 `str`를 선택하세요.
-
-  ```python
-  from typing import Text
+def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
   ...
-  def py2_compatible(x: Text) -> Text:
-  ...
-  def py3_only(x: str) -> str:
-  ...
-  ```
-
-- Type이 byte 또는 Text 일 수 있는 경우 적절한 Text Type과 함께 `Union`을 사용하세요.
-
-  ```python
-  from typing import Text, Union
-  ...
-  def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
-  ...
-  def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
-  ...
-  ```
+```
 
 - 함수의 모든 string Type이 항상 동일한 경우(예, 반환 Type이 위의 코드에서 인자 Type과 동일한 경우) [AnyStr](#s3.19.10-type-var)를 사용하세요.
 

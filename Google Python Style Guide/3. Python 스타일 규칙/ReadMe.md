@@ -232,6 +232,10 @@
 - `def` 줄 이후에는 빈 줄이 없어야 합니다.
 - 함수와 메소드 사이에 개발자의 판단하에 적절하게 한 개의 빈 줄을 사용하세요.
 
+- 빈 줄을 정의에 고정할 필요는 없습니다.
+- 예를 들어, 함수와 클래스 및 메서드 정의 바로 앞에 있는 관련 주석이 의미가 있을 수 있습니다.
+- comment가 Docstring의 일부로 더 유용할 수 있는 지 고려해야합니다.
+
 ---
 <a id="s3.6-whitespace"></a>
 
@@ -435,6 +439,10 @@
 
 - 반환값의 자료형과 의미를 기록합니다. 만약 함수가 None만을 반환한다면 이 섹션은 필요없습니다.
 - 또한 만약 docstring이 Returns 나 Yields로 시작하거나(e.g. `"""Returns row from Bigtable as a tuple of strings."""`) 충분한 설명이 제공된다면 생략 될 수 있습니다.
+- Tuple 반환 값을 개별 이름이 있는 여러 반환 값인 것처럼 자주 문서화하는 'NumPy style' ([example](http://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html))을 모방하지 마세요. (Tuple를 언급하지 않습니다.)
+- 대신, 다음과 같은 반환값으로 기술하세요.
+  - "Returns a tuple (mat_a, mat_b), where mat_a is ..., and ...".
+- Docstring의 보조 이름은 함수 본문에 사용된 내부 이름과 반드시 일치할 필요는 없습니다. (해당 이름은 API의 일부가 아니기 때문입니다.)
 
 <a id="doc-function-raises"></a>
 
@@ -448,7 +456,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                           keys: Sequence[Union[bytes, str]],
                           require_all_keys: bool = False,
-  ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str, ...]]:
     """Fetches rows from a Smalltable.
 
     Retrieves rows pertaining to the given keys from the Table instance
@@ -458,8 +466,8 @@
         table_handle: An open smalltable.Table instance.
         keys: A sequence of strings representing the key of each table
           row to fetch.  String keys will be UTF-8 encoded.
-        require_all_keys: Optional; If require_all_keys is True only
-          rows with values set for all keys will be returned.
+        require_all_keys: If True only rows with values set for all keys will be
+          returned.
 
     Returns:
         A dict mapping keys to the corresponding table row data
@@ -485,7 +493,7 @@
   def fetch_smalltable_rows(table_handle: smalltable.Table,
                             keys: Sequence[Union[bytes, str]],
                             require_all_keys: bool = False,
-  ) -> Mapping[bytes, Tuple[str]]:
+  ) -> Mapping[bytes, Tuple[str, ...]]:
       """Fetches rows from a Smalltable.
 
       Retrieves rows pertaining to the given keys from the Table instance
@@ -498,8 +506,7 @@
           A sequence of strings representing the key of each table row to
           fetch.  String keys will be UTF-8 encoded.
         require_all_keys:
-          Optional; If require_all_keys is True only rows with values set
-          for all keys will be returned.
+          If True only rows with values set for all keys will be returned.
 
       Returns:
         A dict mapping keys to the corresponding table row data
@@ -645,7 +652,7 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
     ```
 
 - 하나의 파일에는 따옴표를 일관되게 사용하세요. `'` 또는 `"` 중 하나를 선택하고 그것만 사용하세요.
-- 다만 `\\` 사용을 피하기 위해 같은 파일이더라도 다른 따옴표를 사용하는 것은 괜찮습니다. `gpylint` 가 이를 검사합니다.
+- 다만 backslash-escape 따음표 문자 사용을 피하기 위해 같은 파일이더라도 다른 따옴표를 사용하는 것은 괜찮습니다.
 
   - 올바른 예
 
@@ -970,15 +977,19 @@ if i & (i-1) == 0:  # True if i is 0 or a power of 2.
 
 ---
 <a id="s3.15-access-control"></a>
+<a id="getters-and-setters"></a>
 
 ### 3.15 접근 제어
 
-- 만약 접근제어자 함수를 무시할 경우 파이썬에서는 함수에 대해 추가적인 비용을 피하기 위해 접근제어자 함수 대신에 public 변수로 사용해야 합니다.
-- 더 많은 기능이 추가된다면 `property`를 사용하여 문법을 일관적으로 유지 할 수 있습니다.
-
-- 반면에 접근이 복잡하거나 변수의 접근에 대한 비용이 큰 경우, `get_foo()` 와 `set_foo()`와 같은 함수 호출([네이밍](#s3.16-naming) 가이드 라인을 참고하라)을 사용해야 합니다.
-- 만약 전에 했던 행동이 property를 통해 접근을 허락했다면 새로운 접근제어자 함수를 property와 묶지마세요.
-- 어떤 코드가 여전히 변수에 오래된 메서드를 통해 접근하려 시도한다면 반드시 눈에 보이게 부수어 복잡성의 변화를 인식하게 만들어야 합니다.
+- Getter/Setter 함수(접근자 및 변경자라고도함)는 변수 값을 가져오거나 설정하기 위한 의미 있는 역할이나 동작을 제공하는 경우 사용해야 합니다.
+- 특히 현재 또는 합리적인 미래에 변수를 가져오거나 설정하는 것이 복잡하거나 비용이 상당할 때 사용해야 합니다.
+- 예를 들어 한 쌍의 getter/setter가 단순히 내부 속성을 읽고 쓰는 경우 내부 속성은 대신 공개되어야 합니다.
+- 이에 비해 변수를 설정하면 일부 상태가 무효화되거나 다시 작성됨을 의미하는 경우 이는 setter 함수여야 합니다.
+- 함수 호출은 잠재적으로 사소하지 않은 작업이 발생하고 있음을 암시합니다.
+- 또한 간단한 논리가 필요하거나 더 이상 getter/setter가 필요하지 않도록 리팩토링할 때 [properties](#properties) 옵션이 될 수 있습니다.
+- Getter/Setter는 `get_foo()`, `set_foo()`와 같은 [Naming](#s3.16-naming) 지침을 따라야 합니다.
+- 이전 동작에서 property을 통한 엑세스가 허용된 경우 새 getter/setter함수를 property에 바인딩하지 마세요.
+- 여전히 이전 방법으로 변수에 액세스하려고 시도하는 코드는 눈에 띄게 중단되어 복잡성의 변화를 인식할 수 있습니다.
 
 ---
 <a id="s3.16-naming"></a>
@@ -1240,13 +1251,15 @@ if __name__ == '__main__':
 
 #### 3.19.3 전방선언
 
-- 아직 정의되지 않은 동일한 모듈의 클래스 이름을 사용해야 하는 경우(예, 클래스 선언 내에 클래스가 필요한 경우 또는 아래에 정의된 클래스를 사용하는 경우) 클래스 이름을 문자열로 사용하세요.
+- 아직 정의되지 않은 동일한 모듈의 클래스 이름을 사용해야 하는 경우(예, 클래스 선언 내에 클래스가 필요한 경우 또는 아래에 정의된 클래스를 사용하는 경우) `from __future__ import annotations`를 사용하세요.
+- 간단한 경우에는 주석을 사용하거나 클래스 이름에 문자열을 사용하세요.
 
 ```python
+from __future__ import annotations
+
 class MyClass:
 
-  def __init__(self,
-               stack: List["MyClass"]) -> None:
+  def __init__(self, stack: Sequence[MyClass]) -> None:
 ```
 
 <a id="s3.19.4-default-values"></a>
@@ -1398,54 +1411,41 @@ c = (1, "2", 3.5)  # type: Tuple[int, str, float]
 
 - String 주석에 대한 적절한 Type은 코드의 용도에 따라 달라집니다.
 
-- Python 3 호환 코드일 경우 `str`를 사용하세요.
+- `str`을 사용하는 것을 선호하지만 `Text`도 허용됩니다. 둘 중 하나를 일관성 있게 사용하세요.
+- 바이너리 데이터를 다루는 코드의 경우 `bytes`를 사용하세요.
+- 텍스트 데이터(Python 2에서는 `str` 또는 `unicode`, Python3에서는 `str`)를 처리하는 Python 2 호환 코드의 경우 `Text`를 사용하세요.
 
-  - `Text`도 가능합니다.
-  - 하나를 사용하더라도 일관성을 유지하여 사용해야 합니다.
+```python
+def deals_with_text_data_in_py3(x: str) -> str:
+  ...
+def deals_with_binary_data(x: bytes) -> bytes:
+  ...
+def py2_compatible_text_data_processor(x: Text) -> Text:
+  ...
+```
 
-- Python 2 호환 코드의 경우 `Text`를 사용하세요.
-
-  - 드믄 경우에 `str`은 적절할 수 있습니다.
-  - 일반적으로 두 Python 버전 간에 반환 유형이 동일하지 않을 때 호환성을 돕습니다. Python 3에 존재하지 않는 `unicode`를 사용하지 마세요.
-
-- 이런 불일치가 존재하는 이유는 `str`은 Python 버전에 따라 다른 것을 의미하기 때문입니다.
+- 일부 흔하지 않은 Python2 호환성 사례에서는 `Text` 대신 `str`이 의미가 있을 수 있으며 일반적으로 Python2와 Python3 간에 반환 유형이 동일하지 않을 때 호환성을 돕기 위해 사용됩니다.
+- Python3에는 `unicode`가 없으므로 절대 사용하지 마세요.
+- 이러한 불일치가 존재하는 이유는 `str`이 Python3와 Python2에서 다른 의미를 갖기 때문입니다.
 
 - 부적절한 예
 
-  ```python
-  def py2_code(x: str) -> unicode:
+```python
+def py2_code(x: str) -> unicode:
   ...
-  ```
+```
 
-- 이진 데이터를 처리하는 경우라면 `bytes`를 사용하세요.
+If the type can be either bytes or text, use `Union`, with the appropriate text
+type.
 
-  ```python
-  def deals_with_binary_data(x: bytes) -> bytes:
+```python
+from typing import Text, Union
+...
+def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
   ...
-  ```
-
-- Python 2에서 Text 데이터(`str`, `unicode`는 python 2, `str`은 python 3)는 `Text`를 사용합니다.
-- Python 3에서만 Text 데이터를 처리하는 경우 `str`를 선택하세요.
-
-  ```python
-  from typing import Text
+def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
   ...
-  def py2_compatible(x: Text) -> Text:
-  ...
-  def py3_only(x: str) -> str:
-  ...
-  ```
-
-- Type이 byte 또는 Text 일 수 있는 경우 적절한 Text Type과 함께 `Union`을 사용하세요.
-
-  ```python
-  from typing import Text, Union
-  ...
-  def py2_compatible(x: Union[bytes, Text]) -> Union[bytes, Text]:
-  ...
-  def py3_only(x: Union[bytes, str]) -> Union[bytes, str]:
-  ...
-  ```
+```
 
 - 함수의 모든 string Type이 항상 동일한 경우(예, 반환 Type이 위의 코드에서 인자 Type과 동일한 경우) [AnyStr](#s3.19.10-type-var)를 사용하세요.
 
