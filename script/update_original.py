@@ -10,7 +10,7 @@ MASTER_REF = "refs/heads/master"
 ORIGINAL_MARKDOWN_PATH = "Original.md"
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] if "ACCESS_TOKEN" in os.environ else ""
 REPO_NAME = "Yosseulsin-JOB/Google-Python-Style-Guide-kor"
-COMMIT_ID_CLASSNAME = ".BtnGroup a"
+COMMIT_ID_CLASSNAME = "div > div.listitem-metadata > div > span > a > span > span"
 MARDOWN_URL = "https://github.com/google/styleguide/commits/gh-pages/pyguide.md"
 RAW_MARKDOWN_URL = "https://raw.githubusercontent.com/google/styleguide/gh-pages/pyguide.md"
 
