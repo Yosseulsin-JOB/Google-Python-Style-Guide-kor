@@ -7,6 +7,7 @@ on:
   issues:
     # 이슈에 새로운 항목이 생기거나 수정사항이 있으면 실행합니다.
     types: [opened, edited]
+  workflow_dispatch:
 
 jobs:
   build:
