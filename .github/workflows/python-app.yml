@@ -2,11 +2,8 @@ name: Python-Style-Guide-Get-Original
 
 on:
   schedule:
-    # 매주 금요일 약 11시 실행합니다. (UTC +09:00)
-    - cron: "0 3 * * 5"
-  issues:
-    # 이슈에 새로운 항목이 생기거나 수정사항이 있으면 실행합니다.
-    types: [opened, edited]
+    # 1, 4, 7, 10월 첫 금요일에 실행합니다. (UTC +09:00)
+    - cron: "0 0 1-7 1,4,7,10 5"
   workflow_dispatch:
 
 jobs:
