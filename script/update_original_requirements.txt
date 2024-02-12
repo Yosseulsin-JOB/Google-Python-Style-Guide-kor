@@ -1,3 +1,2 @@
-beautifulsoup4==4.7.1
 requests==2.31.0
 PyGithub==1.51

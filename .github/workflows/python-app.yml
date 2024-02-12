@@ -2,7 +2,7 @@ name: Python-Style-Guide-Get-Original
 
 on:
   schedule:
-    # 매주 금요일 11시 쯔음 실행합니다. (UTC +09:00)
+    # 매주 금요일 약 11시 실행합니다. (UTC +09:00)
     - cron: "0 3 * * 5"
   issues:
     # 이슈에 새로운 항목이 생기거나 수정사항이 있으면 실행합니다.
@@ -15,9 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.9
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
