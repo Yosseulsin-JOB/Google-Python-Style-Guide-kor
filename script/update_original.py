@@ -48,6 +48,7 @@ def download_from_google_style_guide_original():
 def get_commit_from_google_style_guide_original():
     markdown = requests.get(MARKDOWN_URL).text
     soup = BeautifulSoup(markdown, 'html.parser')
+    print(soup)
     commits = soup.select(COMMIT_ID_CLASSNAME)
     if len(commits) == 0:
         raise Exception(
