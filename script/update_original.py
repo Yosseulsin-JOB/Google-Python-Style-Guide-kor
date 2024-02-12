@@ -1,19 +1,14 @@
-import os
-import sys
-import requests
+import os, sys, requests
 import urllib.request
-from bs4 import BeautifulSoup
-from github import Github, InputGitAuthor
+from github import Github
 
 MASTER_BRANCH = "master"
 MASTER_REF = "refs/heads/master"
 ORIGINAL_MARKDOWN_PATH = "Original.md"
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN'] if "ACCESS_TOKEN" in os.environ else ""
 REPO_NAME = "Yosseulsin-JOB/Google-Python-Style-Guide-kor"
-COMMIT_ID_CLASSNAME = "div > div.listitem-metadata > div > span > a"
-MARKDOWN_URL = "https://github.com/google/styleguide/commits/gh-pages/pyguide.md"
 RAW_MARKDOWN_URL = "https://raw.githubusercontent.com/google/styleguide/gh-pages/pyguide.md"
-
+GITHUB_COMMIT_API = "https://api.github.com/repos/google/styleguide/commits"
 
 def create_ref_name(commit):
     return 'refs/heads/original/' + commit['label']
@@ -37,26 +32,21 @@ def create_pr_body():
 '''
 
 # 항상 루트에서 python ./script/update_original.py 로 실행해야 루트에 있는 Original.md 파일로 대체됩니다.
-
-
 def download_from_google_style_guide_original():
     urllib.request.urlretrieve(RAW_MARKDOWN_URL, ORIGINAL_MARKDOWN_PATH)
 
 # commit 이름과 링크를 가져옵니다.
-
-
 def get_commit_from_google_style_guide_original():
-    markdown = requests.get(MARKDOWN_URL).text
-    soup = BeautifulSoup(markdown, 'html.parser')
-    commits = soup.select(COMMIT_ID_CLASSNAME)
-    if len(commits) == 0:
+    response = requests.get(GITHUB_COMMIT_API, {'path': 'pyguide.md'});
+    response.raise_for_status()
+    commit_histories = response.json()
+
+    if len(commit_histories) == 0 :
         raise Exception(
             "주소가 달라졌거나 selector 포맷이 변경되었습니다. 업데이트하세요. > ( https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/script/update_original.py )")
-    commit = commits[0]
-    commit_label = commit.text
-    commit_url = 'https://github.com' + commit.attrs['href']
-
-    return {"label": commit_label.strip(), 'url': commit_url.strip()}
+    
+    commit_history = commit_histories[0];
+    return {"label": commit_history['sha'][0:7], 'url': commit_history['html_url']}
 
 
 def get_repo():
