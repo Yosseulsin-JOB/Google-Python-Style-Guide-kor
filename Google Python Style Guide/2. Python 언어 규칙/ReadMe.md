@@ -38,7 +38,8 @@
 - 경고를 띄우지 않기 위해, 코드에 라인 단위로 주석을 달아야 합니다.
 
   ```python
-  dict = 'something awful'  # Bad Idea... pylint: disable=redefined-builtin
+  def do_PUT(self):  # WSGI name, so pylint: disable=invalid-name
+    ...
   ```
 
 - `pylint`의 경고는 각각 symbolic name(`empty-docstring`)으로 구별됩니다.
@@ -54,7 +55,7 @@
 - 각 메시지에 대해 자세한 정보를 얻고자 하는 경우 다음과 같은 방법으로 볼 수 있습니다.
 
   ```shell
-  pylint --help-msg=C6409
+  pylint --help-msg=invalid-name
   ```
 
 - `pyling: disable-msg`는 이전에 사용했던 방식으로 이제는 사용되지 않으며 `pylint: disable`를 사용합니다.
@@ -62,7 +63,7 @@
 - 아래 예시를 참고하세요.
 
   ```python
-  def viking_cafe_order(spam: str, beans: str, eggs: Optional[str] = None) -> str:
+  def viking_cafe_order(spam: str, beans: str, eggs: str | None = None) -> str:
       del beans, eggs  # Unused by vikings.
       return spam + spam + spam
   ```
@@ -74,7 +75,7 @@
 
 ### 2.2 Imports
 
-- `import`문을 사용할때 package와 module에 사용하고 개별 클래스나 함수에 대해 사용하면 안됩니다. 다만 [typing 모듈](#s3.19.12-imports), [typing_extensions module](https://github.com/python/typing/tree/master/typing_extensions)에서 가져온 클래스 및 [six.moves module](https://six.readthedocs.io/#module-six.moves)에서의 리디렉션은 이 규칙에서 제외됩니다.
+- `import`문은 개별 타입, 클래스, 함수가 아니라 패키지와 모듈에만 사용하세요. (주: 개별 타입은 기본 자료형, 사용자 정의 클래스를 나타냅니다.)
 
 <a id="s2.2.1-definition"></a>
 
@@ -100,8 +101,13 @@
 
 - `import x`를 패키지와 모듈을 import할때 사용하세요.
 - `from x import y`를 `x`가 패키지의 접두어이고 `y`가 접두어가 없는 모듈일때 사용하세요.
-- 만약 `y` 로 이름이 지어진 두 모듈이 import되거나 `y` 가 불필요하게 너무 긴 이름을 가졌다면 `from x import y as z`를 사용세요.
-- `import y as z`를 `z` 가 공식적인 약어인 경우에만 사용하세요(e.g., `np` 는 `numpy` 를 의미합니다.)
+- 다음과 같은 상황에서는 `from x import y as z` 를 사용하세요.
+  - `y`라는 이름을 가진 두 개의 모듈을 가져옵니다.
+  - `y`는 현재 모듈에 정의된 최상위 이름과 충돌합니다.
+  - `y`는 공개 API의 일부인 공통 매개변수 이름(예: 'features')과 충돌합니다.
+  - `y`는 불편할 정도로 긴 이름입니다.
+  - `y`는 코드 컨텍스트에서 너무 일반적입니다(예: `from storage.file_system import options as fs_options`).
+- `import y as z`를 `z` 가 공식적인 약어인 경우에만 사용하세요(e.g., `import numpy as np`)
 
 - 예를들어 `sound.effects.echo`모듈이 import 된다면 아래와 같습니다.
 
@@ -114,6 +120,17 @@
 - import된것들과 관련있는 이름을 사용하지마세요.
 - 모듈이 같은 패키지에 있더라도 전체 패키지 이름을 사용하세요.
 - 이는 무심코 패키지를 두번 import 하는것을 예방하는 것에 도움이 됩니다.
+
+<a id="imports-exemptions"></a>
+
+##### 2.2.4.1 예외
+
+- 이 규칙의 예외는 다음과 같습니다.
+  - 다음 모듈의 심볼은 정적 분석 및 타입 검사를 지원하는 데 사용됩니다.
+    - [`typing` module](#typing-imports)
+    - [`collections.abc` module](#typing-imports)
+    - [`typing_extensions` module](https://github.com/python/typing_extensions/blob/main/README.md)
+  - [six.moves module](https://six.readthedocs.io/#module-six.moves)의 리다이렉션입니다.
 
 ---
 <a id="s2.3-packages"></a>
@@ -149,7 +166,7 @@
     import absl.flags
     from doctor.who import jodie
 
-    FLAGS = absl.flags.FLAGS
+    _FOO = absl.flags.DEFINE_string(...)
     ```
 
     ```python
@@ -157,7 +174,7 @@
     from absl import flags
     from doctor.who import jodie
 
-    FLAGS = flags.FLAGS
+    _FOO = flags.DEFINE_string(...)
     ```
 
   - 부적절한 예 _(이 파일은 `doctor/who/` 에 있다고 가정하고 `jodie.py`또한 존재한다고 가정합니다.)_
@@ -205,10 +222,8 @@
 
 ##### 예외는 다음과 같은 조건을 만족해야 합니다
 
-- 적절한 경우 내장 예외 클래스를 사용하세요.
-- 예를 들어, 만약 양수를 예상하는데 음수가 통과한다면 `ValueError`를 발생시는 것이 그 예입니다.
-- 공공 API에 있는 인수의 값을 검증하기 위해 `assert`문을 사용하지마세요.
-- `assert`는 올바른 사용이나 예상치 못한 이벤트 발생을 나타내는 것이 아니라 내부적 정확성을 보장하기 위해 사용됩니다. 만약 나중에 예외가 필요하다면, raise문을 실행하세요.
+- 내장 예외 클래스를 사용하는 데에 문제가 없다면 사용합니다. 예를 들어, 함수 인자를 검증할 때와 같은 프로그래밍 오류나 위반된 전제조건을 나타내기 위해 `ValueError`를 발생시키세요.
+- `assert` 문을 조건문이나 전제조건 검증 대신 사용하지 마세요. application logic에 중요하지 않아야 합니다. `assert`문을 제거해도 코드가 정상적으로 작동한다면, 그것이 기준이 될 수 있습니다. assert 조건문은 평가될 것이라고 [보장되지 않습니다](https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement). [pytest](https://pytest.org)기반의 테스트에서는 `assert` 문을 사용하여 기대값을 검증하는 것이 적절하고 예상됩니다
 
   - 올바른 예
 
@@ -227,9 +242,10 @@
         if minimum < 1024:
             raise ValueError(f'Min. port must be at least 1024, not {minimum}.')
         port = self._find_next_open_port(minimum)
-        if not port:
+        if port is None:
           raise ConnectionError(
               f'Could not connect to service on port {minimum} or higher.')
+        # 이 코드의 결과는 이 assert에 의존하지 않습니다.
         assert port >= minimum, (
             f'Unexpected port {port} when minimum was {minimum}.')
         return port
@@ -247,8 +263,10 @@
         The new minimum port.
         """
         assert minimum >= 1024, 'Minimum port must be at least 1024.'
+        # 이 코드는 이전 assert에 의존합니다.
         port = self._find_next_open_port(minimum)
         assert port is not None
+        # 반환 값에 대한 타입 검사는 assert에 의존합니다.
         return port
     ```
 
@@ -261,16 +279,19 @@
 
 ---
 <a id="s2.5-global-variables"></a>
+<a id="25-global-variables"></a>
+<a id="s2.5-global-state"></a>
+<a id="25-global-state"></a>
 
-### 2.5 전역 변수
+### 2.5 변경 가능한 전역 상태
 
-- 전역 변수를 사용하지 마세요.
+- 변경 가능한 전역 상태를 사용하지 마세요.
 
 <a id="s2.5.1-definition"></a>
 
 #### 2.5.1 정의
 
-- 모듈이나 클래스 속성으로 선언된 변수를 말합니다.
+- 프로그램 실행 중 변경될 수 있는 모듈 수준의 값이나 클래스 속성을 말합니다.
 
 <a id="s2.5.2-pros"></a>
 
@@ -279,21 +300,24 @@
 - 가끔 편리합니다.
 
 <a id="s2.5.3-cons"></a>
+<a id="253-cons"></a>
+<a id="global-variables-cons"></a>
 
 #### 2.5.3 단점
 
-- import되는 동안 모듈의 동작이 변경될 수도 있습니다. 왜냐하면 전역 변수의 할당은 모듈을 처음 import를 할때 수행이 되기 때문입니다.
+- 캡슐화가 깨집니다.
+  - 이러한 설계는 유효한 목표를 달성하기 어렵게 만들 수 있습니다. 예를 들면, 전역 상태를 사용하여 데이터베이스 연결을 관리하는 경우, 두 개의 서로 다른 데이터베이스를 동시에 연결하는 것이 어려워질 수 있습니다(e.g., 마이그레이션 중 차이를 계산할 때). 전역 레지스트리에서도 유사한 문제가 쉽게 발생할 수 있습니다.
+- 모듈이 처음 임포트될 때 전역 변수에 대한 할당이 이루어지기 때문에, 모듈의 동작을 임포트 중에 변경할 가능성이 있습니다.
 
 <a id="s2.5.4-decision"></a>
+<a id="254-decision"></a>
+<a id="global-variables-decision"></a>
 
 #### 2.5.4 결론
 
-- 전역 변수를 사용하지 마세요.
-
-- 전역변수는 기술적으로는 변수이지만, module-level 상수가 허용되고 권장됩니다.
-- 예를들어 `_MAX_HOLY_HANDGRENADE_COUNT = 3`. 상수는 반드시 모든 공백 `_`를 넣어서 이름을 만들어야 합니다.
-- 만약 전역변수가 필요하다면 module-level에서 선언되고 모듈 내부에서 이름에 `_`를 붙여서 만들어져야 합니다.
-- 외부 접근은 반드시 public단위의 module-level 함수를 통해서 동작되어야 합니다. [Naming](#s3.16-naming)을 참고하세요.
+- 변경 가능한 전역 상태를 사용하지 마세요.
+  - 전역 상태를 사용하는 것이 드물게 필요한 경우, 변경 가능한 전역 엔티티는 모듈 수준이나 클래스 속성으로 선언하고, 이름 앞에 `_`를 붙여 내부적으로 사용해야 합니다. 필요한 경우, 변경 가능한 전역 상태에 대한 외부 접근은 공개 함수나 클래스 메소드를 통해 이루어져야 합니다. [Naming](#s3.16-naming)를 참고하세요. 변경 가능한 전역 상태를 사용하는 설계 이유에 대해서는 주석에 설명하거나 링크된 문서에서 설명해 주세요.
+  - 모듈 수준의 상수는 허용되며 권장됩니다. 예를 들어, 내부 용도의 상수에는 `_MAX_HOLY_HANDGRENADE_COUNT = 3`를 사용하고, Public API 상수에는 `SIR_LANCELOTS_FAVORITE_COLOR = "blue"`를 사용하세요. 상수는 모두 대문자와 밑줄을 사용하여 명명해야 합니다. [Naming](#s3.16-naming)를 참고하세요.
 
 ---
 <a id="s2.6-nested"></a>
@@ -316,7 +340,7 @@
 #### 2.6.2 장점
 
 - 제한된 스코프 내에서 사용하는 유틸리티 클래스와 함수의 정의를 허용합니다.
-- [ADT](http://www.google.com/url?sa=D&q=http://en.wikipedia.org/wiki/Abstract_data_type)가 무엇인지 참고하세요.
+- [ADT](https://ko.wikipedia.org/wiki/추상_자료형)가 무엇인지 참고하세요.
 - 일반적으로 데코레이터를 구현할 때 사용됩니다.
 
 <a id="s2.6.3-cons"></a>
@@ -365,19 +389,17 @@
 
 #### 2.7.4 결론
 
-- 복잡하지 않은 상황에서 사용하세요. 각각의 부분은 반드시 한 라인에서 끝나야 합니다.
-- map, for문, filter 표현식이 그 예입니다. 중첩 for문이나 filter문은 허용되지 않습니다.
-- loop문을 통해 코드를 단순화 할 수 있으면 사용하세요.
+- 컴프리헨션(comprehension)은 허용되지만, 여러 개의 for 절이나 필터 표현식은 허용되지 않습니다. 간결함보다는 가독성을 우선시하세요.
 - 올바른 예
 
   ```python
   result = [mapping_expr for value in iterable if filter_expr]
 
-  result = [{'key': value} for value in iterable
-              if a_long_filter_expression(value)]
-
-  result = [complicated_transform(x)
-              for x in iterable if predicate(x)]
+  result = [
+      is_valid(metric={'key': value})
+      for value in interesting_iterable
+      if a_longer_filter_expression(value)
+  ]
 
   descriptive_name = [
       transform({'key': key, 'value': value}, color='black')
@@ -387,37 +409,32 @@
 
   result = []
   for x in range(10):
-      for y in range(5):
-          if x * y > 10:
-              result.append((x, y))
-
-  return {x: complicated_transform(x)
-          for x in long_generator_function(parameter)
-          if x is not None}
-
-  squares_generator = (x**2 for x in range(10))
+    for y in range(5):
+      if x * y > 10:
+        result.append((x, y))
+  return {
+      x: complicated_transform(x)
+      for x in long_generator_function(parameter)
+      if x is not None
+  }
+  return (x**2 for x in range(10))
 
   unique_names = {user.name for user in users if user is not None}
-
-  eat(jelly_bean for jelly_bean in jelly_beans
-      if jelly_bean.color == 'black')
   ```
 
 - 부적절한 예
 
   ```python
-  result = [complicated_transform(
-                  x, some_argument=x+1)
-              for x in iterable if predicate(x)]
-
   result = [(x, y) for x in range(10) for y in range(5) if x * y > 10]
 
-  return ((x, y, z)
-          for x in range(5)
-          for y in range(5)
-          if x != y
-          for z in range(5)
-          if y != z)
+  return (
+      (x, y, z)
+      for x in range(5)
+      for y in range(5)
+      if x != y
+      for z in range(5)
+      if y != z
+  )
   ```
 
 ---
@@ -444,7 +461,7 @@
 
 #### 2.8.3 단점
 
-- 메소드 이름을 읽어도 객체의 타입을 유추할 수 없습니다.(e.g. `has_key()`는 딕셔너리를 의미합니다.) 이건 이점이 될 수도 있습니다.
+- 메소드 이름을 읽어도 객체의 타입을 유추할 수 없습니다.(변수에 타입 주석이 없는 경우) 이건 이점이 될 수도 있습니다.
 
 <a id="s2.8.4-decision"></a>
 
@@ -457,20 +474,16 @@
 
   ```python
   for key in adict: ...
-  if key not in adict: ...
   if obj in alist: ...
   for line in afile: ...
   for k, v in adict.items(): ...
-  for k, v in six.iteritems(adict): ...
   ```
 
 - 부적절한 예
 
   ```python
   for key in adict.keys(): ...
-  if not adict.has_key(key): ...
   for line in afile.readlines(): ...
-  for k, v in dict.iteritems(): ...
   ```
 
 ---
@@ -498,13 +511,15 @@
 
 #### 2.9.3 단점
 
-- 없습니다.
+- 제너레이터 내의 지역 변수는 제너레이터가 모두 소모되거나 자체적으로 가비지 컬렉션될 때까지 가비지 컬렉션되지 않습니다.
 
 <a id="s2.9.4-decision"></a>
 
 #### 2.9.4 결론
 
 - 제너레이터 함수에서 docstring에 대해 "Returns:"보다 "Yields:"를 사용하세요.
+- 제너레이터가 비용이 많이 드는 자원을 관리하는 경우, 정리 작업을 강제로 수행해야 합니다.
+- 정리 작업을 잘 수행하는 방법 중 하나는 제너레이터를 컨텍스트 매니저로 감싸는 것입니다 ([PEP-0533](https://peps.python.org/pep-0533/)).
 
 ---
 <a id="s2.10-lambda-functions"></a>
@@ -537,9 +552,7 @@
 
 #### 2.10.4 결론
 
-- 람다를 한 줄로 사용하세요. 만약 코드 내부에 있는 람다 함수가 60~80글자 수 정도로 길다면 그건 아마 더 일반적인 
-  [Lexical Scoping(렉시컬 스코핑)](#s2.16-lexical-scoping)으로 정의하는게 나을 것입니다.
-
+- 람다 함수는 허용하지만, 람다 함수 내부의 코드가 여러 줄에 걸치거나 60-80자를 넘는 경우, 일반적인 [중첩 함수](#s2.16-lexical-scoping)로 정의하는 것이 더 나을 수 있습니다.
 - 곱셈 같은 일반 연산자에서는 `operator`모듈 대신에 람다 함수를 사용하세요.
 - 예를 들어, `operator.mul`을 `lambda x,y : x * y` 처럼 사용하시면 됩니다.
 
@@ -649,7 +662,7 @@
   def foo(a, b=None):
       if b is None:
           b = []
-  def foo(a, b: Optional[Sequence] = None):
+  def foo(a, b: Sequence | None = None):
       if b is None:
           b = []
   def foo(a, b: Sequence = ()):  # tuples은 불변하기 때문에 사용 가능합니다.
@@ -659,13 +672,16 @@
 - 부적절한 예
 
   ```python
+  from absl import flags
+  _FOO = flags.DEFINE_string(...)
+
   def foo(a, b=[]):
       ...
-  def foo(a, b=time.time()):  # 모듈이 로드가 될 때의 시간인가???
+  def foo(a, b=time.time()):  # `b`가 이 모듈이 로드된 시간을 나타내는 것인가요?
       ...
-  def foo(a, b=FLAGS.my_thing):  # sys.argv는 아직 구문 분석되지 않았습니다...
+  def foo(a, b=_FOO.value):  # sys.argv는 아직 구문 분석되지 않았습니다...
       ...
-  def foo(a, b: Mapping = {}):  # 확인되지 않은 코드로 전달 될 수 있습니다...
+  def foo(a, b: Mapping = {}):  # 확인되지 않은 코드로 전달 될 수 있습니다.
       ...
   ```
 
@@ -718,7 +734,7 @@
 
 ### 2.14 True/False 평가
 
-- 가능한 경우 "암묵적(implicit)" `false`를 사용하세요.
+- 가능한 경우 "암묵적(implicit)" `false`를 사용하세요. (몇 가지 주의사항이 있지만)
 
 <a id="s2.14.1-definition"></a>
 
@@ -818,7 +834,7 @@
 
 #### 2.16.3 단점
 
-- 혼란스러운 버그로 이어질 수 있습니다. [PEP-0227](http://www.google.com/url?sa=D&q=http://www.python.org/dev/peps/pep-0227/)에서 자세한 정보를 확인할 수 있습니다.
+- [PEP-0227](https://peps.python.org/pep-0227)을 기반으로 한 이 예시와 같이 혼란스러운 버그를 초래할 수 있습니다.
 
   ```python
   i = 4
@@ -893,16 +909,16 @@
 
 - Decorator는 분명한 이점이 있더라도 현명하게 사용해야 합니다. Decorator는 import와 명명 지침을 따라야 합니다. Decorator pydoc는 decorator 함수 임을 분명히 명시해야합니다. dcorator를 위한 유닛 테스트(unit test)를 사용해야합니다.
 - Decorator(예. 파일, 소켓, 데이터베이스 연결 등) 를 실행할 때 (`pydoc` 혹은 기타 도구를 import 시간에 가져올 때) 사용 못할 수 있으므로 Decorator의 외부 의존성을 피하세요. 유효한 매개변수를 가진 Decorator은 모든 경우에 작동할 수 있도록 보장되어야 합니다.
-- Decorator는 "Top level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
+- Decorator는 "Top-level code"의 특별한 경우일 때에는 [main](#s3.17-main) 항목에 자세한 내용이 있습니다.
 - 기존 라이브러리에 정의된 API와 통합하기 위해 강제하지 않는 한 "staticmethod"를 사용하지 마세요. 대신 모듈 레벨 함수를 쓰세요.
-- 프로세스 전체 캐시 등 필요한 global state를 수정하는 명명된 생성자 또는 클래스별 루틴을 작성할 때만 "classmethod"를 사용하세요.
+- classmethod는 명명된 생성자를 작성하거나 프로세스 전체 캐시와 같은 필수 전역 상태를 수정하는 클래스 특정 루틴을 작성할 때만 사용하세요.
 
 ---
 <a id="s2.18-threading"></a>
 
 ### 2.18 스레드
 
-- 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 큐 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 threading 모듈이나 locking primitives를 사용하세요. lower-level lock 대신해 Condition variables와 `threading.Condition`를 선호하세요.
+- 내장된 타입의 원자성에 의존하지 마세요. 딕셔너리와 같은 Python의 내장된 타입은 원자 형태로 조작할 수 있지만 그러지 않은 경우(예: `__hash__`이나 `__eq__`가 Python 함수로 구현되는 경우)도 있으며 원자로 되어있다고 신뢰하면 안 됩니다. 또한, 원자 변수 할당에 의존해서는 안 됩니다. (결국, 딕셔너리에 달려있기 때문입니다) 스레드 간 데이터를 통신하는 데 선호하는 방법으로 `queue` 모듈의 `Queue` 데이터 타입을 사용하세요. 그렇지 않으면 `threading` 모듈이나 locking primitives를 사용하세요. lower-level lock 대신해 Condition variables와 `threading.Condition`를 선호하세요.
 
 ---
 <a id="s2.19-power-features"></a>
@@ -980,25 +996,7 @@
   from __future__ import generator_stop
   ```
 
-- 2.7 버전을 계속 지원해야하는 부담이 있는 레거시 코드의 경우
-
-  ```python
-  from __future__ import absolute_import
-  from __future__ import division
-  from __future__ import print_function
-  ```
-
 - 자세한 내용은 [Python future statement definitions](https://docs.python.org/3/library/__future__.html) 문서를 읽어보세요.
-- 코드가 충분히 현대적인 환경에서만 사용된다는 확신이 들 때까지 이러한 import를 제거하지 마세요.
-- 현재 코드에서 특정 향후 import를 통해 활성화되는 기능을 현재 사용하지 않더라도 파일에 해당 기능을 유지하면 나중에 코드가 이전 동작에 따라 실수로 수정되는 것을 방지할 수 있습니다.
-- 적절하다고 생각되는 다른 `from __future__` import 문을 사용하세요.
-- 2.7버전 내에 여러 위치에서 도입된 암시적 기본 코덱 변환 결과로 인해 확실하지 않았기 때문에 2.7버전에 대한 권장 사항에 `unicode_literals`를 포함하지 않았습니다.
-- 대부분의 이중 버전 2-3 코드는 필요한 경우 `b''` 와 `u''` q바트와 유니코드 문자열 리터럴을 명시적으로 사용하는 것이 더 나았습니다.
-
-##### six, future 그리고 past 라이브러리
-
-- 프로젝트가 여전히 Python 2, 3 모두에서 사용을 지원해야하는 경우 적합하다고 판단되는 대로 [six](https://pypi.org/project/six/), [future](https://pypi.org/project/future/), 및 [past](https://pypi.org/project/past/) 라이브러리를 사용하세요.
-- 코드를 더 깨끗하고 삶을 더 쉽게 만들기 위해 존재합니다.
 
 ---
 <a id="s2.21-type-annotated-code"></a>
@@ -1006,8 +1004,8 @@
 
 ### 2.21 Type 주석
 
-- Python 3에서 타입의 정보를 [PEP-484](https://www.python.org/dev/peps/pep-0484/)의 참고해서 주석으로 달 수 있습니다. 그리고 빌드 할 때 [pytype](https://github.com/google/pytype)같은 타입검사도구를 사용하세요.
-- Type에 대한 주석은 소스 안이나 [stub pyi 파일](https://www.python.org/dev/peps/pep-0484/#stub-files)에 있을 수 있습니다. 가능하면 주석은 소스안에 있어야 합니다. 타사 또는 확장 모듈에는 pyi 파일을 사용하세요.
+- Python에서 타입의 정보를 [PEP-484](https://www.python.org/dev/peps/pep-0484/)의 참고해서 주석으로 달 수 있습니다. 그리고 빌드 할 때 [pytype](https://github.com/google/pytype)같은 타입검사도구를 사용하세요.
+- Type에 대한 주석은 소스 안이나 [stub pyi 파일](https://peps.python.org/pep-0484/#stub-files)에 있을 수 있습니다. 가능하면 주석은 소스안에 있어야 합니다. 타사 또는 확장 모듈에는 pyi 파일을 사용하세요.
 
 <a id="s2.21.1-definition"></a>
 
@@ -1016,19 +1014,13 @@
 - Type의 주석(혹은 Type 정보)은 함수나 메서드의 인자값이나 반환값입니다
 
   ```python
-  def func(a: int) -> List[int]:
+  def func(a: int) -> list[int]:
   ```
 
-- [PEP-526](https://www.python.org/dev/peps/pep-0526/)구문 처럼 변수의 type을 선언할 때 사용합니다.
+- [PEP-526](https://peps.python.org/pep-0526/)구문 처럼 변수의 type을 선언할 때 사용합니다.
 
   ```python
   a: SomeType = some_func()
-  ```
-
-- legacy Python version을 지원해야한다면 코드에 type 설명을 추가합니다.
-
-  ```python
-  a = some_func()  # type: SomeType
   ```
 
 <a id="s2.21.2-pros"></a>
