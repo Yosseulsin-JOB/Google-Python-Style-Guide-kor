@@ -8,8 +8,8 @@
 import os
 import re
 
-find_link = re.compile('\[(\w+)\]\(([\w\\\/\_\.\:]+)\)')
-find_nums = re.compile('([0-9]+)\.([0-9]*).*')
+find_link = re.compile('\\[(\\w+)\\]\\(([\\w\\\\/_.:]+)\\)')
+find_nums = re.compile('([0-9]+)\\.([0-9]*).*')
 
 readme = []
 tree = []
