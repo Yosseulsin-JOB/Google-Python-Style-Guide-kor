@@ -30,6 +30,10 @@ export function getContents({ repo, path = "", branch = "master" }) {
   );
 }
 
+export function getRateLimit() {
+  return fetchData(`${GITHUB_API_URL}/rate_limit`);
+}
+
 export function getFiles({
   repo,
   path = "",
