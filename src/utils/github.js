@@ -1,3 +1,4 @@
+import { getToken } from ".";
 import { CONTENT_TYPE, GITHUB_API_URL } from "../constants/github";
 
 function isNotFound(defaultValue = [], onMap = (response) => response) {
@@ -9,7 +10,9 @@ function fetchData(url, onFilter = (branch) => branch) {
   const notFound = isNotFound([], (response) =>
     Array.isArray(response) ? response : [response]
   );
-  return fetch(url)
+  const token = getToken();
+  const headers = token ? { Authorization: `token ${token}` } : {};
+  return fetch(url, { headers })
     .then((response) => response.json())
     .then(notFound)
     .then((response) => response.filter(onFilter));

@@ -93,7 +93,7 @@ export default function App() {
     return (
       <div className="body">
         <div className="container">
-          <NotFound body={error.body} />
+          <NotFound body={error.body} isToken />
         </div>
       </div>
     );

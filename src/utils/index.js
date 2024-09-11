@@ -144,3 +144,11 @@ export function isSelectedContent(page, content) {
 
   return !!children.find((item) => item.num === child);
 }
+
+export function setToken(token) {
+  localStorage.setItem("token", token);
+}
+
+export function getToken(token) {
+  return localStorage.getItem("token");
+}
