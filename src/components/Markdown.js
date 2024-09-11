@@ -8,7 +8,7 @@ export default function Markdown({ children }) {
 
   useEffect(() => {
     if (ref.current) {
-      ref.current.innerHTML = marked(children, {});
+      ref.current.innerHTML = marked.marked(children, {});
       if (window?.hljs) {
         hljs.highlightAll();
       }
