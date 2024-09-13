@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "prebuild": "rm -rf dist",
     "build": "webpack",
     "start": "webpack serve",
     "predeploy": "npm run build",
