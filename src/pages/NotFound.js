@@ -19,9 +19,15 @@ export default function NotFound({
           </a>
           를 참고하세요.
           <br />
+          <a
+            target="_blank"
+            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md"
+          >
+            Markdown
+          </a>
+          에서 보거나 Personal Token 을 사용하여 API 요청 횟수를 일시적으로
+          확보할 수 있습니다.
           <br />
-          Personal Token으로 API 요청 회수를 증가시키려면 Personal Token을
-          입력해주세요.
           <br />
           <input value={text} onChange={(e) => setText(e.target.value)} />{" "}
           <button
@@ -35,8 +41,19 @@ export default function NotFound({
           </button>
           <br />
           <span style={{ color: "red" }}>
-            * Personal Token은 로컬 스토리지에 저장되며 서버에 저장하지
-            않습니다.
+            *{" "}
+            <a
+              target="_blank"
+              style={{ color: "red" }}
+              href="https://github.com/settings/tokens/new"
+            >
+              Personal Token
+            </a>
+            은 로컬 스토리지에 저장되며 서버에 저장하지 않습니다.
+          </span>
+          <br />
+          <span style={{ color: "blue" }}>
+            * 별도의 scopes 설정은 필요없습니다.
           </span>
         </div>
       )}
