@@ -1,0 +1,159 @@
+/* .CONTENT_TYPE */
+
+/* .GITHUB_API_URL */
+
+/* .getToken */
+
+/* 2021.09.12 : release 값을 기반으로 branch 데이터를 처리하기로 결정. */
+
+/* binding */
+
+/* createRoot */
+
+/* default */
+
+/* getBranchData */
+
+/* getContentData */
+
+/* getFiles */
+
+/* getFolders */
+
+/* getPage */
+
+/* getRateLimit */
+
+/* getRawByContent */
+
+/* getReleases */
+
+/* getToken */
+
+/* harmony export */
+
+/* harmony import */
+
+/* import() */
+
+/* setToken */
+
+/* toFlatContents */
+
+/* unused harmony exports getContents, getRawByPath */
+
+/*#__PURE__*/
+
+/************************************************************************/
+
+/******/
+
+/***/
+
+//   return fetchData(`${GITHUB_API_URL}/repos/${repo}/branches`, onFilter);
+
+// 0 means "already installed".
+
+// CONCATENATED MODULE: ./src/App.js
+
+// CONCATENATED MODULE: ./src/constants/index.js
+
+// CONCATENATED MODULE: ./src/index.js
+
+// CONCATENATED MODULE: ./src/pages/Loading.js
+
+// CONCATENATED MODULE: ./src/svg/Loading.js
+
+// CONCATENATED MODULE: ./src/utils/index.js
+
+// Check if module is in cache
+
+// Create a new module (and put it into the cache)
+
+// EXPORTS
+
+// EXTERNAL MODULE: ./node_modules/react-dom/client.js
+
+// EXTERNAL MODULE: ./node_modules/react/index.js
+
+// EXTERNAL MODULE: ./src/utils/github.js
+
+// Execute the module function
+
+// JSONP chunk loading for javascript
+
+// Load entry module and return exports
+
+// Return the exports of the module
+
+// The chunk loading function for additional chunks
+
+// The module cache
+
+// The require function
+
+// This entry module depends on other loaded chunks and execution need to be delayed
+
+// This file contains only the entry chunk.
+
+// This function allow to reference async chunks
+
+// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+
+// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+
+// a Promise means "currently loading".
+
+// all chunks have JS
+
+// avoid mem leaks in IE.
+
+// avoid mem leaks.
+
+// create error before stack unwound to get useful stacktrace later
+
+// define __esModule on exports
+
+// define getter functions for harmony exports
+
+// export function getBranchs({ repo, onFilter = (branch) => branch }) {
+
+// expose the modules object (__webpack_modules__)
+
+// install a JSONP callback for chunk loading
+
+// loadScript function to load a script via script tag
+
+// no HMR
+
+// no HMR manifest
+
+// no baseURI
+
+// no module.id needed
+
+// no module.loaded needed
+
+// no prefetching
+
+// no preloaded
+
+// object to store loaded CSS chunks
+
+// object to store loaded and loading chunks
+
+// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+
+// return url for filenames based on template
+
+// setup Promise in chunk cache
+
+// start chunk loading
+
+// startup
+
+// undefined = chunk not loaded, null = chunk preloaded/prefetched
+
+// webpackBootstrap
+
+// }
