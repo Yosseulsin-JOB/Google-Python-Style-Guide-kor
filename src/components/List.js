@@ -5,6 +5,9 @@ import { isSelectedContent, toFlatContents } from "../utils";
 
 import ArrowSVG from "../svg/Arrow";
 import ExternalLink from "../svg/ExternalLink";
+import { GITHUB_MARKDOWN_URL } from "../constants/github";
+
+import "@/styles/components/List.css";
 
 export default function List({ page = {}, show = false, contents = [] }) {
   const [license, setLicense] = useState(false);
@@ -18,10 +21,7 @@ export default function List({ page = {}, show = false, contents = [] }) {
       </ul>
       <ul className="title all">
         <li>
-          <a
-            aria-label="markdown link"
-            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md"
-          >
+          <a aria-label="markdown link" href={GITHUB_MARKDOWN_URL}>
             Github에서 보기
           </a>
         </li>
@@ -74,7 +74,7 @@ export default function List({ page = {}, show = false, contents = [] }) {
       <ul className="title github">
         <li>
           <a
-            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor"
+            href={GITHUB_MARKDOWN_URL}
             aria-label="Python 스타일 가이드 한국어판 깃헙 방문하기"
           >
             Github

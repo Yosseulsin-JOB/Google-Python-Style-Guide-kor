@@ -1,12 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { lazy, Suspense, useEffect, useRef, useState } from "react";
 
-import List from "./components/List";
-import Header from "./components/Header";
-
-import Viewer from "./pages/Viewer";
 import Loading from "./pages/Loading";
-import NotFound from "./pages/NotFound";
-import SearchResult from "./pages/SearchResult";
 
 import {
   getPage,
@@ -18,9 +12,13 @@ import {
 } from "./utils";
 import { getRateLimit } from "./utils/github";
 
+const NotFound = lazy(() => import("./pages/NotFound"));
+const List = lazy(() => import("./components/List"));
+const Header = lazy(() => import("./components/Header"));
+
 const pages = {
-  s: Viewer,
-  f: SearchResult,
+  s: lazy(() => import("./pages/Viewer")),
+  f: lazy(() => import("./pages/SearchResult")),
   loading: Loading,
 };
 
@@ -128,19 +126,25 @@ export default function App() {
 
   return (
     <div className="body">
-      <Header
-        branchs={branchs}
-        selected={branch}
-        onChangeBranch={setBranch}
-        onToggleMenu={handleToggleMenu}
-      />
+      <Suspense>
+        <Header
+          branchs={branchs}
+          selected={branch}
+          onChangeBranch={setBranch}
+          onToggleMenu={handleToggleMenu}
+        />
+      </Suspense>
       <div style={{ display: "flex", height: "calc(100vh - 100px - 56px)" }}>
-        <List page={page} show={showMenu} contents={contents} />
+        <Suspense>
+          <List page={page} show={showMenu} contents={contents} />
+        </Suspense>
         <div
           className="container"
           onClick={() => showMenu && setShowMenu(false)}
         >
-          <PageComponent page={page} contents={flatContents} />
+          <Suspense>
+            <PageComponent page={page} contents={flatContents} />
+          </Suspense>
         </div>
       </div>
     </div>

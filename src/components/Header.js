@@ -3,6 +3,9 @@ import React from "react";
 import MenuSVG from "../svg/Menu";
 import ExternalLink from "../svg/ExternalLink";
 
+import "@/styles/components/Header.css";
+import { GITHUB_MARKDOWN_URL } from "../constants/github";
+
 export default function Header({
   branchs = [],
   selected = "",
@@ -26,10 +29,7 @@ export default function Header({
       </div>
       <ul className="menu">
         <li className="github">
-          <a
-            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor"
-            aria-label="github repo"
-          >
+          <a href={GITHUB_MARKDOWN_URL} aria-label="github repo">
             Github
             <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
           </a>

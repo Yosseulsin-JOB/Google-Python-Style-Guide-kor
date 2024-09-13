@@ -1,5 +1,6 @@
 import React from "react";
 import { setToken } from "../utils";
+import { GITHUB_MARKDOWN_URL } from "../constants/github";
 
 export default function NotFound({
   body = "페이지를 찾을 수 없습니다.",
@@ -25,7 +26,7 @@ export default function NotFound({
           <a
             target="_blank"
             aria-label="한국어판 마크다운 버전으로 가기"
-            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md"
+            href={GITHUB_MARKDOWN_URL}
           >
             Markdown
           </a>

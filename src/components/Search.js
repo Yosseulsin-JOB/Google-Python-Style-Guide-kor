@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import SearchSVG from "../svg/Search";
 
+import "@/styles/components/Search.css";
+
 export default function Search() {
   const [text, setText] = useState("");
 
