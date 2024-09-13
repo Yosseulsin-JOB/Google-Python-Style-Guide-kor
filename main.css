@@ -1,10 +1,4 @@
-/*!**********************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/App.css ***!
-  \**********************************************************************/
 @import url(https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap);
-/*!**************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/App.css (1) ***!
-  \**************************************************************************/
 * {
   font-family: "Gowun Dodum", sans-serif;
 }
@@ -60,9 +54,6 @@ table .body {
   justify-content: center;
 }
 
-/*!**********************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/components/List.css ***!
-  \**********************************************************************************/
 .body .list {
   position: relative;
   max-width: 240px;
@@ -166,9 +157,6 @@ table .body {
   }
 }
 
-/*!************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/components/Header.css ***!
-  \************************************************************************************/
 .body .header {
   position: relative;
   width: 100%;
@@ -224,9 +212,6 @@ table .body {
   }
 }
 
-/*!************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/components/Search.css ***!
-  \************************************************************************************/
 .search {
   position: relative;
   width: 100%;
@@ -248,9 +233,6 @@ table .body {
   stroke: rgba(211, 211, 211, 0.8);
 }
 
-/*!**************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/styles/components/Contents.css ***!
-  \**************************************************************************************/
 .body .container .contents {
   max-width: 700px;
   width: calc(100% - 40px);
