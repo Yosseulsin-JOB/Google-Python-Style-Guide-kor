@@ -10,6 +10,7 @@
 
 .body .list .title,
 .body .list .subtitle {
+  margin-block-end: 0px;
   margin-block-start: 0px;
   list-style-type: none;
 }

@@ -36,26 +36,34 @@ export default function List({ page = {}, show = false, contents = [] }) {
             />
           </a>
         </li>
-        <ul
-          className="subtitle info"
-          style={license ? { maxHeight: "1000px" } : {}}
-        >
-          <li>
-            <a href="https://google.github.io/styleguide/pyguide.html">원문</a>
-          </li>
-          <li>
-            <a href="https://github.com/yangheeryu/Gowun-Dodum">고운돋움글꼴</a>
-          </li>
-          <li>
-            <a href="https://github.com/Sotaneum">페이지</a>
-          </li>
-        </ul>
+        <li>
+          <ul
+            className="subtitle info"
+            style={license ? { maxHeight: "1000px" } : {}}
+          >
+            <li>
+              <a href="https://google.github.io/styleguide/pyguide.html">
+                원문
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/yangheeryu/Gowun-Dodum">
+                고운돋움글꼴
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/Sotaneum">페이지</a>
+            </li>
+          </ul>
+        </li>
       </ul>
       <ul className="title github">
-        <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">
-          Github
-          <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
-        </a>
+        <li>
+          <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">
+            Github
+            <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
+          </a>
+        </li>
       </ul>
     </div>
   );
@@ -95,16 +103,18 @@ function Item({ data, page = {} }) {
         </a>
       </li>
       {hasChildren && (
-        <ul className="subtitle" style={show ? { maxHeight: "1500px" } : {}}>
-          {children.map((data) => (
-            <SubItem
-              data={data}
-              key={data.sha}
-              href={`#s${num}.${data.num}`}
-              selected={page.name === `${num}.${data.num}`}
-            />
-          ))}
-        </ul>
+        <li>
+          <ul className="subtitle" style={show ? { maxHeight: "1500px" } : {}}>
+            {children.map((data) => (
+              <SubItem
+                data={data}
+                key={data.sha}
+                href={`#s${num}.${data.num}`}
+                selected={page.name === `${num}.${data.num}`}
+              />
+            ))}
+          </ul>
+        </li>
       )}
     </>
   );

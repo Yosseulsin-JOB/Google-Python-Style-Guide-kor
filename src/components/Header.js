@@ -50,7 +50,11 @@ function SelectBranch({
   const handleChangeBracnh = (e) => onChangeBranch(e.target.value || "master");
 
   return (
-    <select defaultValue={selected} onChange={handleChangeBracnh}>
+    <select
+      defaultValue={selected}
+      onChange={handleChangeBracnh}
+      aria-label="branch"
+    >
       {branchs.map(({ label, value }) => (
         <option key={value} value={value}>
           {label}
