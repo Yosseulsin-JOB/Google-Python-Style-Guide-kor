@@ -68,7 +68,7 @@ export default function Viewr({ page = {}, contents = [] }) {
     setError(null);
     setFetch(false);
     getRawByContent(content)
-      .then((text) => `# ${content.parent}\n${text}`)
+      .then((text) => `## ${content.parent}\n${text}`)
       .then(setMarkdown)
       .then(() => {
         document.querySelector("html").scrollTop = 0;
