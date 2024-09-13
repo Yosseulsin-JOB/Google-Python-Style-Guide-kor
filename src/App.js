@@ -45,7 +45,7 @@ export default function App() {
   useEffect(() => {
     getRateLimit()
       .then((response) => response[0].rate)
-      .then(({ reset, remaining }) => {
+      .then(({ reset = Date.now() / 1000, remaining = 0 } = {}) => {
         if (ref.current === false) {
           return;
         }
