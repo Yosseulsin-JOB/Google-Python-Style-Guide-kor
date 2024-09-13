@@ -18,7 +18,10 @@ export default function List({ page = {}, show = false, contents = [] }) {
       </ul>
       <ul className="title all">
         <li>
-          <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md">
+          <a
+            aria-label="markdown link"
+            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md"
+          >
             Github에서 보기
           </a>
         </li>
@@ -28,7 +31,7 @@ export default function List({ page = {}, show = false, contents = [] }) {
           className={`parent${license ? " selected" : ""}`}
           onClick={() => setLicense(!license)}
         >
-          <a href={window.location.hash}>
+          <a href={window.location.hash} aria-label="open license list">
             License
             <ArrowSVG
               className="children"
@@ -42,24 +45,38 @@ export default function List({ page = {}, show = false, contents = [] }) {
             style={license ? { maxHeight: "1000px" } : {}}
           >
             <li>
-              <a href="https://google.github.io/styleguide/pyguide.html">
+              <a
+                href="https://google.github.io/styleguide/pyguide.html"
+                aria-label="go to original style guide"
+              >
                 원문
               </a>
             </li>
             <li>
-              <a href="https://github.com/yangheeryu/Gowun-Dodum">
+              <a
+                href="https://github.com/yangheeryu/Gowun-Dodum"
+                aria-label="go to font license"
+              >
                 고운돋움글꼴
               </a>
             </li>
             <li>
-              <a href="https://github.com/Sotaneum">페이지</a>
+              <a
+                href="https://github.com/Sotaneum"
+                aria-label="go to website developer"
+              >
+                페이지
+              </a>
             </li>
           </ul>
         </li>
       </ul>
       <ul className="title github">
         <li>
-          <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">
+          <a
+            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor"
+            aria-label="Python 스타일 가이드 한국어판 깃헙 방문하기"
+          >
             Github
             <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
           </a>
@@ -125,7 +142,9 @@ function SubItem({ data, href, selected = false }) {
 
   return (
     <li className={selected ? "selected" : ""}>
-      <a href={href}>{name.replace(".md", "")}</a>
+      <a href={href} aria-label={`${name} 읽어보기`}>
+        {name.replace(".md", "")}
+      </a>
     </li>
   );
 }

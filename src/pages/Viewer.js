@@ -41,6 +41,7 @@ export default function Viewr({ page = {}, contents = [] }) {
             요청하신 페이지는 제거되었거나 찾을 수 없습니다. (참고 :{" "}
             <a
               target="_blank"
+              aria-label="특정 넘버링 가이드가 없는 이유 안내"
               href="https://github.com/google/styleguide/issues/627#issuecomment-791570024"
             >
               #627

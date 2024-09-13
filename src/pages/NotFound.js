@@ -14,13 +14,17 @@ export default function NotFound({
         <div>
           <br />
           자세한 내용은{" "}
-          <a href="https://docs.github.com/ko/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users">
+          <a
+            aria-label="깃헙 API token 안내 페이지로 이동"
+            href="https://docs.github.com/ko/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28#primary-rate-limit-for-authenticated-users"
+          >
             여기
           </a>
           를 참고하세요.
           <br />
           <a
             target="_blank"
+            aria-label="한국어판 마크다운 버전으로 가기"
             href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor/blob/master/Google%20Python%20Style%20Guide%20kor.md"
           >
             Markdown
@@ -45,6 +49,7 @@ export default function NotFound({
             <a
               target="_blank"
               style={{ color: "red" }}
+              aria-label="깃헙 토큰 생성 페이지로 이동"
               href="https://github.com/settings/tokens/new"
             >
               Personal Token

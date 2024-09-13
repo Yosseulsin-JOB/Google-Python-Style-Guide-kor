@@ -26,7 +26,12 @@ export default function SearchResult({ page = {}, contents = [] }) {
           const path = name.replace(".md", "");
           return (
             <li key={name}>
-              <a href={`#s${path.replace(" ", "-")}`}>{path}</a>
+              <a
+                aria-label={`${name} 가이드로 이동하기`}
+                href={`#s${path.replace(" ", "-")}`}
+              >
+                {path}
+              </a>
             </li>
           );
         })}

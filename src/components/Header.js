@@ -13,19 +13,23 @@ export default function Header({
     <div className="header">
       <div>
         <a
+          aria-label="menu"
           className="m_menu"
           href={window.location.hash}
           onClick={onToggleMenu}
         >
           <MenuSVG style={{ stroke: "black", width: "18px" }} />
         </a>
-        <a className="title" href="">
+        <a className="title" href="" aria-label="title">
           Google Python Style Guide
         </a>
       </div>
       <ul className="menu">
         <li className="github">
-          <a href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor">
+          <a
+            href="https://github.com/Yosseulsin-JOB/Google-Python-Style-Guide-kor"
+            aria-label="github repo"
+          >
             Github
             <ExternalLink style={{ width: "18px", stroke: "#34568b" }} />
           </a>
